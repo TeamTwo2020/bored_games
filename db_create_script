@@ -14,16 +14,25 @@ db_database="2021_cgg1"
 TABLE='eng_words';
 
 input="/users/2021/cgg1/git_hub/bored_games/english.txt"
-while read -r line
-do
-    #echo "$line" | head -c 1
+#output="db_english_script.txt"
 
-    first_char=${line:0:1}
+#while read -r line
+#do
+#    #echo "$line" | head -c 1
+
+#    first_char=${line:0:1}
     #echo "$first_char"
-    mysql --user=$db_user --password=$db_pass $db_database <<EOF
-        INSERT INTO $TABLE (\`word\`, \`first_char\`) VALUES ("$line", "$first_char");
-EOF
+#    mysql --user=$db_user --password=$db_pass $db_database <<EOF
+#        INSERT INTO $TABLE (\`word\`, \`first_char\`) VALUES ("$line", "$first_char");
+#EOF
   
-done < "$input"
+#done < "$input"
 
 #script to parse eng_words to each word is an update statement. run script in dbeaver
+while read -r line
+do
+    echo "$line"
+    first_char=${line:0:1}
+    new_string="INSERT INTO ${TABLE} (word, first_char) VALUES ("\"$line\"", "\"$first_char\"");"
+    echo "${new_string}" >> output.txt
+done    < "$input"
