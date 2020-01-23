@@ -29,10 +29,12 @@ input="/users/2021/cgg1/git_hub/bored_games/english.txt"
 #done < "$input"
 
 #script to parse eng_words to each word is an update statement. run script in dbeaver
+
+echo "INSERT INTO ${TABLE} (word, first_char) VALUES " >> output.txt
 while read -r line
 do
     echo "$line"
     first_char=${line:0:1}
-    new_string="INSERT INTO ${TABLE} (word, first_char) VALUES ("\"$line\"", "\"$first_char\"");"
+    new_string="("\"$line\"", "\"$first_char\""),"
     echo "${new_string}" >> output.txt
 done    < "$input"
