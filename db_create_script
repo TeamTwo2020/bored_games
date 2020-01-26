@@ -38,3 +38,4 @@ do
     new_string="("\"$line\"", "\"$first_char\""),"
     echo "${new_string}" >> output.txt
 done    < "$input"
+#test
