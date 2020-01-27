@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", function(event){
     //Spawn in the letter inventory for the player
     letter_inventory = new LetterInventory();
     letter_inventory.drawSelf(ctx, 335, 780);
-    letter = new LetterTile("a");
-    letter_inventory.addLetterTile(letter);
+    letter1 = new LetterTile("a");
+    letter2 = new LetterTile("a")
+    letter_inventory.addLetterTile(letter1);
+    letter_inventory.addLetterTile(letter2);
+    letter_inventory.drawLetters(ctx);
     //A debugging function so that tile slots highlight themselves and their
     //neighbours when they are clicked
     canvas.addEventListener('mousedown', function(e) {
@@ -77,20 +80,20 @@ function tileSlotClicked(canvas, event, tile_slot_list){
 //This associates all tiles with the tiles above, below and to the sides.
 function associateNeighbours(tile_slot_list){
     for (i = 0; i < tile_slot_list.length; i ++){
-        if (i > 10){
-            tile_slot_list[i].top_neighbour = tile_slot_list[(i-11)];
+        if (i > 14){
+            tile_slot_list[i].top_neighbour = tile_slot_list[(i-15)];
         }
         
-        if (i % 11 != 0){
+        if (i % 15 != 0){
             tile_slot_list[i].left_neighbour = tile_slot_list[(i-1)];
         }
         
-        if (i != 9 && i != 19 && i != 29 && i != 39 && i != 49 && i != 59 && i != 69 && i != 79 && i != 89 && i != 99){
+        if (i != 14 && i != 29 && i != 44 && i != 59 && i != 74 && i != 89 && i != 104 && i != 119 && i != 134 && i != 149 && i != 164 && i != 179 && i != 194 && i != 209 && i != 224){
             tile_slot_list[i].right_neighbour = tile_slot_list[(i+1)];
         }
         
-        if (i < 90){
-            tile_slot_list[i].bottom_neighbour = tile_slot_list[(i+10)];
+        if (i < 210){
+            tile_slot_list[i].bottom_neighbour = tile_slot_list[(i+15)];
         }
     }
 }
@@ -125,8 +128,13 @@ class LetterInventory{
     }
     
     drawLetters(ctx){
-        letter_x = this.x;
+        var letter_x = this.x + 5;
         for (i = 0; i < this.letters.length; i++){
+            this.letters[i].drawSelf(ctx, letter_x, this.y, "purple");
+        }
+        
+        
+    }
             
 }
 
