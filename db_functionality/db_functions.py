@@ -1,4 +1,5 @@
 import setup_db
+import time
 
 class Db_stuff(object):
     def __init__(self):
@@ -8,17 +9,20 @@ class Db_stuff(object):
     def check_word(self, word):
         first_letter=word[0]
         self.cursor.execute(""" SELECT * FROM eng_words 
-                                WHERE word=%s """, (word))
+                                WHERE first_char=%s AND word=%s""", (first_letter, word))
         return False if self.cursor.rowcount==0 else True
 
-
-
-    #function for continuous checking
-
-#invoker setup_db.py in constructor
-
-test_word="recently"
-print(test_word)
+test_word="operation"
 test=Db_stuff()
-test_bool=test.check_word(test_word)
-print(test_bool)
+
+
+for i in range(500):
+    start=time.perf_counter()
+    test_bool = test.check_word(test_word)
+    print("%f" % (time.perf_counter()-start))
+    if test_bool==False:
+        print("----ERROR----")
+
+start=time.perf_counter()
+test_bool = test.check_word("optimal")
+print("%f" % (time.perf_counter()-start))
