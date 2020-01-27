@@ -109,6 +109,8 @@ class LetterInventory{
         this.letters = [];
         this.width = 500;
         this.height = 60;
+        this.x;
+        this.y;
     }
     
     addLetterTile(letter_tile){
@@ -118,7 +120,14 @@ class LetterInventory{
     drawSelf(ctx, x, y){
         ctx.fillStyle = "lime";
         ctx.fillRect(x, y, this.width, this.height);
+        this.x = x;
+        this.y = y;
     }
+    
+    drawLetters(ctx){
+        letter_x = this.x;
+        for (i = 0; i < this.letters.length; i++){
+            
 }
 
 //This is the tile slot class.
@@ -187,5 +196,7 @@ class LetterTile{
         ctx.fillRect(x_pos, y_pos, this.width, this.height);
         this.colour = style;
     }
+    
+    
 }
 
