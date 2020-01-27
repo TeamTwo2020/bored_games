@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     //Spawn in the letter inventory for the player
     letter_inventory = new LetterInventory();
     letter_inventory.drawSelf(ctx, 335, 780);
-    
+    letter = new LetterTile("a");
+    letter_inventory.addLetterTile(letter);
     //A debugging function so that tile slots highlight themselves and their
     //neighbours when they are clicked
     canvas.addEventListener('mousedown', function(e) {
@@ -110,6 +111,10 @@ class LetterInventory{
         this.height = 60;
     }
     
+    addLetterTile(letter_tile){
+        this.letters.push(letter_tile);
+    }
+    
     drawSelf(ctx, x, y){
         ctx.fillStyle = "lime";
         ctx.fillRect(x, y, this.width, this.height);
@@ -163,6 +168,23 @@ class TileSlot{
     reColourSelf(ctx, style){
         ctx.fillStyle = style;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.colour = style;
+    }
+}
+
+class LetterTile{
+    constructor(letter, width, height){
+        this.letter = letter;
+        this.width = width;
+        this.height = height;
+        this.x;
+        this.y;
+        this.colour;
+    }
+    
+    drawSelf(ctx, x_pos, y_pos, style){
+        ctx.fillStyle = style;
+        ctx.fillRect(x_pos, y_pos, this.width, this.height);
         this.colour = style;
     }
 }
