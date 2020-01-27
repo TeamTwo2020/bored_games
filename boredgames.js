@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     //Spawn in the letter inventory for the player
     letter_inventory = new LetterInventory();
     letter_inventory.drawSelf(ctx, 335, 780);
-    letter1 = new LetterTile("a");
-    letter2 = new LetterTile("a")
+    letter1 = new LetterTile("a", 50, 50);
+    letter2 = new LetterTile("b", 50, 50)
     letter_inventory.addLetterTile(letter1);
     letter_inventory.addLetterTile(letter2);
     letter_inventory.drawLetters(ctx);
@@ -130,7 +130,12 @@ class LetterInventory{
     drawLetters(ctx){
         var letter_x = this.x + 5;
         for (i = 0; i < this.letters.length; i++){
-            this.letters[i].drawSelf(ctx, letter_x, this.y, "purple");
+            this.letters[i].drawSelf(ctx, letter_x, (this.y + 5), "purple");
+            console.log("drawing " + this.letters[i].letter);
+            this.letters[i].x = letter_x;
+            this.letters[i].y = this.y + 5;
+            this.letters[i].colour = "purple";
+            letter_x += 55;
         }
         
         
