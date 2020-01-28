@@ -6,9 +6,6 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    ctx.fillStyle = "beige";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
     //Spawn in the one-hundred tile slots and associate them
     //with their neighbours.
     var tile_slot_list = spawnAllTiles(ctx);
@@ -25,10 +22,37 @@ function init(){
             clicked_tile_slot.highlightNeighbours(ctx);
         }
     });
+    var falling_cube = {
+        x: 20,
+        y: 20
+    }
+    //start the animations
+    setInterval(function() {
+        draw(canvas, ctx, tile_slot_list, falling_cube);
+    }, 10);
+    
+}
+
+function draw(canvas, ctx, tile_slot_list, falling_cube){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "beige";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    
+    
+    //draw all of the tile slots
+    for (tile = 0; tile < tile_slot_list.length; tile++){
+        drawTileSlot(ctx, "red", tile_slot_list[tile], tile_slot_list[tile].x, tile_slot_list[tile].y);
+    }
+    
+    ctx.fillstyle = "gold";
+    ctx.fillRect(falling_cube.x, falling_cube.y, 50, 50);
+    falling_cube.y += 1;
+    
 }
 
 //Draw a tile slot at this location with this colour
-function spawnTileSlot(ctx, style, tile_slot, tile_x_pos, tile_y_pos){
+function drawTileSlot(ctx, style, tile_slot, tile_x_pos, tile_y_pos){
     ctx.fillStyle = style;
     tile_slot.drawSelf(ctx, tile_x_pos, tile_y_pos);
 }
@@ -42,7 +66,6 @@ function spawnAllTiles(ctx){
     for (i = 0; i <15; i++){
         for (j = 0; j < 15; j++){
             tile_slot_list.push(new TileSlot(45, 45));
-            spawnTileSlot(ctx, "red", tile_slot_list[tile_slot_list_index], spawn_point_x, spawn_point_y);
             tile_slot_list[tile_slot_list_index].x = spawn_point_x;
             tile_slot_list[tile_slot_list_index].y = spawn_point_y;
             tile_slot_list[tile_slot_list_index].colour = "red";
