@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="Width=device-width, initial-scale=1">
+    <script>
+        function validateForm(){
+            var x = document.forms["myForm"][
+    </script>
+    <link rel="stylesheet" href="styles/styles.css"/>
+    <title>Title</title>
+</head>
+<body>
+    <h3>Contact Us</h3>
+    <div class="nav_menu_dropdown">
+        <button onclick="myFunction()" class="dropbtn">Menu</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Home</a>
+            <a href="#">Games Menu</a>
+            <a href="#">Contact-us</a>
+            <a href="#">Tutorials</a>
+        </div>
+        <form action="mailto:116706819@umail.ucc.ie">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" placeholder="name@address.xxx">
+
+            <label for="county">County</label>
+            <select id="county" name="County">
+                <option value="Antrim">Antrim</option>
+                <option value="Armagh">Armagh</option>
+                <option value="Carlow">Carlow</option>
+                <option value="Cavan">Cavan</option>
+                <option value="Clare">Clare</option>
+                <option value="Cork">Cork</option>
+                <option value="Derry">Derry</option>
+                <option value="Donegal">Donegal</option>
+                <option value="Down">Down</option>
+                <option value="Dublin">Dublin</option>
+                <option value="Fermanagh">Fermanagh</option>
+                <option value="Galway">Galway</option>
+                <option value="Kerry">Kerry</option>
+                <option value="Kildare">Kildare</option>
+                <option value="Kilkenny">Kilkenny</option>
+                <option value="Laois">Laois</option>
+                <option value="Leitrim">Leitrim</option>
+                <option value="Limerick">Limerick</option>
+                <option value="Longford">Longford</option>
+                <option value="Louth">Louth</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Meath">Meath</option>
+                <option value="Monaghan">Monaghan</option>
+                <option value="Offaly">Offaly</option>
+                <option value="Roscommon">Roscommon</option>
+                <option value="Sligo">Sligo</option>
+                <option value="Tipperary">Tipperary</option>
+                <option value="Tyrone">Tyrone</option>
+                <option value="Waterford">Waterford</option>
+                <option value="Wexford">Wexford</option>
+                <option value="Wicklow">Wicklow</option>
+            </select>
+
+            <label for="subject">Subject</label>
+            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <footer>
+        <small><b> <br>&copy; Team 2 Software Project 2020 all rights reserved<br></b></small>
+    </footer>
+</body>
+</html>
