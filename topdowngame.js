@@ -9,41 +9,62 @@ function init(){
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
     var vertical_speed = 0;
+    var horizontal_speed = 0;
     var recorded_event;
+    var moving_down;
+    var moving_right;
+    var moving_left;
+    var moving_up;
     
     document.addEventListener('keydown', function(event){
-        if(event.keyCode == 87){
+        if(event.key == "w"){
             vertical_speed = 5;
-            }
-        
-        if(event.keyCode == 68){
-        
+            moving_up = true;
         }
-        
-        if(event.keyCode == 65){
-            
-        }
-        
-        if(event.keyCode == 83){
-            vertical_speed = -5;
-        }
-        
-        console.log("key event is " + event.keyCode);
-        
     });
     
+    document.addEventListener('keydown', function(event){
+        
+        if(event.key == "d"){
+            horizontal_speed = -5;
+            moving_right = true;
+        }
+    });
+    
+    document.addEventListener('keydown', function(event){
+        if(event.key == "a"){
+            horizontal_speed = 5;
+            moving_left = true;
+        }
+    });
+    
+    document.addEventListener('keydown', function(event){
+        
+        if(event.key == "s"){
+            vertical_speed = -5;
+            moving_down = true;
+        }
+    });
+        
+        
+    
     document.addEventListener('keyup', function(event){
-        if(event.keyCode == 87 || event.keyCode == 83 ){
-            vertical_speed = 0;
-            }
-        
-        if(event.keyCode == 68){
-        
+        if(event.key == "w"){
+            moving_up = false;
         }
         
-        if(event.keyCode == 65){
-            
+        if(event.key == "s"){
+            moving_down = false;
         }
+        
+        if(event.key == "d"){
+            moving_right = false;
+        }
+        
+        if(event.key == "a"){
+            moving_left = false;
+        }
+       
         
                 
     });
@@ -58,14 +79,21 @@ function init(){
     }
     //start the animations
     setInterval(function() {
-        draw(canvas, ctx, falling_cube, player, vertical_speed);
+        if(moving_down == false && moving_up == false){
+            vertical_speed = 0;
+        }
+        
+        if(moving_left == false && moving_right == false){
+            horizontal_speed = 0;
+        }
+        draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed);
         
         
     }, 10);
     
 }
 
-function draw(canvas, ctx, falling_cube, player, vertical_speed){
+function draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.fillStyle = "beige";
@@ -73,7 +101,7 @@ function draw(canvas, ctx, falling_cube, player, vertical_speed){
     ctx.fillStyle = "purple";
     ctx.fillRect(falling_cube.x, falling_cube.y, 50, 50);
     falling_cube.y =falling_cube.y + vertical_speed;
-    //falling_cube.x += 1;
+    falling_cube.x = falling_cube.x + horizontal_speed;
     
     
     ctx.fillRect(player.x, player.y, 50, 50);
