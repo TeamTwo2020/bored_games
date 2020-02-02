@@ -11,11 +11,10 @@ function init(){
     var vertical_speed = 0;
     var recorded_event;
     
-    recorded_event = document.addEventListener('keydown', function(event){
+    document.addEventListener('keydown', function(event){
         if(event.keyCode == 87){
             vertical_speed = 5;
-            return event;
-        }
+            }
         
         if(event.keyCode == 68){
         
@@ -27,13 +26,27 @@ function init(){
         
         if(event.keyCode == 83){
             vertical_speed = -5;
-            return event;
         }
         
         console.log("key event is " + event.keyCode);
         
     });
     
+    document.addEventListener('keyup', function(event){
+        if(event.keyCode == 87 || event.keyCode == 83 ){
+            vertical_speed = 0;
+            }
+        
+        if(event.keyCode == 68){
+        
+        }
+        
+        if(event.keyCode == 65){
+            
+        }
+        
+                
+    });
     var falling_cube = {
         x: 20,
         y: 20
