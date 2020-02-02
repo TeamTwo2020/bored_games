@@ -46,7 +46,8 @@ function init(){
         }
     });
         
-        
+    vertical_line_list = [];
+    vertical_line_list.push(new VerticalGridLine(ctx, 10, -100));
     
     document.addEventListener('keyup', function(event){
         if(event.key == "w"){
@@ -74,8 +75,8 @@ function init(){
     }
     
     var player = {
-        x: 50,
-        y: 50
+        x: 500,
+        y: 500
     }
     //start the animations
     setInterval(function() {
@@ -86,14 +87,14 @@ function init(){
         if(moving_left == false && moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed);
+        draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed, vertical_line_list);
         
         
     }, 10);
     
 }
 
-function draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed){
+function draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed, vertical_line_list){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.fillStyle = "beige";
@@ -105,7 +106,32 @@ function draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_spee
     
     
     ctx.fillRect(player.x, player.y, 50, 50);
-    
-    console.log("speed: " + vertical_speed);
-    //vertical_speed = 0;
+    for (var i=0; i < vertical_line_list.length; i++){
+        console.log("drawing one");
+        vertical_line_list[i].drawSelf("black");
+    }
 }
+
+
+
+
+
+
+
+
+class VerticalGridLine{
+    constructor(ctx, x, y){
+        this.x;
+        this.y;
+        this.ctx = ctx;
+        this.height = 3000;
+        this.width = 5;
+    }
+    
+    drawSelf(style){
+        console.log("drawing myself");
+        this.ctx.fillStyle = style;
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+}
+        
