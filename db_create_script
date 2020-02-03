@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Name: Cristian Gaudino
+
+
+#read line from file
+#select first letter from line
+#add the word and the first letter to database
+
+db_user="----"
+db_server="----"
+db_pass="----"
+db_database="----"
+TABLE='eng_words';
+
+input="./english.txt"
+#output="db_english_script.txt"
+
+#while read -r line
+#do
+#    #echo "$line" | head -c 1
+
+#    first_char=${line:0:1}
+    #echo "$first_char"
+#    mysql --user=$db_user --password=$db_pass $db_database <<EOF
+#        INSERT INTO $TABLE (\`word\`, \`first_char\`) VALUES ("$line", "$first_char");
+#EOF
+  
+#done < "$input"
+
+#script to parse eng_words to each word is an update statement. run script in dbeaver
+
+echo "INSERT INTO ${TABLE} (word, first_char) VALUES " >> output.txt
+while read -r line
+do
+    echo "$line"
+    first_char=${line:0:1}
+    new_string="("\"$line\"", "\"$first_char\""),"
+    echo "${new_string}" >> output.txt
+done    < "$input"
+#test
