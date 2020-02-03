@@ -7,13 +7,13 @@
 #select first letter from line
 #add the word and the first letter to database
 
-db_user="cgg1"
-db_server="cs1.ucc.ie"
-db_pass="weeS2dih"
-db_database="2021_cgg1"
+db_user="----"
+db_server="----"
+db_pass="----"
+db_database="----"
 TABLE='eng_words';
 
-input="/users/2021/cgg1/git_hub/bored_games/english.txt"
+input="./english.txt"
 #output="db_english_script.txt"
 
 #while read -r line
