@@ -8,7 +8,7 @@ def words_connect():
     password="----"
 
     try:
-        connection = db.connect('----', '----', '----', '----')
+        connection = db.connect(server, username, password, database)
         if connection:
             cursor =connection.cursor(db.cursors.DictCursor)
             if cursor:
