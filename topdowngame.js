@@ -69,9 +69,9 @@ function init(){
         
                 
     });
-    hero = new Rectangle(50, 50, 50, 50, "purple")
+    hero = new Rectangle(50, 50, 50, 50, "green")
     
-    wall = new Rectangle(500, 300, 20, 350, "orange")
+    wall = new Rectangle(500, 300, 20, 350, "blue")
     
     //start the animations
     setInterval(function() {
@@ -91,15 +91,23 @@ function init(){
 
 function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertical_line_list){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "purple";
+    
+    if(hero.testCollision(wall)){
+        ctx.fillStyle="orange";
+        
+    }else{
+        ctx.fillStyle = "purple";
+        
+    }
+    //hero.drawRect(ctx);
     ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
     hero.y =hero.y + vertical_speed;
     hero.x = hero.x + horizontal_speed;
     
     
+    ctx.fillStyle = "blue";
     ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
     
     /*
@@ -117,8 +125,33 @@ class Rectangle {
         this.y=y;
         this.width=width;
         this.height=height;
-        this.color=colour;
+        this.colour=colour;
     }
+    
+    get bottom() { return this.y + this.height; }
+    get left() { return this.x }
+    get right() {return this.x+this.width }
+    get top() { return this.y }
+    
+    
+    drawRect(ctx){
+        ctx.beginPath();
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = this.colour;
+        ctx.closePath();
+    }
+    
+    testCollision(rectangle){
+        if ( this.top > rectangle.bottom || this.right < rectangle.left || this.left > rectangle.right || this.bottom < rectangle.top ){
+            
+            console.log("collision was false");
+            return false;
+        }
+        console.log("collision did run");
+        return true;
+    }
+    
+    
 }
 
 
