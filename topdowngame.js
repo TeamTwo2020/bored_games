@@ -94,21 +94,27 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertica
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
+    ctx.fillStyle = "blue";
+    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
+    
+    ctx.fillStyle="purple";
+    ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
+    
     if(hero.testCollision(wall)){
-        ctx.fillStyle="orange";
+        //ctx.fillStyle="orange";
+        hero.y =hero.y + (vertical_speed / 2);
+        hero.x = hero.x + (horizontal_speed / 2);
+        
         
     }else{
-        ctx.fillStyle = "purple";
+        //ctx.fillStyle = "purple";
+        hero.y =hero.y + vertical_speed;
+        hero.x = hero.x + horizontal_speed;
         
     }
     //hero.drawRect(ctx);
-    ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
-    hero.y =hero.y + vertical_speed;
-    hero.x = hero.x + horizontal_speed;
     
     
-    ctx.fillStyle = "blue";
-    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
     
     /*
     for (var i=0; i < vertical_line_list.length; i++){
