@@ -8,135 +8,95 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
+    var new_room = new RoomObject(12);
+    var moving_up;
+    var moving_down;
+    var moving_left;
+    var moving_right;
+
     var vertical_speed = 0;
     var horizontal_speed = 0;
-    var recorded_event;
-    var moving_down;
-    var moving_right;
-    var moving_left;
-    var moving_up;
-    
+	  console.log("new_room: " + new_room.number);
+
+    heroSetUp();
     document.addEventListener('keydown', function(event){
-        if(event.key == "w" || event.key == "W"){
-            vertical_speed = -5;
-            moving_up = true;
-        }
-    });
-    
-    document.addEventListener('keydown', function(event){
-        
-        if(event.key == "d" || event.key == "D"){
-            horizontal_speed = 5;
-            moving_right = true;
-        }
-    });
-    
-    document.addEventListener('keydown', function(event){
-        if(event.key == "a" || event.key == "A"){
-            horizontal_speed = -5;
-            moving_left = true;
-        }
-    });
-    
-    document.addEventListener('keydown', function(event){
-        
-        if(event.key == "s" || event.key == "S"){
-            vertical_speed = 5;
-            moving_down = true;
-        }
-    });
-        
-    vertical_line_list = [];
-    vertical_line_list.push(new VerticalGridLine(ctx, 10, -100));
-    
-    document.addEventListener('keyup', function(event){
-        if(event.key == "w" || event.key == "W"){
-            moving_up = false;
-        }
-        
-        if(event.key == "s" || event.key == "S"){
-            moving_down = false;
-        }
-        
-        if(event.key == "d" || event.key == "D"){
-            moving_right = false;
-        }
-        
-        if(event.key == "a" || event.key == "A"){
-            moving_left = false;
-        }
-       
-        
-                
-    });
+      if(event.key == "w" || event.key == "W"){
+          vertical_speed = -5;
+          moving_up = true;
+      }
+
+      if(event.key == "d" || event.key == "D"){
+          horizontal_speed = 5;
+          moving_right = true;
+      }
+
+      if(event.key == "a" || event.key == "A"){
+          horizontal_speed = -5;
+          moving_left = true;
+      }
+
+      if(event.key == "s" || event.key == "S"){
+          vertical_speed = 5;
+          moving_down = true;
+      }
+  });
+
+  document.addEventListener('keyup', function(event){
+      if(event.key == "w" || event.key == "W"){
+          moving_up = false;
+      }
+
+      if(event.key == "s" || event.key == "S"){
+          moving_down = false;
+      }
+
+      if(event.key == "d" || event.key == "D"){
+          moving_right = false;
+      }
+
+      if(event.key == "a" || event.key == "A"){
+          moving_left = false;
+      }
+  });
+
+
     hero = new Rectangle(50, 50, 50, 50, "purple")
-    
+
     wall = new Rectangle(500, 300, 20, 350, "orange")
-    
+
     //start the animations
     setInterval(function() {
         if(moving_down == false && moving_up == false){
             vertical_speed = 0;
         }
-        
+
         if(moving_left == false && moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertical_line_list);
-        
-        
+        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed);
+
+
     }, 10);
-    
+
 }
 
-function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertical_line_list){
+function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "purple";
     ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
     hero.y =hero.y + vertical_speed;
     hero.x = hero.x + horizontal_speed;
-    
-    
+
+
     ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
-    
+    console.log("hero x:" + hero.x + "hero y: " + hero.y);
+    //console.log("vertical speed: " + vertical_speed);
     /*
     for (var i=0; i < vertical_line_list.length; i++){
         console.log("drawing one");
         vertical_line_list[i].drawSelf("black");
     }*/
 }
-
-class Rectangle {
-    //create a subclass for entities and add method for movement
-    //add getters and setters etc.
-    constructor(x, y, width, height, colour ){
-        this.x=x;
-        this.y=y;
-        this.width=width;
-        this.height=height;
-        this.color=colour;
-    }
-}
-
-
-
-
-class VerticalGridLine{
-    constructor(ctx, x, y){
-        this.x;
-        this.y;
-        this.ctx = ctx;
-        this.height = 3000;
-        this.width = 5;
-    }
-    
-    drawSelf(style){
-        console.log("drawing myself");
-        this.ctx.fillStyle = style;
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-}
-        
