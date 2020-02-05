@@ -77,6 +77,11 @@ window.onload = function () {
     showLives.innerHTML = "You have " + lives + " lives";
     if (lives < 1) {
       showLives.innerHTML = "Game Over";
+       correct.parentNode.removeChild(correct);
+       letters.parentNode.removeChild(letters);
+       showClue.innerHTML = "";
+       context.clearRect(0, 0, 400, 400);
+       return;
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
