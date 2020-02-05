@@ -17,7 +17,7 @@ body{
      flex-flow: row;
      flex-wrap: wrap;
      justify-content: space-between;
-     background-color: #80bfff;
+     background-color: gray;
      font-family: 'ABeeZee', sans-serif;
 }
 /*header*/
@@ -37,26 +37,43 @@ header {
     flex-wrap: wrap;
 }
 /*nav*/
-nav{
-    width:auto;
-    margin:1em;
+nav{ 
+   margin:0.625em;
+    background-color: gray;
+    color:black;
+    border-style: dotted;
+    border-radius: 2em;
+    font-size: 2em;
      
 }
 
-nav, h1, a{
+nav, h2, a{
    
     padding:0.625em;
     color:black;
     text-decoration: none;
-    list-style: none;  
+    list-style: none;
+    font-size: 20px;
 }
 nav li{
     text-decoration: none;
     list-style: none;
+    float:left;
+}
+nav li a {
+    display: block;
+    padding: 8px;
+    
+}
+nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
     
 nav a:hover{
-    color:yellow;
+    color:black;
 }
 nav img{
     float:right;
@@ -66,8 +83,21 @@ nav img{
 /*main*/
 main{
     
-    /*border-style:dotted;
-    border-color:gray;*/
+    border-style:dotted;
+    border-color:black;
+    border-radius:2em;
+    display:inline-block;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:auto;
+    padding:0.625em;
+    width:auto;
+}
+form{
+    
+    border-style:dotted;
+    border-color:gray;
     border-radius:2em;
     display:inline-block;
     flex-flow: row;
@@ -141,7 +171,7 @@ footer  {
     padding:2em;
     width:auto;
     display:inline-flex;
-    background-color: #80bfff;
+    background-color: gray;
     color:black;
     
 }

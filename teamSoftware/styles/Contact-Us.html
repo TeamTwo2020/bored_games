@@ -7,29 +7,47 @@
             var x = document.forms["myForm"][
     </script>
     <link rel="stylesheet" href="styles/styles.css"/>
-    <title>Title</title>
+    <title>Bored-Games</title>
 </head>
 <body>
-    <h3>Contact Us</h3>
-    <div class="nav_menu_dropdown">
-        <button onclick="myFunction()" class="dropbtn">Menu</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Home</a>
-            <a href="#">Games Menu</a>
-            <a href="#">Contact-us</a>
-            <a href="#">Tutorials</a>
-        </div>
-        <form action="mailto:116706819@umail.ucc.ie">
-            <label for="fname">First Name:</label>
+     <header>
+            
+            <img src="../images/board.png" alt=" Bored-Games" />
+        </header>
+    
+    <!--<div class="nav_menu_dropdown">-->
+        <!--<button onclick="myFunction()" class="dropbtn">Menu</button>-->
+
+        <!--<div id="myDropdown" class="dropdown-content">-->
+            <nav>
+                <ul>
+
+            <li><a href="../index.html"><b>Home</b></a></li>
+            <li><a href="#"><b>Games Menu</b></a></li>
+            <li><a href="Contact-Us.html"><b>Contact-us</b></a></li>
+            <li><a href="#"><b>Tutorials</b></a></li>
+        </ul>
+        </nav>
+    <main>
+        <form> 
+            <action="mailto:116706819@umail.ucc.ie">
+            <ul align="justify">
+        <li><label for="fname"><b>First Name :</b> </label>
             <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-            <label for="lname">Last Name:</label>
+        </li>
+        <br>
+        <li>
+            <label for="lname"><b>Last Name :</b> </label>
             <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-            <label for="email">E-mail:</label>
+        </li>
+        <br>
+        <li>
+            <label for="email"><b>Email Addr:</b> </label>
             <input type="text" id="email" name="email" placeholder="name@address.xxx">
-
-            <label for="county">County</label>
+        </li>
+        <br>
+        <li>
+            <label for="county"><b>County :</b></label>
             <select id="county" name="County">
                 <option value="Antrim">Antrim</option>
                 <option value="Armagh">Armagh</option>
@@ -63,13 +81,23 @@
                 <option value="Wexford">Wexford</option>
                 <option value="Wicklow">Wicklow</option>
             </select>
+        </li>
+    </ul>
 
-            <label for="subject">Subject</label>
-            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
+    <ul>
+        <li>
+           
+            <div><b>Subject</b></div><textarea id="subject" name="subject" placeholder="Write something.." textarea rows="6" cols="50"/>
+                
+            </textarea>
+             
             <input type="submit" value="Submit">
-        </form>
-    </div>
+        </li>
+    </ul>
+        
+    </action="mailto:116706819@umail.ucc.ie">
+</main>
+    
     <footer>
         <small><b> <br>&copy; Team 2 Software Project 2020 all rights reserved<br></b></small>
     </footer>
