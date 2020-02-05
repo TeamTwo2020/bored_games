@@ -17,31 +17,31 @@ function init(){
     var moving_up;
     
     document.addEventListener('keydown', function(event){
-        if(event.key == "w"){
-            vertical_speed = 5;
+        if(event.key == "w" || event.key == "W"){
+            vertical_speed = -5;
             moving_up = true;
         }
     });
     
     document.addEventListener('keydown', function(event){
         
-        if(event.key == "d"){
-            horizontal_speed = -5;
+        if(event.key == "d" || event.key == "D"){
+            horizontal_speed = 5;
             moving_right = true;
         }
     });
     
     document.addEventListener('keydown', function(event){
-        if(event.key == "a"){
-            horizontal_speed = 5;
+        if(event.key == "a" || event.key == "A"){
+            horizontal_speed = -5;
             moving_left = true;
         }
     });
     
     document.addEventListener('keydown', function(event){
         
-        if(event.key == "s"){
-            vertical_speed = -5;
+        if(event.key == "s" || event.key == "S"){
+            vertical_speed = 5;
             moving_down = true;
         }
     });
@@ -50,34 +50,29 @@ function init(){
     vertical_line_list.push(new VerticalGridLine(ctx, 10, -100));
     
     document.addEventListener('keyup', function(event){
-        if(event.key == "w"){
+        if(event.key == "w" || event.key == "W"){
             moving_up = false;
         }
         
-        if(event.key == "s"){
+        if(event.key == "s" || event.key == "S"){
             moving_down = false;
         }
         
-        if(event.key == "d"){
+        if(event.key == "d" || event.key == "D"){
             moving_right = false;
         }
         
-        if(event.key == "a"){
+        if(event.key == "a" || event.key == "A"){
             moving_left = false;
         }
        
         
                 
     });
-    var falling_cube = {
-        x: 20,
-        y: 20
-    }
+    hero = new Rectangle(50, 50, 50, 50, "purple")
     
-    var player = {
-        x: 500,
-        y: 500
-    }
+    wall = new Rectangle(500, 300, 20, 350, "orange")
+    
     //start the animations
     setInterval(function() {
         if(moving_down == false && moving_up == false){
@@ -87,34 +82,44 @@ function init(){
         if(moving_left == false && moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed, vertical_line_list);
+        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertical_line_list);
         
         
     }, 10);
     
 }
 
-function draw(canvas, ctx, falling_cube, player, vertical_speed, horizontal_speed, vertical_line_list){
+function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertical_line_list){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "purple";
-    ctx.fillRect(falling_cube.x, falling_cube.y, 50, 50);
-    falling_cube.y =falling_cube.y + vertical_speed;
-    falling_cube.x = falling_cube.x + horizontal_speed;
+    ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
+    hero.y =hero.y + vertical_speed;
+    hero.x = hero.x + horizontal_speed;
     
     
-    ctx.fillRect(player.x, player.y, 50, 50);
+    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
+    
+    /*
     for (var i=0; i < vertical_line_list.length; i++){
         console.log("drawing one");
         vertical_line_list[i].drawSelf("black");
-    }
+    }*/
 }
 
-
-
-
+class Rectangle {
+    //create a subclass for entities and add method for movement
+    //add getters and setters etc.
+    constructor(x, y, width, height, colour ){
+        this.x=x;
+        this.y=y;
+        this.width=width;
+        this.height=height;
+        this.color=colour;
+    }
+}
 
 
 
