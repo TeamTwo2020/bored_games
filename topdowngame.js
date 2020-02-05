@@ -62,7 +62,7 @@ function init(){
 
     hero = new Rectangle(50, 50, 50, 50, "purple")
 
-    wall = new Rectangle(500, 300, 20, 350, "orange")
+    wall = new Rectangle(500, 300, 20, 350, "blue")
 
     //start the animations
     setInterval(function() {
@@ -82,18 +82,28 @@ function init(){
 
 function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "purple";
-    ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
-    hero.y =hero.y + vertical_speed;
-    hero.x = hero.x + horizontal_speed;
+
+    wall.drawRect(ctx);
+    hero.drawRect(ctx);
+
+    if(hero.testCollision(wall)){
+        //ctx.fillStyle="orange";
+        hero.y =hero.y + (vertical_speed / 2);
+        hero.x = hero.x + (horizontal_speed / 2);
 
 
-    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
-    console.log("hero x:" + hero.x + "hero y: " + hero.y);
-    //console.log("vertical speed: " + vertical_speed);
+    }else{
+        //ctx.fillStyle = "purple";
+        hero.y =hero.y + vertical_speed;
+        hero.x = hero.x + horizontal_speed;
+
+    }
+    //hero.drawRect(ctx);
+
+
+
     /*
     for (var i=0; i < vertical_line_list.length; i++){
         console.log("drawing one");
