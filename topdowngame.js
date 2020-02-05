@@ -69,7 +69,7 @@ function init(){
         
                 
     });
-    hero = new Rectangle(50, 50, 50, 50, "green")
+    hero = new Rectangle(50, 50, 50, 50, "purple")
     
     wall = new Rectangle(500, 300, 20, 350, "blue")
     
@@ -94,11 +94,8 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, vertica
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    ctx.fillStyle = "blue";
-    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
-    
-    ctx.fillStyle="purple";
-    ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
+    wall.drawRect(ctx);
+    hero.drawRect(ctx);
     
     if(hero.testCollision(wall)){
         //ctx.fillStyle="orange";
@@ -142,8 +139,8 @@ class Rectangle {
     
     drawRect(ctx){
         ctx.beginPath();
-        ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.fillStyle = this.colour;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.closePath();
     }
     
