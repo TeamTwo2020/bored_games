@@ -14,7 +14,7 @@ class Rectangle {
     get right(){ return this.x+this.width }
     get top(){ return this.y }
     
-    drawRect(ctx){
+    drawSelf(ctx){
         //console.log("called rect draw")
         ctx.beginPath();
         ctx.fillStyle=this.color;

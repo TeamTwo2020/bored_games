@@ -71,20 +71,21 @@ function init(){
         if(moving_left == false && moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed);
+        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_room);
 
 
     }, 10);
 
 }
 
-function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed){
+function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_room){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     wall.drawSelf(ctx);
     hero.drawSelf(ctx);
+    new_room.drawSelf(ctx);
 
     if(hero.testCollision(wall)){
         console.log("moving // 2")
