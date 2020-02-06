@@ -60,7 +60,7 @@ function init(){
   });
 
 
-    hero = new Rectangle(50, 50, 50, 50, "purple")
+    hero = new Entity(50, 50, 50, 50, "purple")
 
     wall = new Rectangle(500, 300, 20, 350, "blue")
 
