@@ -8,7 +8,7 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    var new_room = new RoomObject(12);
+    var new_room = new Room(canvas, 12);
     var moving_up;
     var moving_down;
     var moving_left;
@@ -18,7 +18,7 @@ function init(){
     var horizontal_speed = 0;
 	  console.log("new_room: " + new_room.number);
 
-    heroSetUp();
+    //
     document.addEventListener('keydown', function(event){
       if(event.key == "w" || event.key == "W"){
           vertical_speed = -5;

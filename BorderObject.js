@@ -10,12 +10,16 @@ class Border{
         this.first_block;
         this.second_block;
         this.third_block;
+        
+        this.generateWallBlockPositions();
     }
     
     //during construction, the border object must discover the positions of the wall chunks
     generateWallBlockPositions(){
         if (this.width < this.height){
-            
+            this.first_block = new Rectangle(this.x, this.y, this.width, (this.height/2)-40, this.color);
+        }
+    }
         
     drawSelf(){}
     
