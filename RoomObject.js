@@ -8,8 +8,8 @@ class Room{
         
         this.wall_list = [];
         this.wall_list.push(new Wall(200, 200, 0, "grey"));
-        //this.examplewall = new Wall(200, 200,0, "grey");
-	}
+        console.log("wall color: " + this.wall_list[0].color);
+}
 	
 	drawSelf(ctx){
         //console.log("left wall null?" + this.left_wall + "\nRight wall null?" + this.right_wall);
@@ -31,9 +31,10 @@ class Room{
             this.lower_wall.drawSelf(ctx);
         }
         
-        
+        //console.log("wall list len: " + this.wall_list.length);
         for (var i = 0; i < this.wall_list.length; i++){
-            console.log("wall color: " + this.wall_list[i].color);
+            //console.log("wall color: " + this.wall_list[i].color);
+            this.wall_list[i].drawSelf(ctx);
         }
         
         //this.examplewall.drawSelf();
