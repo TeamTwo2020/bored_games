@@ -9,6 +9,11 @@ class Rectangle {
         this.color=color;
     }
     
+    get bottom() { return this.y + this.height; }
+    get left(){ return this.x; }
+    get right(){ return this.x+this.width }
+    get top(){ return this.y }
+    
     drawRect(ctx){
         //console.log("called rect draw")
         ctx.beginPath();
