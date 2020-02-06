@@ -8,7 +8,7 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    var new_room = new Room(canvas, 12);
+    var new_room = new Room(canvas, 12, 30);
     var moving_up;
     var moving_down;
     var moving_left;
@@ -83,8 +83,8 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed){
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    wall.drawRect(ctx);
-    hero.drawRect(ctx);
+    wall.drawSelf(ctx);
+    hero.drawSelf(ctx);
 
     if(hero.testCollision(wall)){
         console.log("moving // 2")
