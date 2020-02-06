@@ -8,7 +8,7 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    var new_room = new Room(canvas, 12);
+    var new_room = new Room(canvas, 12, 30);
     var moving_up;
     var moving_down;
     var moving_left;

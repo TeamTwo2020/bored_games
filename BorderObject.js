@@ -16,11 +16,15 @@ class Border{
     
     //during construction, the border object must discover the positions of the wall chunks
     generateWallBlockPositions(){
+        console.log("generating block positions\nthis.width: " + this.width + "\nthis.height: " + this.height);
         if (this.width < this.height){
+            console.log("drawing first block");
             this.first_block = new Rectangle(this.x, this.y, this.width, (this.height/2)-40, this.color);
         }
     }
         
-    drawSelf(){}
+    drawSelf(){
+        this.first_block.drawSelf();
+    }
     
 }
