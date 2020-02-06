@@ -6,4 +6,11 @@ class Room{
 		this.lower_wall;
 		this.number= input_number;
 	}
+	
+	drawSelf(ctx){
+        if (this.left_wall != null){
+            this.left_wall.drawSelf(ctx);
+        }
+    }
+            
 }

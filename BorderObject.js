@@ -23,8 +23,8 @@ class Border{
         }
     }
         
-    drawSelf(){
-        this.first_block.drawSelf();
+    drawSelf(ctx){
+        this.first_block.drawSelf(ctx);
     }
     
 }
