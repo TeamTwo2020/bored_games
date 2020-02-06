@@ -1,11 +1,7 @@
 class Entity extends Rectangle{
     
-    constructor(x, y, width, height, colour ){
-        super(x);
-        super(y);
-        super(width);
-        super(height);
-        super(colour);
+    constructor(x, y, width, height, color ){
+        super(x, y, width, height, color);
     }
     
     get bottom() { return this.y + this.height; }
