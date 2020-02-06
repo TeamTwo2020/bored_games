@@ -86,7 +86,7 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
     hero.drawSelf(ctx);
     new_room.drawSelf(ctx);
     
-    collisionType=hero.testCollision(wall);
+    /*collisionType=hero.testCollision(wall);
     switch(collisionType){
         case 0:
             hero.y =hero.y + vertical_speed;
@@ -112,7 +112,7 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
         
             break;
         
-    }
+    }*/
     
     /*
     if(hero.testCollision(wall)){

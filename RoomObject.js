@@ -5,6 +5,10 @@ class Room{
 		this.upper_wall = new Border(wall_thickness, 0, canvas.width - wall_thickness, wall_thickness, "black", "closed");
 		this.lower_wall = new Border(wall_thickness, canvas.height - wall_thickness, canvas.width - wall_thickness, wall_thickness, "black", "closed");
 		this.number= input_number;
+        
+        this.wall_list = [];
+        this.wall_list.push(new Wall(200, 200, 0, "grey"));
+        
 	}
 	
 	drawSelf(ctx){
@@ -27,6 +31,10 @@ class Room{
             this.lower_wall.drawSelf(ctx);
         }
         
+        
+        for (var i = 0; i < this.wall_list.length; i++){
+            this.wall_list[i].drawSelf(ctx);
+        }
     }
             
 }
