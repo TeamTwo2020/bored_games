@@ -8,7 +8,7 @@ class Room{
         
         this.wall_list = [];
         this.wall_list.push(new Wall(200, 200, 0, "grey"));
-        
+        //this.examplewall = new Wall(200, 200,0, "grey");
 	}
 	
 	drawSelf(ctx){
@@ -33,8 +33,11 @@ class Room{
         
         
         for (var i = 0; i < this.wall_list.length; i++){
-            this.wall_list[i].drawSelf(ctx);
+            console.log("wall color: " + this.wall_list[i].color);
         }
+        
+        //this.examplewall.drawSelf();
+        //console.log("frm room: " + this.examplewall.color);
     }
             
 }
