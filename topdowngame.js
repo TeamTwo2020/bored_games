@@ -16,7 +16,6 @@ function init(){
 
     var vertical_speed = 0;
     var horizontal_speed = 0;
-	  console.log("new_room: " + new_room.number);
 
     //
     document.addEventListener('keydown', function(event){
@@ -86,19 +85,45 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
     wall.drawSelf(ctx);
     hero.drawSelf(ctx);
     new_room.drawSelf(ctx);
-
+    
+    collisionType=hero.testCollision(wall);
+    switch(collisionType){
+        case 0:
+            hero.y =hero.y + vertical_speed;
+            hero.x = hero.x + horizontal_speed;
+            break;
+        case 1: //cant go up
+            hero.y=hero.y + (vertical_speed / 2);
+            hero.x = hero.x + (horizontal_speed / 2);
+            break;
+        case 2://cant go down
+            hero.y=hero.y + (vertical_speed / 2);
+            hero.x = hero.x + (horizontal_speed / 2);
+            
+            break;
+        case 3://cant go left
+            hero.y=hero.y + (vertical_speed / 2);
+            hero.x = hero.x + (horizontal_speed / 2);
+            
+            break;
+        case 4: //cant go right
+            hero.y=hero.y + (vertical_speed / 2);
+            hero.x = hero.x + (horizontal_speed / 2);
+        
+            break;
+        
+    }
+    
+    /*
     if(hero.testCollision(wall)){
-        console.log("moving // 2")
         hero.y =hero.y + (vertical_speed / 2);
         hero.x = hero.x + (horizontal_speed / 2);
 
-
     }else{
-        console.log("moving normally")
         hero.y =hero.y + vertical_speed;
         hero.x = hero.x + horizontal_speed;
 
-    }
+    }*/
     //hero.drawRect(ctx);
 
 
