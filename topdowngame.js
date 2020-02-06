@@ -58,7 +58,8 @@ function init(){
           moving_left = false;
       }
   });
-
+  
+  
     hero = new Rectangle(50, 50, 50, 50, "purple")
     wall = new Rectangle(500, 300, 20, 350, "blue")
     //start the animations
