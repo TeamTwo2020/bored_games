@@ -25,10 +25,7 @@ class Wall{
     }
     
     drawSelf(ctx){
-        for (var i = 0; i < 1; i++){
-            console.log("Wb index: " + i + "wall blocks length: " + this.wall_blocks.length);
-            this.wall_blocks[i].drawSelf();
-        }
+    
     }
             
     

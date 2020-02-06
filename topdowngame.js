@@ -86,7 +86,9 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
     if(moving.moving_up==true){
         if(testCollision(hero.x, hero.y-5, hero.width, hero.height, wall)){
             moving.moving_up=false;
+            
         }else{
+            moving.moving_up=true;
             hero.y-=5;
         }
     }
@@ -94,6 +96,7 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
         if(testCollision(hero.x, hero.y+5, hero.width, hero.height, wall)){
             moving.moving_down=false;
         }else{
+            moving.moving_down=true;
             hero.y+=5;
         }
     }
@@ -101,6 +104,7 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
         if(testCollision(hero.x-5, hero.y, hero.width, hero.height, wall)){
             moving.moving_left=false;
         }else{
+            moving.moving_left=true;
             hero.x-=5;
         }
     }
@@ -108,6 +112,7 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
         if(testCollision(hero.x+5, hero.y, hero.width, hero.height, wall)){
             moving.moving_right=false;
         }else{
+            moving.moving_right=true;
             hero.x+=5;
         }
     }

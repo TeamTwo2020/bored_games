@@ -13,8 +13,8 @@
     
 }*/
 
-testCollision(x, y, width, heigth, rectangle){
-    if ( y > rectangle.bottom || (x+width) < rectangle.left || x > rectangle.right || (y+height) < rectangle.top ){     
+function testCollision(x, y, width, height, rectangle){
+    if ( y+5 > rectangle.bottom || (x+width-5) < rectangle.left || x+5 > rectangle.right || (y+height-5) < rectangle.top ){     
         return false;
     }
     return true;
