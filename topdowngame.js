@@ -20,44 +20,44 @@ function init(){
 
     //
     document.addEventListener('keydown', function(event){
-      if(event.key == "w" || event.key == "W"){
-          vertical_speed = -5;
-          moving_up = true;
-      }
+        if(event.key == "w" || event.key == "W"){
+            vertical_speed = -5;
+            moving_up = true;
+        }
 
-      if(event.key == "d" || event.key == "D"){
-          horizontal_speed = 5;
-          moving_right = true;
-      }
+        if(event.key == "d" || event.key == "D"){
+            horizontal_speed = 5;
+            moving_right = true;
+        }
 
-      if(event.key == "a" || event.key == "A"){
-          horizontal_speed = -5;
-          moving_left = true;
-      }
+        if(event.key == "a" || event.key == "A"){
+            horizontal_speed = -5;
+            moving_left = true;
+        }
 
-      if(event.key == "s" || event.key == "S"){
-          vertical_speed = 5;
-          moving_down = true;
-      }
-  });
+        if(event.key == "s" || event.key == "S"){
+            vertical_speed = 5;
+            moving_down = true;
+        }
+    });
 
-  document.addEventListener('keyup', function(event){
-      if(event.key == "w" || event.key == "W"){
-          moving_up = false;
-      }
+    document.addEventListener('keyup', function(event){
+        if(event.key == "w" || event.key == "W"){
+            moving_up = false;
+        }
 
-      if(event.key == "s" || event.key == "S"){
-          moving_down = false;
-      }
+        if(event.key == "s" || event.key == "S"){
+            moving_down = false;
+        }
 
-      if(event.key == "d" || event.key == "D"){
-          moving_right = false;
-      }
+        if(event.key == "d" || event.key == "D"){
+            moving_right = false;
+        }
 
-      if(event.key == "a" || event.key == "A"){
-          moving_left = false;
-      }
-  });
+        if(event.key == "a" || event.key == "A"){
+            moving_left = false;
+        }
+    });
   
   
     hero = new Entity(50, 50, 50, 50, "purple")
@@ -87,13 +87,13 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed){
     hero.drawRect(ctx);
 
     if(hero.testCollision(wall)){
-        //ctx.fillStyle="orange";
+        console.log("moving // 2")
         hero.y =hero.y + (vertical_speed / 2);
         hero.x = hero.x + (horizontal_speed / 2);
 
 
     }else{
-        //ctx.fillStyle = "purple";
+        console.log("moving normally")
         hero.y =hero.y + vertical_speed;
         hero.x = hero.x + horizontal_speed;
 
