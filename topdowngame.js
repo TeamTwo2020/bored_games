@@ -11,7 +11,13 @@ function init(){
         moving_up: false,
         moving_down: false,
         moving_left: false,
-        moving_right: false
+        moving_right: false,
+        
+        moving_up_speed: 0,
+        moving_down_speed: 0,
+        moving_left_speed: 0,
+        moving_right_speed: 0
+        
     }
 
     var vertical_speed = 0;
@@ -21,36 +27,44 @@ function init(){
     document.addEventListener('keydown', function(event){
         if(event.key == "w" || event.key == "W"){
             moving.moving_up = true;
+            moving.moving_up_speed = 5;
         }
 
         if(event.key == "d" || event.key == "D"){
             moving.moving_right = true;
+            moving.moving_right_speed = 5;
         }
 
         if(event.key == "a" || event.key == "A"){
             moving.moving_left = true;
+            moving.moving_left_speed = 5;
         }
 
         if(event.key == "s" || event.key == "S"){
             moving.moving_down = true;
+            moving.moving_down_speed = 5;
         }
     });
 
     document.addEventListener('keyup', function(event){
         if(event.key == "w" || event.key == "W"){
             moving.moving_up = false;
+            moving.moving_up_speed = 0;
         }
 
         if(event.key == "s" || event.key == "S"){
             moving.moving_down = false;
+            moving.moving_down_speed = 0;
         }
 
         if(event.key == "d" || event.key == "D"){
             moving.moving_right = false;
+            moving.moving_right_speed = 0;
         }
 
         if(event.key == "a" || event.key == "A"){
             moving.moving_left = false;
+            moving.moving_left_speed = 0;
         }
     });
   
@@ -83,41 +97,41 @@ function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_roo
     new_room.drawSelf(ctx);
     
     //IF moving_up is true, call testCollision with future coords and wall. 
-    if(moving.moving_up==true){
+    if(moving.moving_up_speed > 0){
         if(testCollision(hero.x, hero.y-5, hero.width, hero.height, wall)){
             moving.moving_up=false;
             
         }else{
             moving.moving_up=true;
-            hero.y-=5;
+            hero.y = hero.y - moving.moving_up_speed;
         }
     }
-    if(moving.moving_down==true){
+    if(moving.moving_down_speed > 0){
         if(testCollision(hero.x, hero.y+5, hero.width, hero.height, wall)){
             moving.moving_down=false;
         }else{
             moving.moving_down=true;
-            hero.y+=5;
+            hero.y = hero.y + moving.moving_down_speed;
         }
     }
-    if(moving.moving_left==true){
+    if(moving.moving_left_speed > 0){
         if(testCollision(hero.x-5, hero.y, hero.width, hero.height, wall)){
             moving.moving_left=false;
         }else{
             moving.moving_left=true;
-            hero.x-=5;
+            hero.x = hero.x - moving.moving_left_speed;
         }
     }
-    if(moving.moving_right==true){
+    if(moving.moving_right_speed > 0){
         if(testCollision(hero.x+5, hero.y, hero.width, hero.height, wall)){
             moving.moving_right=false;
         }else{
             moving.moving_right=true;
-            hero.x+=5;
+            hero.x=hero.x + moving.moving_right_speed;
         }
     }
         
-        
+    //console.log("right speed: " + moving.moving_right_speed);
     
     /*
     collisionType=hero.testCollision(wall);
