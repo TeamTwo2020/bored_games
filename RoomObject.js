@@ -1,21 +1,26 @@
 class Room{
-	constructor(canvas, input_number, wall_thickness){
+	constructor(canvas, room_index, wall_thickness, left_door, right_door, upper_door, lower_door){
         this.wall_thickness = wall_thickness;
-		this.left_wall = new Border(0, 0, wall_thickness, canvas.height, "black", "closed");
-		this.right_wall = new Border(canvas.width - wall_thickness, 0, wall_thickness, canvas.height, "black", "closed");
-		this.upper_wall = new Border(wall_thickness, 0, canvas.width - wall_thickness, wall_thickness, "black", "closed");
-		this.lower_wall = new Border(wall_thickness, canvas.height - wall_thickness, canvas.width - wall_thickness, wall_thickness, "black", "closed");
-		this.number= input_number;
+		this.left_wall = new Border(0, 0, wall_thickness, canvas.height, "black", left_door);
+		this.right_wall = new Border(canvas.width - wall_thickness, 0, wall_thickness, canvas.height, "black", right_door);
+		this.upper_wall = new Border(wall_thickness, 0, canvas.width - wall_thickness, wall_thickness, "black", upper_door);
+		this.lower_wall = new Border(wall_thickness, canvas.height - wall_thickness, canvas.width - wall_thickness, wall_thickness, "black", lower_door);
+		
+        this.left_neighbour;
+        this.right_neighbour;
+        this.upper_neighbour;
+        this.lower_neighbour;
         
         this.static_object_list = [];
         this.projectile_object_list = [];
         this.entity_list = [];
         this.room_contents_list = [this.static_object_list, this.projectile_object_list, this.entity_list];
         
+        
         //console.log("wall color: " + this.wall_list[0].color);
         this.wall_list = this.generateWalls(5, canvas);
         for (var wallin = 0; wallin < this.wall_list.length; wallin++){
-            console.log("wall: " + wallin + "\nX: " + this.wall_list[wallin].x + "\nY: " + this.wall_list[wallin].y);
+            //console.log("wall: " + wallin + "\nX: " + this.wall_list[wallin].x + "\nY: " + this.wall_list[wallin].y);
         }
         //console.log("wall list length after generation: " + this.wall_list.length);
         for (var i = 0; i < this.wall_list.length; i++){
@@ -24,6 +29,31 @@ class Room{
                 //console.log("block in wall: " + j);
                 this.static_object_list.push(this.wall_list[i].wall_blocks[j]);
             }
+        }
+        
+        //add borders to static objects
+        this.static_object_list.push(this.left_wall.first_block);
+        this.static_object_list.push(this.left_wall.third_block);
+        if (this.left_wall.gate_status != "open"){
+            this.static_object_list.push(this.left_wall.second_block);
+        }
+        
+        this.static_object_list.push(this.right_wall.first_block);
+        this.static_object_list.push(this.right_wall.third_block);
+        if (this.right_wall.gate_status != "open"){
+            this.static_object_list.push(this.right_wall.second_block);
+        }
+        
+        this.static_object_list.push(this.upper_wall.first_block);
+        this.static_object_list.push(this.upper_wall.third_block);
+        if (this.upper_wall.gate_status != "open"){
+            this.static_object_list.push(this.upper_wall.second_block);
+        }
+        
+        this.static_object_list.push(this.lower_wall.first_block);
+        this.static_object_list.push(this.lower_wall.third_block);
+        if (this.right_wall.gate_status != "open"){
+            this.static_object_list.push(this.lower_wall.second_block);
         }
         
            
@@ -75,14 +105,14 @@ class Room{
         var generation_attempts = 100;
         
         for (var i = 0; i < amount_of_walls; i++){
-            console.log("amount of walls needed: " + amount_of_walls + "\namount of walls currently: " + walls.length);
+            //console.log("amount of walls needed: " + amount_of_walls + "\namount of walls currently: " + walls.length);
             for (var j = 0; j < walls.length; j++){
-                console.log("for each wall...");
+                //console.log("for each wall...");
                 while (generation_attempts > 0){
                     if (((new_x + spawn_space > walls[j].x) && (new_y + spawn_space < walls[j].y)) || ((new_x < walls[j].x + spawn_space) && (new_y + spawn_space < walls[j].y)) || ((new_x < walls[j].x + spawn_space) && (new_y < walls[j].y + spawn_space)) || ((new_x + spawn_space > walls[j].x) && (new_y < walls[j].y + spawn_space))){
                         generation_attempts -= 1;
                         
-                        console.log("attempt x: " + new_x + "\nattempt y: " + new_y);
+                        //console.log("attempt x: " + new_x + "\nattempt y: " + new_y);
                         
                         new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
                         new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
@@ -117,7 +147,17 @@ class Room{
         return walls;
     }
     
-    
+    assignNeighbour(direction, room){
+        if (direction == "upper"){
+            this.upper_neighbour = room;
+        } else if (direction == "lower"){
+            this.lower_neighbour = room;
+        } else if (direction == "left"){
+            this.left_neighbour = room;
+        } else if (direction == "right"){
+            this.right_neighbour = room;
+        }
+    }
     
 }
             

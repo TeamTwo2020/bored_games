@@ -6,7 +6,16 @@ function init(){
     //Instantiate the canvas and its context.
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    var new_room = new Room(canvas, 12, 30);
+    var new_room = new Room(canvas, 0, 30, "none", "open", "closed", "none");
+    var right_room = new Room(canvas, 1, 30, "open", "none", "closed", "closed");
+    
+    new_room.right_neighbour = right_room;
+    right_room.left_neighbour = new_room;
+    
+    var rooms = [];
+    var current_room = 0;
+    rooms.push(new_room);
+    rooms.push(right_room);
     var moving={
         moving_up: false,
         moving_down: false,
@@ -16,12 +25,18 @@ function init(){
         moving_up_speed: 0,
         moving_down_speed: 0,
         moving_left_speed: 0,
-        moving_right_speed: 0
+        moving_right_speed: 0,
+        
+        colliding_up: false,
+        colliding_down: false,
+        colliding_left: false,
+        colliding_right: false
         
     }
 
     var vertical_speed = 0;
     var horizontal_speed = 0;
+    
 
     //
     document.addEventListener('keydown', function(event){
@@ -70,7 +85,7 @@ function init(){
   
   
     hero = new Entity(50, 50, 50, 50, "purple")
-    wall = new Rectangle(500, 300, 20, 350, "blue")
+    //wall = new Rectangle(500, 300, 20, 350, "blue")
     henry = new Henry(700, 200, 50, 50, "red", hero)
     
     //start the animations
@@ -82,57 +97,89 @@ function init(){
         if(moving.moving_left == false && moving.moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, hero, wall, henry, vertical_speed, horizontal_speed, new_room, moving);
+        draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, rooms, current_room, moving);
 
 
     }, 10);
 
 }
 
-function draw(canvas, ctx, hero, wall, henry, vertical_speed, horizontal_speed, new_room, moving){
+function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, rooms, current_room, moving){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     henry.drawSelf(ctx);
-    wall.drawSelf(ctx);
+    //wall.drawSelf(ctx);
     hero.drawSelf(ctx);
     henry.shoot(ctx, hero);
-    new_room.drawSelf(ctx);
+    rooms[current_room].drawSelf(ctx);
     
-    //IF moving_up is true, call testCollision with future coords and wall. 
-    if(moving.moving_up_speed > 0){
-        if(testCollision(hero.x, hero.y-5, hero.width, hero.height, wall)){
-            moving.moving_up=false;
-            
-        }else{
-            moving.moving_up=true;
-            hero.y = hero.y - moving.moving_up_speed;
-        }
+    moving.colliding_down = false;
+    moving.colliding_up = false;
+    moving.colliding_left = false;
+    moving.colliding_right = false;
+    
+    for (var i = 0; i < rooms[current_room].static_object_list.length; i++){
+            if(moving.moving_up_speed > 0){
+                if(testCollision(hero.x, hero.y-5, hero.width, hero.height, rooms[current_room].static_object_list[i])){
+                    moving.moving_up=false;
+                    moving.colliding_up = true;
+                    break;
+                    
+                    
+                }else{
+                    moving.moving_up=true;
+                    
+                    //hero.y = hero.y - moving.moving_up_speed;
+                }
+            }
+            if(moving.moving_down_speed > 0){
+                if(testCollision(hero.x, hero.y+5, hero.width, hero.height, rooms[current_room].static_object_list[i])){
+                    moving.moving_down=false;
+                    moving.colliding_down = true;
+                    break;
+                }else{
+                    moving.moving_down=true;
+                    //hero.y = hero.y + moving.moving_down_speed;
+                }
+            }
+            if(moving.moving_left_speed > 0){
+                if(testCollision(hero.x-5, hero.y, hero.width, hero.height, rooms[current_room].static_object_list[i])){
+                    moving.moving_left=false;
+                    moving.colliding_left = true;
+                    break;
+                }else{
+                    moving.moving_left=true;
+                    //hero.x = hero.x - moving.moving_left_speed;
+                }
+            }
+            if(moving.moving_right_speed > 0){
+                if(testCollision(hero.x+5, hero.y, hero.width, hero.height, rooms[current_room].static_object_list[i])){
+                    moving.moving_right=false;
+                    moving.colliding_right = true;
+                    break;
+                }else{
+                    moving.moving_right=true;
+                    //hero.x=hero.x + moving.moving_right_speed;
+                }
+            }
     }
-    if(moving.moving_down_speed > 0){
-        if(testCollision(hero.x, hero.y+5, hero.width, hero.height, wall)){
-            moving.moving_down=false;
-        }else{
-            moving.moving_down=true;
-            hero.y = hero.y + moving.moving_down_speed;
-        }
+    
+    if(moving.colliding_up == false){
+        hero.y = hero.y - moving.moving_up_speed;
     }
-    if(moving.moving_left_speed > 0){
-        if(testCollision(hero.x-5, hero.y, hero.width, hero.height, wall)){
-            moving.moving_left=false;
-        }else{
-            moving.moving_left=true;
-            hero.x = hero.x - moving.moving_left_speed;
-        }
+    
+    if(moving.colliding_down == false){
+        hero.y = hero.y + moving.moving_down_speed;
     }
-    if(moving.moving_right_speed > 0){
-        if(testCollision(hero.x+5, hero.y, hero.width, hero.height, wall)){
-            moving.moving_right=false;
-        }else{
-            moving.moving_right=true;
-            hero.x=hero.x + moving.moving_right_speed;
-        }
+    
+    if(moving.colliding_left == false){
+        hero.x = hero.x - moving.moving_left_speed;
+    }
+    
+    if (moving.colliding_right == false){
+        hero.x=hero.x + moving.moving_right_speed;
     }
         
     //console.log("right speed: " + moving.moving_right_speed);
