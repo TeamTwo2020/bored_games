@@ -4,6 +4,7 @@ class Henry extends Entity{
         this.shot=false;
         this.entity=entity;
         this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity);
+        this.canshoot = true;
     }
     
     shoot(ctx){

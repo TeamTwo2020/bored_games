@@ -82,10 +82,16 @@ class Room{
         }
         
         //console.log("wall list len: " + this.wall_list.length);
-        for (var i = 0; i < this.room_contents_list[0].length; i++){
+        for (var i = 0; i < this.room_contents_list.length; i++){
             //console.log("drawing wall at x: " + this.room_contents_list[0][i].x);
             //console.log("wall color: " + this.wall_list[i].color);
-            this.room_contents_list[0][i].drawSelf(ctx);
+            for (var j = 0; j < this.static_object_list.length; j++){
+                this.static_object_list[j].drawSelf(ctx);
+            }
+            
+            for (var e = 0; e < this.entity_list.length; e++){
+                this.entity_list[e].drawSelf(ctx);
+            }
             //console.log("Drawing something...");
         }
         
@@ -157,6 +163,10 @@ class Room{
         } else if (direction == "right"){
             this.right_neighbour = room;
         }
+    }
+    
+    addEntity(entity){
+        this.entity_list.push(entity);
     }
     
 }
