@@ -17,7 +17,7 @@ class Border{
     
     //during construction, the border object must discover the positions of the wall chunks
     generateWallBlockPositions(){
-        console.log("generating block positions\nthis.width: " + this.width + "\nthis.height: " + this.height + "\nx pos: " + this.x + "\ny pos: " + this.y);
+        //console.log("generating block positions\nthis.width: " + this.width + "\nthis.height: " + this.height + "\nx pos: " + this.x + "\ny pos: " + this.y);
         if (this.width < this.height){
             //Draw the first block of the wall
             this.first_block = new Rectangle(this.x, this.y, this.width, (this.height/2)-40, this.color);
