@@ -2,6 +2,15 @@ class Entity extends Rectangle{
     
     constructor(x, y, width, height, color ){
         super(x, y, width, height, color);
+        //health attribute for later
+    }
+    
+    get middle() { 
+        var middle={
+            x: this.x+(this.width/2),
+            y: this.y+(this.height/2)
+        }
+        return middle; 
     }
     /*
     testCollision(rectangle){
