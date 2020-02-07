@@ -71,6 +71,8 @@ function init(){
   
     hero = new Entity(50, 50, 50, 50, "purple")
     wall = new Rectangle(500, 300, 20, 350, "blue")
+    henry = new Henry(700, 200, 50, 50, "red", hero)
+    
     //start the animations
     setInterval(function() {
         if(moving.moving_down == false && moving.moving_up == false){
@@ -80,20 +82,22 @@ function init(){
         if(moving.moving_left == false && moving.moving_right == false){
             horizontal_speed = 0;
         }
-        draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_room, moving);
+        draw(canvas, ctx, hero, wall, henry, vertical_speed, horizontal_speed, new_room, moving);
 
 
     }, 10);
 
 }
 
-function draw(canvas, ctx, hero, wall, vertical_speed, horizontal_speed, new_room, moving){
+function draw(canvas, ctx, hero, wall, henry, vertical_speed, horizontal_speed, new_room, moving){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "beige";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    henry.drawSelf(ctx);
     wall.drawSelf(ctx);
     hero.drawSelf(ctx);
+    henry.shoot(ctx, hero);
     new_room.drawSelf(ctx);
     
     //IF moving_up is true, call testCollision with future coords and wall. 
