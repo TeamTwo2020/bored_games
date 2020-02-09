@@ -37,7 +37,3 @@ def update_score(bg_db_connection, bg_db_cursor, username, password, score):
     update score_command = "UPDATE players SET score+%i WHERE username = %s" % (score, username)
     self.access_db(update_score_command)
     return
-
-def bg_db_close(bg_db_connection, bg_db_cursor):
-    bg_db_connection.close()
-    bg_db_cursor.close()
