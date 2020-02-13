@@ -1,0 +1,277 @@
+/*core*/
+@import url('https://fonts.googleapis.com/css?family=ABeeZee');
+
+
+html{
+    
+    background-color:gray;
+   
+
+}
+
+body{
+     width:auto;
+     margin: 1em auto;
+     padding: 1em;
+     display:flex;
+     flex-flow: row;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     background-color: gray;
+     font-family: 'ABeeZee', sans-serif;
+}
+/*header*/
+header img{
+   	width:auto;
+    grid-area: top;
+    background-color:black;
+    border-radius:2em 0em;
+    max-width:100%;
+    
+    
+}
+header {
+   
+    padding: 1em;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+/*nav*/
+nav{ 
+   margin:0.625em;
+    background-color: gray;
+    color:black;
+    border-style: dotted;
+    border-radius: 2em;
+    font-size: 2em;
+     
+}
+
+nav, h2, a{
+   
+    padding:0.625em;
+    color:black;
+    text-decoration: none;
+    list-style: none;
+    font-size: 20px;
+}
+nav li{
+    text-decoration: none;
+    list-style: none;
+    float:left;
+}
+nav li a {
+    display: block;
+    padding: 8px;
+    
+}
+nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+    
+nav a:hover{
+    color:black;
+}
+nav img{
+    float:right;
+    border-radius:2em;
+    margin:1em;
+}
+/*main*/
+main{
+    
+    border-style:dotted;
+    border-color:black;
+    border-radius:2em;
+    display:inline-block;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:auto;
+    padding:0.625em;
+    width:auto;
+}
+form{
+    
+    border-style:dotted;
+    border-color:gray;
+    border-radius:2em;
+    display:inline-block;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:1em;
+    padding:0.625em;
+    width:auto;
+}
+main h1{
+    color:black;
+    text-align:center;
+}
+main p{
+    padding:0.625em;
+    margin:1em;
+    color:black;
+    text-align:inline;
+    
+}
+main img{
+    padding:0.625em;
+    
+    float:left;
+    max-width:100%;   
+}
+.row{
+    display:flex;
+}
+.column{
+    flex:60%;
+    padding: 10px;
+}
+main figure img{
+    padding:1em;
+    float:right;
+    max-width:30%
+    
+}
+/*aside*/
+
+}
+aside {
+   
+    color:black;
+    margin:1em;
+
+}
+aside caption{
+    text-align:center;
+    margin:3em
+}
+aside img{
+   	display:inline-flex;
+    max-width:100%;
+}
+iframe{
+   max-width:100%;
+}
+
+
+figcaption p{
+    font-size:1em;
+    color:black;
+    text-align:center;
+}
+/*footer*/
+
+footer  {
+	
+    padding:2em;
+    width:auto;
+    display:inline-flex;
+    background-color: gray;
+    color:black;
+    
+}
+footer a{
+    color:blue;
+}
+/*media*/
+
+@media screen and (min-width:40em){
+    
+    nav ul{
+       
+        display:inline-flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      
+    }
+  
+    body{
+        display: grid;
+        grid-template-columns:75% 25%;
+        grid-template-rows: auto;
+        grid-template-areas: "upper-top upper-top"
+                             "lower-top lower-top"
+                             "middle-left middle-right"
+                             "bottom bottom"
+    }
+    header{
+        grid-area: upper-top;
+    }
+    nav{
+        grid-area: lower-top;
+    }
+    main{
+        grid-area: middle-left;
+    }
+    aside{
+        grid-area: middle-right;
+    }
+    footer{
+        grid-area: bottom;
+       
+    }
+ }
+@media screen and (min-width:70em){
+    
+    nav ul{
+       
+        display:inline-flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+      
+    }
+   
+    body{
+        display: grid;
+        grid-template-columns:25% 55% 20%;
+        grid-template-rows: auto;
+        grid-template-areas: "top top top"
+                             "middle-left middle-middle middle-right"
+                             "bottom bottom bottom"
+    }
+    header{
+        grid-area: top;
+    }
+    nav{
+        grid-area: middle-left;
+    }
+    main{
+        grid-area: middle-middle;
+    }
+    aside{
+        grid-area: middle-right;
+    }
+    footer{
+        grid-area: bottom;
+       
+    }
+ }
+ @media screen and (min-width:80em) {
+     
+     body{
+         width:80em;
+     }
+ }
+
+ 
+
+
+
+
+
+   
+   
+
+
+    
+
+
+
+    
+    
