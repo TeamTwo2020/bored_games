@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <script>
+        function validateForm(){
+            var x = document.forms["myForm"]
+    </script>
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bored-Games</title>
     
@@ -62,7 +66,7 @@
           <span class="caret"></span></a>
           
        
-         <li><a href="contactUs.html">Contact us</a></li> 
+         <li><a href="starships.html">Contact us</a></li> 
          <li><a href="droids.html">Login/Sign up</a></li>
          <li><a href ="#">Sign up for our News Letter</a></li>
          <li><form action = "add.php" method = "Post">
@@ -82,30 +86,91 @@
      
       <div class ="row">
 
-        <div class="col-md-4">
-
-            <h2 class="star"> Top-Down Game</h2>
-             <img class="img-left" src="images/word1.png"  alt="Top-Down Game"/>
-          
-        </div><!--close col-md-8-->
+        <div class="col-md-12">
+            
+                <h2  class="star">Contact us</h2>
+            <action="mailto:116706819@umail.ucc.ie">
+                <P class="blocktext"> 
+            <ul align="center">
+        <li><label for="fname"><h5 class="star">First Name :</h5> </label>
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        </li>
         
-        <div class ="col-md-4">
-        <h2 class="star"><a href="hangman/index.html"> Hangman </h2></a>
-        <a href="hangman/index.html"><img class="img-left" src="images/hangman1.png"  alt="Hangman"/></a>
+        <li>
+            <label for="lname"><h5 class="star">Last Name :</h5> </label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        </li>
+        <br>
+        <li>
+            <label for="email"><h5 class="star">Email Addr:</h5> </label>
+            <input type="text" id="email" name="email" placeholder="name@address.xxx">
+        </li>
+        <br>
+        <li>
+            <label for="county"><h5 class="star">County :</h5></label>
+            <select id="county" name="County">
+                <option value="Antrim">Antrim</option>
+                <option value="Armagh">Armagh</option>
+                <option value="Carlow">Carlow</option>
+                <option value="Cavan">Cavan</option>
+                <option value="Clare">Clare</option>
+                <option value="Cork">Cork</option>
+                <option value="Derry">Derry</option>
+                <option value="Donegal">Donegal</option>
+                <option value="Down">Down</option>
+                <option value="Dublin">Dublin</option>
+                <option value="Fermanagh">Fermanagh</option>
+                <option value="Galway">Galway</option>
+                <option value="Kerry">Kerry</option>
+                <option value="Kildare">Kildare</option>
+                <option value="Kilkenny">Kilkenny</option>
+                <option value="Laois">Laois</option>
+                <option value="Leitrim">Leitrim</option>
+                <option value="Limerick">Limerick</option>
+                <option value="Longford">Longford</option>
+                <option value="Louth">Louth</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Meath">Meath</option>
+                <option value="Monaghan">Monaghan</option>
+                <option value="Offaly">Offaly</option>
+                <option value="Roscommon">Roscommon</option>
+                <option value="Sligo">Sligo</option>
+                <option value="Tipperary">Tipperary</option>
+                <option value="Tyrone">Tyrone</option>
+                <option value="Waterford">Waterford</option>
+                <option value="Wexford">Wexford</option>
+                <option value="Wicklow">Wicklow</option>
+            </select>
+        </li>
+    
+
+    
+        <li>
+           
+            <h5 class="star">Subject</h5>
+            <textarea id="subject" name="subject" placeholder="Write something.." textarea rows="6" cols="50">
+            </textarea>
+            <br>  
+            
+             
+            <input type="submit" value="Submit"></input>
+        </li>
+    </ul>
+    </P>
+        
+    </action="mailto:116706819@umail.ucc.ie">
+</main>
+
+           
          
-        </div>
+        
 
        
-      <div class="row"> 
-        <div class ="col-md-4">
-        <h2 class="star">Coming Soon</h2>
-        <img class="img-left" src="images/coming1.png"  alt="Coming Soon"/>
-        </div> 
-         </div>
+     
           
                  
          
-          </div>
+          
         
 
           <nav class="navbar navbar-inverse col-md-12">
