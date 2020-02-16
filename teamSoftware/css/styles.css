@@ -4,12 +4,12 @@
 }
 .star{
 	font-family:"star";
-	color: red;
+	color: yellow;
 	text-shadow: 5px 5px black;
 
 }
 h2, a{
-	color: red;
+	color: yellow;
 }
 .darkred{
 	color:#ff0000;
