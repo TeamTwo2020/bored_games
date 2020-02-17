@@ -4,14 +4,6 @@ class Entity extends Rectangle{
         super(x, y, width, height, color);
         //health attribute for later
     }
-    
-    get middle() { 
-        var middle={
-            x: this.x+(this.width/2),
-            y: this.y+(this.height/2)
-        }
-        return middle; 
-    }
     /*
     testCollision(rectangle){
         if (this.top > rectangle.bottom || this.right < rectangle.left || this.left >rectangle.right || this.bottom < rectangle.top ){
