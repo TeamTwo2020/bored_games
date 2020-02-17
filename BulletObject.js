@@ -1,7 +1,10 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, color, entity){
+    constructor(x, y, width, height, color, entity, room){
         super(x, y, width, height, color);
         this.entity=entity;
+        this.room = room;
+        this.room.addProjectile(this);
+        this.stopped = false;
         this.targetAcquired=false;
         this.x_speed=0;
         this.y_speed=0;
@@ -9,11 +12,12 @@ class Bullet extends Rectangle{
         this.targetUp=false;
     }
     
+    
     moveBullet(ctx, shot){
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
         //else dont draw the bullet
-        if (!(testCollision(this.middle.x, this.middle.y, this.width, this.height, this.entity))){
+        if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects())){
             if(!(this.targetAcquired)){
                 //update x and y position here to be close to target using trig
                 //assuming 
@@ -50,10 +54,26 @@ class Bullet extends Rectangle{
             }else{
                 this.y+=this.y_speed;
             }
-            this.drawSelf(ctx);
+            //this.drawSelf(ctx);
         }else{
             shot=false;
+            this.stopped = true;
         }
         return shot;
+    }
+    
+    checkCollisionWithStaticObjects(){
+        //console.log("checking collision with static objects: " + this.room.static_object_list.length);
+        
+        for (var i = 0; i < this.room.static_object_list.length; i++){
+            //console.log("checking collision in for loop...");
+            if (testCollision(this.x, this.y, this.width, this.height, this.room.static_object_list[i])){
+                return true;
+            } else {
+                //console.log("not colliding");
+            }
+        }
+        
+        return false;
     }
 }

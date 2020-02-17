@@ -18,8 +18,9 @@ function init(){
     room_info.rooms.push(new_room);
     room_info.rooms.push(right_room);
     
-    hero = new Entity(50, 50, 50, 50, "purple")
-    henry = new Henry(700, 200, 50, 50, "red", hero)
+    console.log("TP: room index is " + new_room.returnIndex());
+    hero = new Entity(50, 50, 50, 50, "purple", new_room)
+    henry = new Henry(700, 200, 50, 50, "red", hero, new_room)
     
     room_info.rooms[0].addEntity(henry);
     
@@ -122,7 +123,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
         henry.shoot(ctx, hero);
     }
     room_info.rooms[room_info.current_room].drawSelf(ctx);
-    console.log("drawing room: " + room_info.current_room);
+    //console.log("drawing room: " + room_info.current_room);
     
     moving.colliding_down = false;
     moving.colliding_up = false;

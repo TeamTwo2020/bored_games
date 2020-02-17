@@ -1,5 +1,6 @@
 class Room{
 	constructor(canvas, room_index, wall_thickness, left_door, right_door, upper_door, lower_door){
+        this.room_index = room_index;
         this.wall_thickness = wall_thickness;
 		this.left_wall = new Border(0, 0, wall_thickness, canvas.height, "black", left_door);
 		this.right_wall = new Border(canvas.width - wall_thickness, 0, wall_thickness, canvas.height, "black", right_door);
@@ -60,6 +61,11 @@ class Room{
         //this.static_object_list.push(new Wall(200, 200, 0, "black"));
         
     }
+    
+    returnIndex(){
+        return this.room_index;
+    }
+        
 	
 	drawSelf(ctx){
         //console.log("left wall null?" + this.left_wall + "\nRight wall null?" + this.right_wall);
@@ -87,12 +93,20 @@ class Room{
             //console.log("wall color: " + this.wall_list[i].color);
             for (var j = 0; j < this.static_object_list.length; j++){
                 this.static_object_list[j].drawSelf(ctx);
+                //console.log("drawing static object");
             }
             
             for (var e = 0; e < this.entity_list.length; e++){
                 this.entity_list[e].drawSelf(ctx);
             }
             //console.log("Drawing something...");
+            for (var k = 0; k < this.projectile_object_list.length; k++){
+                if (this.projectile_object_list[k].stopped){
+                    this.projectile_object_list.splice(k, 1);
+                } else{
+                    this.projectile_object_list[k].drawSelf(ctx);
+                }
+            }
         }
         
         //this.examplewall.drawSelf();
@@ -167,6 +181,11 @@ class Room{
     
     addEntity(entity){
         this.entity_list.push(entity);
+    }
+    
+    addProjectile(projectile){
+        //console.log("projectile added");
+        this.projectile_object_list.push(projectile);
     }
     
 }
