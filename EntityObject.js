@@ -1,6 +1,6 @@
 class Entity extends Rectangle{
     
-    constructor(x, y, width, height, color ){
+    constructor(x, y, width, height, color, room){
         super(x, y, width, height, color);
         //health attribute for later
     }

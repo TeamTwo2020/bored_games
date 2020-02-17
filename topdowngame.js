@@ -18,8 +18,8 @@ function init(){
     room_info.rooms.push(new_room);
     room_info.rooms.push(right_room);
     
-    hero = new Entity(50, 50, 50, 50, "purple")
-    henry = new Henry(700, 200, 50, 50, "red", hero)
+    hero = new Entity(50, 50, 50, 50, "purple", new_room)
+    henry = new Henry(700, 200, 50, 50, "red", hero, new_room)
     
     room_info.rooms[0].addEntity(henry);
     
