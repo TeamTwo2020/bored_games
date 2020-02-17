@@ -93,6 +93,7 @@ class Room{
             //console.log("wall color: " + this.wall_list[i].color);
             for (var j = 0; j < this.static_object_list.length; j++){
                 this.static_object_list[j].drawSelf(ctx);
+                //console.log("drawing static object");
             }
             
             for (var e = 0; e < this.entity_list.length; e++){

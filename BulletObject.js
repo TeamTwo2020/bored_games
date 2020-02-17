@@ -13,7 +13,7 @@ class Bullet extends Rectangle{
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
         //else dont draw the bullet
-        if (!(testCollision(this.x, this.y, this.width, this.height, this.entity))){
+        if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects())){
             //update x and y position here to be close to target using trig
             //assuming 
             //x speed is x_dist/y_dist x5:
@@ -61,5 +61,20 @@ class Bullet extends Rectangle{
             this.stopped = true;
         }
         return shot;
+    }
+    
+    checkCollisionWithStaticObjects(){
+        //console.log("checking collision with static objects: " + this.room.static_object_list.length);
+        
+        for (var i = 0; i < this.room.static_object_list.length; i++){
+            //console.log("checking collision in for loop...");
+            if (testCollision(this.x, this.y, this.width, this.height, this.room.static_object_list[i])){
+                return true;
+            } else {
+                //console.log("not colliding");
+            }
+        }
+        
+        return false;
     }
 }

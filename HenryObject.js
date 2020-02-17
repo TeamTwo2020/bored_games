@@ -4,7 +4,7 @@ class Henry extends Entity{
         this.shot=false;
         this.entity=entity;
         //console.log("Henry room is : " + room.returnIndex());
-        
+        this.bullet = null;
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
         this.canshoot = true;
     }
