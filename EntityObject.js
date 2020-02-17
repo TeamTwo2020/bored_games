@@ -2,6 +2,9 @@ class Entity extends Rectangle{
     
     constructor(x, y, width, height, color, room){
         super(x, y, width, height, color);
+        this.room = room;
+        console.log("Entity log says room is " + this.room);
+        console.log("Entity log says room id is " + this.room.room_index);
         //health attribute for later
     }
     

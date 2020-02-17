@@ -1,8 +1,13 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, color, entity){
+    constructor(x, y, width, height, color, entity, room){
         super(x, y, width, height, color);
-        this.entity=entity
+        this.entity = entity;
+        this.room = room;
+        //console.log("Room is " + room);
+        this.room.addProjectile(this);
+        this.stopped = false;
     }
+    
     
     moveBullet(ctx, shot){
         //if bullet doesnt collide with anything
@@ -50,9 +55,10 @@ class Bullet extends Rectangle{
             }else{
                 this.y+=y_speed;
             }
-            this.drawSelf(ctx);
+            //this.drawSelf(ctx);
         }else{
             shot=false;
+            this.stopped = true;
         }
         return shot;
     }
