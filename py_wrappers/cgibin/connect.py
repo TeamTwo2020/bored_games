@@ -18,10 +18,10 @@ Used with each of the query functions
 
 
 # Method for opening connection to mysql database
-def _access_db(self, query):
+def access_db(query):
     global connection
     try:
-        connection = mysql.connect(**self._config)  # establish connection via mysql connector
+        connection = mysql.connect(config)  # establish connection via mysql connector
         if connection.is_connected():  # Verify connection is established
             print("access_db: Connecting... ")  # Output confirmation
         cursor = connection.cursor()  # Navigation cursor for database
@@ -40,10 +40,7 @@ def _access_db(self, query):
         connection.close()  # Close connection to database
 
 
-"""
-Private function to Insert new member details to the database
-@param: string:username, string:password
-"""
+
 
 
 def _insert(self, username, password):
