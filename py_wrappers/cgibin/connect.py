@@ -4,8 +4,9 @@ import pymysql as mysql
 from os import environ
 
 # Login details for mysql
-config = {'user': 'cgg1', 'password': 'weeS2dih', 'host': 'cs1.ucc.ie', 'database': '2021_cgg1',
-          'raise_on_warnings': True}
+#**config = {'user': 'cgg1', 'password': 'weeS2dih', 'host': 'cs1.ucc.ie', 'database': '2021_cgg1',
+#          'raise_on_warnings': True}
+user, password, host, database = "cgg1", "weeS2dih", "cs1.ucc.ie", "2021_cgg1"
 """
 Python functions for connecting to mysql database.
 
@@ -21,7 +22,7 @@ Used with each of the query functions
 def access_db(query):
     global connection
     try:
-        connection = mysql.connect(config)  # establish connection via mysql connector
+        connection = mysql.connect(user, password, host, database)  # establish connection via mysql connector
         if connection.is_connected():  # Verify connection is established
             print("access_db: Connecting... ")  # Output confirmation
         cursor = connection.cursor()  # Navigation cursor for database
