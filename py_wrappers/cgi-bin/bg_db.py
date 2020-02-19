@@ -17,12 +17,12 @@ Used with each of the query functions
 
 # Method for opening connection to mysql database
 def _access_db(self, query):
-    global bg_db_connection
+    global connection
     try:
-        bg_db_connection = mysql.connect(**self._config)  # establish connection via mysql connector
-        if bg_db_connection.is_connected():  # Verify connection is established
+        connection = mysql.connect(**self._config)  # establish connection via mysql connector
+        if connection.is_connected():  # Verify connection is established
             print("access_db: Connecting... ")  # Output confirmation
-        cursor = bg_db_connection.cursor()  # Navigation cursor for database
+        cursor = connection.cursor()  # Navigation cursor for database
         cursor.execute(query)  # Execute query on database
         result = cursor.fetchall()
         return result  # Return query result
@@ -34,8 +34,8 @@ def _access_db(self, query):
         else:
             print(err)  # Print the error
     finally:
-        bg_db_connection.commit()  # Send query to database
-        bg_db_connection.close()  # Close connection to database
+        connection.commit()  # Send query to database
+        connection.close()  # Close connection to database
 
 
 """
@@ -45,8 +45,8 @@ Private function to Insert new member details to the database
 
 
 def _new_member(self, username, password):
-    # Database manipultion query::INSERT
-    new_member_entry = "INSERT INTO players(username, password) VALUES(%s, '%s')"
+    # Database manipulation query::INSERT
+    new_member_entry = "INSERT INTO players(username, password) VALUES(%s, '%s')" % (username, password)
     self.access_db(new_member_entry)  # Pass query to connection opening method _access_db()
     return  # exit
 
@@ -58,7 +58,7 @@ Private function to DELETE member details from the database
 
 
 def _unregister_member(self, connection, cursor, username, password):
-    # Database manipultion query::DELETE FROM
+    # Database manipulation query::DELETE FROM
     remove_entry = "DELETE FROM players WHERE username = %s" % (username)
     self.access_db(remove_entry)  # Pass query to connection opening method _access_db()
     return  # exit
@@ -71,7 +71,7 @@ private function to UPDATE member score details in database
 
 
 def _update_score(self, connection, cursor, username, password, score):
-    # Database manipultion query::UPDATE
+    # Database manipulation query::UPDATE
     update_score_command = "UPDATE players SET score+%i WHERE username = %s" % (score, username)
     self.access_db(update_score_command)  # Pass query to connection opening method _access_db()
     return  # exit
