@@ -40,7 +40,10 @@ def access_db(query):
         connection.close()  # Close connection to database
 
 
-
+"""
+Private function to Insert new member details to the database
+@param: string:username, string:password
+"""
 
 
 def _insert(self, username, password):

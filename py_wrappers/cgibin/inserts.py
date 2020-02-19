@@ -8,6 +8,10 @@ enable()
 
 # Insertion query for new user to be added
 
+"""
+Private function to Insert new member details to the database
+@param: string:username, string:password
+"""
 
 def insert_new_user(self, username, password):
     score, times_played = 0, 0
