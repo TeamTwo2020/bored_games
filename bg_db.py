@@ -44,7 +44,7 @@ def _new_member(username, password):
 
 """
 Private function to DELETE member details from the database
-@param: mysql.connector:bg_db_connection, mysql.connector.cursor:bg_db_cursor, string:username, string:password
+@param: mysql.connector:connection, mysql.connector.cursor:bg_db_cursor, string:username, string:password
 """
 def _unregister_member(bg_db_connection, bg_db_cursor, username, password):
     #Database manipultion query::DELETE FROM
@@ -54,7 +54,7 @@ def _unregister_member(bg_db_connection, bg_db_cursor, username, password):
 
 """
 private function to UPDATE member score details in database
-@param: mysql.connector:bg_db_connection, mysql.connector.cursor:bg_db_cursor, string:username, string:password
+@param: mysql.connector:connection, mysql.connector.cursor:bg_db_cursor, string:username, string:password
 """
 def _update_score(bg_db_connection, bg_db_cursor, username, password, score):
     #Database manipultion query::UPDATE

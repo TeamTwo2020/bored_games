@@ -1,6 +1,4 @@
 # Imports
-from typing import Dict, Union
-
 import pymysql as mysql
 
 # Login details for mysql
