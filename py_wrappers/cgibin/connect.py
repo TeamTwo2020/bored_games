@@ -1,11 +1,13 @@
 # Imports
+
 import pymysql as mysql
+from os import environ
 
 # Login details for mysql
 config = {'user': 'cgg1', 'password': 'weeS2dih', 'host': 'cs1.ucc.ie', 'database': '2021_cgg1',
           'raise_on_warnings': True}
 """
-Python functions for connecting to and data manipulation in mysql database.
+Python functions for connecting to mysql database.
 
 @author: Adrian Denis Coffey
 
@@ -44,7 +46,7 @@ Private function to Insert new member details to the database
 """
 
 
-def _new_member(self, username, password):
+def _insert(self, username, password):
     # Database manipulation query::INSERT
     new_member_entry = "INSERT INTO players(username, password) VALUES(%s, '%s')" % (username, password)
     self.access_db(new_member_entry)  # Pass query to connection opening method _access_db()
