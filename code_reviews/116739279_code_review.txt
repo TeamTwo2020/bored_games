@@ -1,0 +1,16 @@
+Review for page:
+https://github.com/TeamTwo2020/bored_games/blob/master/teamSoftware/topdown/HenryObject.js
+The code itself is clean and readable with consistant indentation. The variables are well named to avoid ambiguity for their use. A downside is the lack of comments. With the exception of line 14 explaining the bullet coordination there are no comments to explain the overall function of the code.
+
+Review for page:
+https://github.com/TeamTwo2020/bored_games/blob/master/teamSoftware/topdown/topdowngame.js
+The code makes good use of variable names there are no ambigious variables. The code is also well laid out and easy to read. It's again consistent in it's layout as well. 
+An issue is the lack of comments throughout the code. An example where they would be particularly useful is for the movement functions starting at line 50. While it's common knowledge how 'wasd' work in relation to movement and it can be gathered from the function which does which a quick comment at the start would be helpful to confirm this quickly to the reader. 
+
+Review for page:
+https://github.com/TeamTwo2020/bored_games/blob/master/teamSoftware/topdown/shoot.html
+The code is uniform and well written with no immediate flaws in logic. However function names and variable names are a little vague in some instances such as function f on line 82. The lack of comments as well is particularly noticable for the cases on lines 98, 104, 109, 114and 119 where instead of a quick glance at the comments to see what each case does you have to look into the case.
+
+Review for page:
+https://github.com/TeamTwo2020/bored_games/blob/master/teamSoftware/hangman/hangman.js
+Code is well laid out and uniform in it's layout mmaking it wasy to read. Good use of variable and function names making it easy to see what does what. Possibly could use a function and function call for resetting the the game after a user wins or loses looking at the comments function on line 85
