@@ -40,7 +40,7 @@ def _insert_new_user(username, password):
     typ, score, times_played = "ins", 0, 0
 
     query = "INSERT INTO 'players' ('USERNAME', 'PASSWORD', 'SCORE', 'TIMES_PLAYED') " \
-            "VALUES ('%s', '%s', '%i', '%i')", \
+            "VALUES ('%s', '%s', '%i', '%i');", \
             (username, password, score, times_played)
 
     connect(typ, query)
@@ -50,7 +50,7 @@ def _insert_contact(fname, lname, email, country, message):
     typ = "ins"
 
     query = "INSERT INTO 'contact'('fname', 'lname', 'email', 'country', 'message') " \
-            "VALUES (%s, %s, %s, %s, %s)", \
+            "VALUES (%s, %s, %s, %s, %s);", \
             (fname, lname, email, country, message)
     connect(typ, query)
     return
