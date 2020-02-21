@@ -31,6 +31,7 @@ def get_scoreboard():
         connection.close()
     except db.Error:
         scores = '<p>Apologies, we are currently experiencing technical difficulties"</p>'
-        return scores
+    print(scores)
+    return scores
 
 
