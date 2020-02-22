@@ -19,8 +19,8 @@ function init(){
     room_info.rooms.push(right_room);
     
     console.log("TP: room index is " + new_room.returnIndex());
-    hero = new Entity(50, 50, 50, 50, "purple", new_room);
-    henry = new Henry(700, 200, 50, 50, "red", hero, new_room);
+    hero = new Hero(50, 50, 50, 50, "purple", new_room, 50);
+    henry = new Henry(700, 200, 50, 50, "red", hero, new_room, 10);
     
     room_info.rooms[0].addEntity(henry);
     
@@ -167,7 +167,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if(testCollision(hero.x+5, hero.y, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])){
                     moving.moving_right=false;
                     moving.colliding_right = true;
-                   
+
                 }else{
                     moving.moving_right=true;
                     //hero.x=hero.x + moving.moving_right_speed;

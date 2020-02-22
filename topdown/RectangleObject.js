@@ -29,4 +29,11 @@ class Rectangle {
         ctx.fillRect(this.x, this.y, this.width, this.height);
         //ctx.closePath();
     }
+
+    drawSelfColorShift(ctx, temp_color){
+        ctx.beginPath();
+        ctx.fillStyle = temp_color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle=this.color;
+    }
 }

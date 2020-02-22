@@ -1,12 +1,30 @@
 class Entity extends Rectangle{
     
-    constructor(x, y, width, height, color, room){
+    constructor(x, y, width, height, color, room, health){
         super(x, y, width, height, color);
         this.room = room;
+        this.health = health;
+        this.damage_animation_timer = 0;
         //console.log("Entity log says room is " + this.room);
         //console.log("Entity log says room id is " + this.room.room_index);
         //health attribute for later
     }
+
+    takeDamage(damage_value){
+        this.health -= damage_value;
+        this.damage_animation_timer = 8;
+
+    }
+
+    drawSelf(ctx) {
+        if (this.damage_animation_timer > 0){
+            this.damage_animation_timer -= 1;
+            super.drawSelfColorShift(ctx, "red");
+        } else {
+            super.drawSelf(ctx);
+        }
+    }
+
     /*
     testCollision(rectangle){
         if (this.top > rectangle.bottom || this.right < rectangle.left || this.left >rectangle.right || this.bottom < rectangle.top ){

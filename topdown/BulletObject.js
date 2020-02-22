@@ -17,7 +17,7 @@ class Bullet extends Rectangle{
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
         //else dont draw the bullet
-        if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects())){
+        if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects())){
             if(!(this.targetAcquired)){
                 //update x and y position here to be close to target using trig
                 //assuming 
@@ -75,5 +75,14 @@ class Bullet extends Rectangle{
         }
         
         return false;
+    }
+
+    checkCollisionWithPlayerObject(){
+        if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
+            this.entity.takeDamage(50);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

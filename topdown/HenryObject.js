@@ -1,6 +1,6 @@
 class Henry extends Entity{
-    constructor(x, y, width, height, color, entity, room){
-        super(x, y, width, height, color, room);
+    constructor(x, y, width, height, color, entity, room, health){
+        super(x, y, width, height, color, room, health);
         this.shot=false;
         this.entity=entity;
         //console.log("Henry room is : " + room.returnIndex());
