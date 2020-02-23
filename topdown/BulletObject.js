@@ -61,16 +61,16 @@ class Bullet extends Rectangle{
         else{
             shot=false;
             this.stopped = true;
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 2, 3));
-            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 2, 3));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-down-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-down"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-down-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
+            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
 
             }
         return shot;

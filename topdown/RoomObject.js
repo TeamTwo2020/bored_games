@@ -11,7 +11,6 @@ class Room{
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
         this.particle_list = [];
-        this.room_contents_list = [this.static_object_list, this.projectile_object_list, this.entity_list, this.particle_list];
         this.wall_list = this.generateWalls(10, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             console.log("Item in wall list: " + i);
@@ -77,35 +76,35 @@ class Room{
         }
 
         //console.log("wall list len: " + this.wall_list.length);
-        for (var i = 0; i < this.room_contents_list.length; i++){
+        //for (var i = 0; i < this.room_contents_list.length; i++){
             //console.log("drawing wall at x: " + this.room_contents_list[0][i].x);
             //console.log("wall color: " + this.wall_list[i].color);
-            for (var j = 0; j < this.static_object_list.length; j++){
-                this.static_object_list[j].drawSelf(ctx);
-                //console.log("drawing static object");
-            }
+        for (var j = 0; j < this.static_object_list.length; j++){
+            this.static_object_list[j].drawSelf(ctx);
+            //console.log("drawing static object");
+        }
 
-            for (var e = 0; e < this.entity_list.length; e++){
-                this.entity_list[e].drawSelf(ctx);
-            }
-            //console.log("Drawing something...");
-            for (var k = 0; k < this.projectile_object_list.length; k++){
-                if (this.projectile_object_list[k].stopped){
-                    this.projectile_object_list.splice(k, 1);
-                } else{
-                    this.projectile_object_list[k].drawSelf(ctx);
-                }
-            }
-
-            for (var l = 0; l < this.particle_list.length; l++){
-                if (this.particle_list[l].stopped){
-                    this.particle_list.splice(l, 1);
-                } else{
-                    this.particle_list[l].moveSelf();
-                    this.particle_list[l].drawSelf(ctx);
-                }
+        for (var e = 0; e < this.entity_list.length; e++){
+            this.entity_list[e].drawSelf(ctx);
+        }
+        //console.log("Drawing something...");
+        for (var k = 0; k < this.projectile_object_list.length; k++){
+            if (this.projectile_object_list[k].stopped){
+                this.projectile_object_list.splice(k, 1);
+            } else{
+                this.projectile_object_list[k].drawSelf(ctx);
             }
         }
+
+        for (var l = 0; l < this.particle_list.length; l++){
+            if (this.particle_list[l].stopped){
+                this.particle_list.splice(l, 1);
+            } else{
+                this.particle_list[l].moveSelf();
+                this.particle_list[l].drawSelf(ctx);
+            }
+        }
+        //}
 
         //this.examplewall.drawSelf();
         //console.log("frm room: " + this.examplewall.color);

@@ -26,7 +26,7 @@ function init(){
 
     hero = new Hero1(50, 50, 50, 30, "purple",new_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
-     
+
     room_info.rooms[0].addEntity(henry);
 
     var moving={
