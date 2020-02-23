@@ -178,7 +178,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 hero.bullet.y=0;
                 direct2=direct;
             }
-
+              direct2=direct;
 
 
         }
