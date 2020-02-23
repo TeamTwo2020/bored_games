@@ -26,12 +26,9 @@ function init(){
 
     hero = new Hero1(50, 50, 50, 30, "purple",new_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
-    test_particle = new Particle(300, 300, 40, 100, "lime", 2, 5);
-    
+     
     room_info.rooms[0].addEntity(henry);
-    room_info.rooms[0].addParticle(test_particle);
 
-    
     var moving={
         moving_up: false,
         moving_down: false,
@@ -137,7 +134,7 @@ function init(){
 
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_info, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "beige";
+    ctx.fillStyle = "#01a88c";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 

@@ -22,7 +22,7 @@ class Border{
         if (this.gate_status == "locked"){
             this.gate_color = "red";
         } else if (this.gate_status == "open"){
-            this.gate_color = "beige";
+            this.gate_color = "#01a88c";
         } else if (this.gate_status == "none"){
             this.gate_color = this.color;
         }

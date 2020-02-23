@@ -10,8 +10,6 @@ class Bullet extends Rectangle{
         this.y_speed=0;
         this.targetLeft=false;
         this.targetUp=false;
-        console.log("normal room"+this.room);
-
     }
     
     
@@ -63,8 +61,18 @@ class Bullet extends Rectangle{
         else{
             shot=false;
             this.stopped = true;
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-down-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 5, Math.random()*4, "straight-up-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 2, 3));
+            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 2, 3));
 
-        }
+            }
         return shot;
     }
     
