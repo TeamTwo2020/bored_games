@@ -16,7 +16,7 @@ function init(){
     var room_info = {
         rooms : [],
         current_room: 0
-    }
+    };
     room_info.rooms.push(new_room);
 
     room_info.rooms.push(right_room);
@@ -26,8 +26,10 @@ function init(){
 
     hero = new Hero1(50, 50, 50, 30, "purple",new_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
+    test_particle = new Particle(300, 300, 40, 100, "lime", 2, 5);
     
     room_info.rooms[0].addEntity(henry);
+    room_info.rooms[0].addParticle(test_particle);
 
     
     var moving={
@@ -46,7 +48,7 @@ function init(){
         colliding_left: false,
         colliding_right: false
         
-    }
+    };
 
     var vertical_speed = 0;
     var horizontal_speed = 0;
@@ -218,8 +220,6 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x, hero.y - 5, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_up = false;
                     moving.colliding_up = true;
-                    break;
-
 
                 } else {
                     moving.moving_up = true;
@@ -230,7 +230,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x, hero.y + 5, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_down = false;
                     moving.colliding_down = true;
-                    break;
+
                 } else {
                     moving.moving_down = true;
 
@@ -240,7 +240,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x - 5, hero.y, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_left = false;
                     moving.colliding_left = true;
-                    break;
+
                 } else {
                     moving.moving_left = true;
                     //hero.x = hero.x - moving.moving_left_speed;
@@ -250,7 +250,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x + 5, hero.y, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_right = false;
                     moving.colliding_right = true;
-                    break;
+
                 } else {
                     moving.moving_right = true;
                     //hero.x=hero.x + moving.moving_right_speed;

@@ -10,7 +10,8 @@ class Room{
         this.static_object_list = [];//wall
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
-        this.room_contents_list = [this.static_object_list, this.projectile_object_list, this.entity_list];
+        this.particle_list = [];
+        this.room_contents_list = [this.static_object_list, this.projectile_object_list, this.entity_list, this.particle_list];
         this.wall_list = this.generateWalls(10, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             console.log("Item in wall list: " + i);
@@ -95,16 +96,20 @@ class Room{
                     this.projectile_object_list[k].drawSelf(ctx);
                 }
             }
+
+            for (var l = 0; l < this.particle_list.length; l++){
+                if (this.particle_list[l].stopped){
+                    this.particle_list.splice(l, 1);
+                } else{
+                    this.particle_list[l].moveSelf();
+                    this.particle_list[l].drawSelf(ctx);
+                }
+            }
         }
 
         //this.examplewall.drawSelf();
         //console.log("frm room: " + this.examplewall.color);
     }
-
-    addEntity(entity){
-        this.entity_list.push(entity);
-    }
-
 
 
 
@@ -184,6 +189,10 @@ class Room{
     addProjectile(projectile){
         //console.log("projectile added");
         this.projectile_object_list.push(projectile);
+    }
+
+    addParticle(particle){
+	    this.particle_list.push(particle);
     }
 
 }
