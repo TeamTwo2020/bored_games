@@ -16,7 +16,7 @@ function init(){
     var room_info = {
         rooms : [],
         current_room: 0
-    }
+    };
     room_info.rooms.push(new_room);
 
     room_info.rooms.push(right_room);
@@ -26,10 +26,9 @@ function init(){
 
     hero = new Hero1(50, 50, 50, 30, "purple",new_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
-    
+     
     room_info.rooms[0].addEntity(henry);
 
-    
     var moving={
         moving_up: false,
         moving_down: false,
@@ -46,7 +45,7 @@ function init(){
         colliding_left: false,
         colliding_right: false
         
-    }
+    };
 
     var vertical_speed = 0;
     var horizontal_speed = 0;
@@ -135,7 +134,7 @@ function init(){
 
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_info, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "beige";
+    ctx.fillStyle = "#01a88c";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
@@ -179,8 +178,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 hero.bullet.y=0;
                 direct2=direct;
             }
-            direct2=direct;
-
+              direct2=direct;
 
 
         }
@@ -219,8 +217,6 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x, hero.y - 5, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_up = false;
                     moving.colliding_up = true;
-                    break;
-
 
                 } else {
                     moving.moving_up = true;
@@ -231,7 +227,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x, hero.y + 5, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_down = false;
                     moving.colliding_down = true;
-                    break;
+
                 } else {
                     moving.moving_down = true;
 
@@ -241,7 +237,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x - 5, hero.y, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_left = false;
                     moving.colliding_left = true;
-                    break;
+
                 } else {
                     moving.moving_left = true;
                     //hero.x = hero.x - moving.moving_left_speed;
@@ -251,7 +247,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_i
                 if (testCollision(hero.x + 5, hero.y, hero.width, hero.height, room_info.rooms[room_info.current_room].static_object_list[i])) {
                     moving.moving_right = false;
                     moving.colliding_right = true;
-                    break;
+
                 } else {
                     moving.moving_right = true;
                     //hero.x=hero.x + moving.moving_right_speed;
