@@ -41,7 +41,7 @@ class Room{
 
         this.static_object_list.push(this.lower_wall.first_block);
         this.static_object_list.push(this.lower_wall.third_block);
-        if (this.right_wall.gate_status != "open"){
+        if (this.lower_wall.gate_status != "open"){
             this.static_object_list.push(this.lower_wall.second_block);
         }
 

@@ -8,7 +8,7 @@ function init(){
 
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    var new_room = new Room(canvas, 0, 30, "none", "open", "closed", "none");
+    var new_room = new Room(canvas, 0, 30, "none", "open", "closed", "closed");
     var right_room = new Room(canvas, 1, 30, "open", "none", "closed", "closed");
     
     new_room.right_neighbour = right_room;
