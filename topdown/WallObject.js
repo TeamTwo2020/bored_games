@@ -2,10 +2,11 @@ class Wall{
     constructor(x, y, preset_wall, color){
         this.x = x;
         this.y = y;
-        this.spawn_padding_width = 150;
-        this.spawn_padding_height = 150;
-        this.wall_blocks = [];
+      //  this.spawn_padding_width = 150;  my comment
+       // this.spawn_padding_height = 150;  my comment
+        this.wall_blocks= [];
         this.color = color;
+
         
         this.block_thickness = 35;
         this.populateWallBlocks(preset_wall);
@@ -17,7 +18,7 @@ class Wall{
                 for (var i = 0; i < 5; i++){
                     
                     if (this.wall_blocks.length == 0){
-                        this.wall_blocks.push(new Rectangle(this.x, this.y, this.block_thickness, this.block_thickness, this.color));
+                       this.wall_blocks.push(new Rectangle(this.x, this.y, this.block_thickness, this.block_thickness, this.color));
                     } else {
                         this.wall_blocks.push(new Rectangle(this.wall_blocks[i-1].x+this.block_thickness, this.y, this.block_thickness, this.block_thickness, this.color));
                     }

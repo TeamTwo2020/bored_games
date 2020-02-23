@@ -14,10 +14,14 @@
 }*/
 
 function testCollision(x, y, width, height, rectangle){
+    //console.log("run testcolleision");
     if ( y+5 > rectangle.bottom || (x+width-5) < rectangle.left || x+5 > rectangle.right || (y+height-5) < rectangle.top ){    
         return false;
+       // console.log("collision no");
     }
+    //console.log("collision yes");
     return true;
+
 }
 
 

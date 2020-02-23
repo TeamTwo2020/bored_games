@@ -26,13 +26,15 @@ class Border{
         } else if (this.gate_status == "none"){
             this.gate_color = this.color;
         }
-            
+            // excellent solution!
         if (this.width < this.height){
+
             //Draw the first block of the wall
             this.first_block = new Rectangle(this.x, this.y, this.width, (this.height/2)-40, this.color);
             
             //Draw the gate part of the wall
             this.second_block = new Rectangle(this.x, this.first_block.height, this.width, this.gate_length, this.gate_color);
+            //  alert("this.x:"+this.x+"y:"+this.first_block.height+"width:"+this.width+"height:"+this.gate_length);//0 460 30 80
             
             //Draw the other wall on the other side of the gate
             this.third_block = new Rectangle(this.x, this.first_block.height + this.second_block.height, this.width, (this.height/2)-40, this.color);
@@ -41,10 +43,11 @@ class Border{
         else {
             //Draw the first block of the wall
             this.first_block = new Rectangle(this.x, this.y, (this.width/2)-(20 + this.height), this.height, this.color);
+
             
             //Draw the second block of the wall
             this.second_block = new Rectangle(this.x + this.first_block.width, this.y, this.gate_length, this.height, this.gate_color);
-            
+           // alert("this.x:"+(this.x + this.first_block.width)+"y:"+this.y+"width:"+this.gate_length+"height:"+this.height);//715 0 80 30
             //Draw the third block of the wall
             this.third_block = new Rectangle(this.x + this.first_block.width + this.second_block.width, this.y, (this.width/2)-(20 + this.height), this.height, this.color);
             

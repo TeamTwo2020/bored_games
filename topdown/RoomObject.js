@@ -117,6 +117,20 @@ class Room{
             else return true;
 
         }
+
+
+
+        function not_block_entity(x,y){
+            if(y>=155&&y<=250&&x<=750&&x>=525) return false;//avoid block henry
+            if(y>=15&&y<=35&&x<=100) return false;//avoid block henry
+
+            else return true;
+
+        }
+
+
+
+
         function islegal_zone(x, y, arrayx, arrayy) {
             var i=0;
             while(i<arrayx.length)
@@ -140,7 +154,7 @@ class Room{
         for (var i = 1; i < amount_of_walls; ){
             new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
             new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-            if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y))
+            if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y))
             {
                 walls.push(new Wall(new_x, new_y, 0, "black"));
                 arrayx.push(new_x);

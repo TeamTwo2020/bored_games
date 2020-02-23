@@ -10,14 +10,20 @@ class Bullet extends Rectangle{
         this.y_speed=0;
         this.targetLeft=false;
         this.targetUp=false;
+        console.log("normal room"+this.room);
+
     }
     
     
     moveBullet(ctx, shot){
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
+
+
         //else dont draw the bullet
-        if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects())){
+     //   if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects()))
+            if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects()))
+        {
             if(!(this.targetAcquired)){
                 //update x and y position here to be close to target using trig
                 //assuming 
@@ -28,6 +34,7 @@ class Bullet extends Rectangle{
                     this.targetLeft=true;
                     x_dist*=-1;
                 }
+                //compare two entities
                 var y_dist=this.entity.middle.y - this.middle.y ;
                 if(y_dist < 0){
                     this.targetUp=true;
@@ -44,20 +51,19 @@ class Bullet extends Rectangle{
             
             //console.log("this.x_speed: ", this.x_speed, "-- this.y_speed: ", this.y_speed);
             
-            if (this.targetLeft==true){
-                this.x-=this.x_speed;
-            }else{
-                this.x+=this.x_speed;
-            }
-            if (this.targetUp==true){
-                this.y-=this.y_speed;
-            }else{
-                this.y+=this.y_speed;
-            }
-            //this.drawSelf(ctx);
-        }else{
+            if (this.targetLeft==true)  {this.x-=this.x_speed;}
+            else{this.x+=this.x_speed;}
+            if (this.targetUp==true){this.y-=this.y_speed;}
+            else{this.y+=this.y_speed; }//this.drawSelf(ctx);
+        }
+       //  else if(testCollision(this.x, this.y, this.width, this.height, this.entity) )
+       // { //alert("you are defeated");//this.entity.clear1();
+        //}
+
+        else{
             shot=false;
             this.stopped = true;
+
         }
         return shot;
     }
@@ -66,7 +72,7 @@ class Bullet extends Rectangle{
         //console.log("checking collision with static objects: " + this.room.static_object_list.length);
         
         for (var i = 0; i < this.room.static_object_list.length; i++){
-            //console.log("checking collision in for loop...");
+            //console.log("checking collision in for loop..."+i);
             if (testCollision(this.x, this.y, this.width, this.height, this.room.static_object_list[i])){
                 return true;
             } else {
@@ -79,8 +85,10 @@ class Bullet extends Rectangle{
 
     checkCollisionWithPlayerObject(){
         if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
-            this.entity.takeDamage(50);
-            return true;
+          if(this.entity.health>0)
+          { this.entity.takeDamage(10);return true;}
+          else alert("game over");
+
         } else {
             return false;
         }
