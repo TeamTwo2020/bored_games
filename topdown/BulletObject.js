@@ -14,14 +14,14 @@ class Bullet extends Rectangle{
     }
     
     
-    moveBullet(ctx, shot){
+    moveBullet(){
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
-        console.log("moving bullet");
+
 
         //else dont draw the bullet
      //   if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects()))
-            if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects()))
+        if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects()))
         {
             if(!(this.targetAcquired)){
                 //update x and y position here to be close to target using trig
