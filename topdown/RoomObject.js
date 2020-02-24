@@ -1,6 +1,11 @@
 class Room{
-	constructor(canvas, room_index, wall_thickness, left_door, right_door, upper_door, lower_door){
-        this.room_index = room_index;
+	constructor(canvas, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door){
+        this.right_neighbour;
+        this.left_neighbour;
+        this.upper_neighbour;
+        this.lower_neighbour;
+        this.room_row_index = room_row_index;
+        this.room_col_index = room_col_index;
         this.wall_thickness = wall_thickness;
 		this.left_wall = new Border(0, 0, wall_thickness, canvas.height, "black", left_door);
 		this.right_wall = new Border(canvas.width - wall_thickness, 0, wall_thickness, canvas.height, "black", right_door);

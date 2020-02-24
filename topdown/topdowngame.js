@@ -57,14 +57,14 @@ function init(){
             moving.moving_up = true;
             moving.moving_up_speed = 5;
             direct=0;
-            console.log("up");
+            //console.log("up");
         }
 
         if(event.key == "d" || event.key == "D"){
             moving.moving_right = true;
             moving.moving_right_speed = 5;
             direct=3;
-            console.log("right");
+            //console.log("right");
 
         }
 
@@ -72,14 +72,14 @@ function init(){
             moving.moving_left = true;
             moving.moving_left_speed = 5;
             direct=2;
-            console.log("left");
+            //console.log("left");
         }
 
         if(event.key == "s" || event.key == "S"){
             moving.moving_down = true;
             moving.moving_down_speed = 5;
             direct=1;
-            console.log("down");
+            //console.log("down");
 
         }
     });
@@ -200,7 +200,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
         hero.drawSelf(ctx);
   //  hero.bullet.drawSelf(ctx,hero.bullet.x, hero.bullet.y);
 
-        if (room_list.current_room.room_index == henry.room.room_index) {
+        if (room_list.current_room.room_row_index == henry.room.room_row_index && room_list.current_room.room_col_index == henry.room.room_col_index) {
             if (ii <= 2000) ii += 10;
             else henry.shoot(ctx, hero);// 2seconds for player prepare , after that opponent will shoot
         }
