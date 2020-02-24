@@ -12,6 +12,7 @@ class Henry extends Entity{
     }
     
     shoot(ctx){
+        //console.log("making a bullet, adding it to projectile list");
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
             this.room.addProjectile(new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", this.entity, this.room));
