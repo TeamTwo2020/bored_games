@@ -92,6 +92,7 @@ class Room{
             if (this.projectile_object_list[k].stopped){
                 this.projectile_object_list.splice(k, 1);
             } else{
+                this.projectile_object_list[k].moveBullet(ctx, true); 
                 this.projectile_object_list[k].drawSelf(ctx);
             }
         }

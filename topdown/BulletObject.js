@@ -10,13 +10,14 @@ class Bullet extends Rectangle{
         this.y_speed=0;
         this.targetLeft=false;
         this.targetUp=false;
+        this.total_speed_multiplier = 8;
     }
     
     
     moveBullet(ctx, shot){
         //if bullet doesnt collide with anything
         //  draw the bullet at a closer position to the target's middle (using trigonometry)
-
+        console.log("moving bullet");
 
         //else dont draw the bullet
      //   if (!(testCollision(this.x, this.y, this.width, this.height, this.entity)) && !(this.checkCollisionWithStaticObjects()))
@@ -41,8 +42,8 @@ class Bullet extends Rectangle{
                 
                 var total_dist=x_dist+y_dist;
                 
-                this.x_speed=(x_dist / total_dist)*10;
-                this.y_speed=(y_dist/total_dist)*10;
+                this.x_speed=(x_dist / total_dist)*this.total_speed_multiplier;
+                this.y_speed=(y_dist/total_dist)*this.total_speed_multiplier;
                 
                 this.targetAcquired=true;
             }
@@ -59,7 +60,7 @@ class Bullet extends Rectangle{
         //}
 
         else{
-            shot=false;
+            //shot=false;
             this.stopped = true;
             this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up"));
             this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up-right"));
@@ -73,7 +74,7 @@ class Bullet extends Rectangle{
             this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
 
             }
-        return shot;
+        //return shot;
     }
     
     checkCollisionWithStaticObjects(){
