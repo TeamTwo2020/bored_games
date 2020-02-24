@@ -90,6 +90,7 @@ class Room{
         }
 
         for (var e = 0; e < this.entity_list.length; e++){
+            this.entity_list[e].moveAi();
             this.entity_list[e].drawSelf(ctx);
         }
         //console.log("Drawing something...");
@@ -97,7 +98,7 @@ class Room{
             if (this.projectile_object_list[k].stopped){
                 this.projectile_object_list.splice(k, 1);
             } else{
-                this.projectile_object_list[k].moveBullet(ctx, true); 
+                this.projectile_object_list[k].moveBullet();
                 this.projectile_object_list[k].drawSelf(ctx);
             }
         }

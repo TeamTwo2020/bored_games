@@ -9,18 +9,10 @@ class Hero1 extends Entity{
 
     }
 
-
-
    generate(ctx){
        //var Entitytemp = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
        this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", henry, this.room);
-
-
-
-
-       }
-
-
+    }
 }
 
 

@@ -202,7 +202,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
 
         if (room_list.current_room.room_row_index == henry.room.room_row_index && room_list.current_room.room_col_index == henry.room.room_col_index) {
             if (ii <= 2000) ii += 10;
-            else henry.shoot(ctx, hero);// 2seconds for player prepare , after that opponent will shoot
+            else henry.shoot();// 2seconds for player prepare , after that opponent will shoot
         }
         room_list.current_room.drawSelf(ctx);
         //console.log("drawing room: " + room_info.current_room);
