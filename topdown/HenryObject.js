@@ -8,7 +8,9 @@ class Henry extends Entity{
         //console.log("Henry room is : " + room.returnIndex());
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
         this.shot_timer = 40;
-        this.collide_timer=0;
+        this.maneuver_timer=0;
+        this.maneuver_x=0;
+        this.maneuver_y=0;
     }
     
 
@@ -25,8 +27,18 @@ class Henry extends Entity{
         
     }
 
-    //ai stuff
     moveAi(){
+        if (this.maneuver_timer>0){
+            //if theres collision assign a new x and y point to these
+            this.aiMovement(this.maneuver_x, this.maneuver_y);
+            this.maneuver_timer-=1;
+        }else{
+            this.aiMovement(this.entity.middle.x, this.entity.middle.y);
+        }
+    }
+
+    //ai stuff
+    aiMovement(dest_x, dest_y){
         var moving={
             moving_up: false,
             moving_down: false,
@@ -52,7 +64,7 @@ class Henry extends Entity{
             //var targetLeft=false;
             //var targetUp=false;
 
-            var x_dist=this.entity.middle.x - this.middle.x;
+            var x_dist=dest_x - this.middle.x;
 
             if(x_dist < 0){
                 moving.moving_left=true;
@@ -61,7 +73,7 @@ class Henry extends Entity{
                 moving.moving_right=true;
             }
             //compare two entities
-            var y_dist=this.entity.middle.y - this.middle.y ;
+            var y_dist=dest_y - this.middle.y;
             if(y_dist < 0){
                 moving.moving_up=true;
                 y_dist*=-1;
@@ -113,7 +125,6 @@ class Henry extends Entity{
 
                 } else {
                     moving.moving_left = true;
-                    //this.x = this.x - moving.moving_left_speed;
                 }
             }
             if (moving.moving_right_speed > 0) {
@@ -123,7 +134,6 @@ class Henry extends Entity{
 
                 } else {
                     moving.moving_right = true;
-                    //this.x=this.x + moving.moving_right_speed;
                 }
             }
         }
@@ -131,7 +141,19 @@ class Henry extends Entity{
         //console.log("r1 o1: " + rooms[0].static_object_list[0].x + " " + rooms[0].static_object_list[0].y + "\nr2 o1: " + rooms[1].static_object_list[0].x + " " + rooms[1].static_object_list[0].y);
         if (moving.colliding_up == false) {
             this.y = this.y - moving.moving_up_speed;
+        }else if(moving.colliding_up == true){
+            if (moving.moving_left==true){
+                this.maneuver_x=dest_x-100;
+                this.maneuver_y=dest_y;
+                this.maneuver_timer=30;
+            }else{
+                this.maneuver_x=dest_x+100;
+                this.maneuver_y=dest_y;
+                this.maneuver_timer=30;
+            }
         }
+
+        //if henry is moving left when he collides up then move 100 left and vice versa
 
         if (moving.colliding_down == false) {
             this.y = this.y + moving.moving_down_speed;
@@ -139,6 +161,16 @@ class Henry extends Entity{
 
         if (moving.colliding_left == false) {
             this.x = this.x - moving.moving_left_speed;
+        }else if(moving.colliding_left == true){
+            if (moving.moving_up==true){
+                this.maneuver_x=dest_x;
+                this.maneuver_y=dest_y-100;
+                this.maneuver_timer=30;
+            }else{
+                this.maneuver_x=dest_x;
+                this.maneuver_y=dest_y+100;
+                this.maneuver_timer=30;
+            }
         }
 
         if (moving.colliding_right == false) {
