@@ -1,5 +1,6 @@
 class Room{
-	constructor(canvas, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
+	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
+        this.room_array = room_array
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -25,14 +26,8 @@ class Room{
                 this.static_object_list.push(this.wall_list[i].wall_blocks[j]);
             }
         }
-        console.log("LEFT DOOR STATUS: " + left_door);
         this.addBorderBlocks();
-        this.openGate(this.left_wall);
         
-
-
-        //this.static_object_list.push(new Wall(200, 200, 0, "black"));
-
     }
 
     returnIndex(){
@@ -209,16 +204,37 @@ class Room{
     }
     
     //When given a border wall, it's gate will be opened
-    openGate(border_wall){
-        console.log("-----------------------\nsearching static blocks. Length of list: " + this.static_object_list.length);
+    openGate(border_direction){
+        //Which border wall should be opened?
+        switch(border_direction){
+            case "left":
+                var border_wall = this.left_wall;
+                this.left_neighbour = this.room_array.array[this.room_row_index][this.room_col_index - 1];
+                console.log("left neighbour: " + this.left_neighbour);
+                break;
+            case "right":
+                var border_wall = this.right_wall;
+                this.right_neighbour = this.room_array.array[this.room_row_index][this.room_col_index + 1];
+                
+                break;
+            case "upper":
+                var border_wall = this.upper_wall;
+                this.upper_neighbour = this.room_array.array[this.room_row_index - 1][this.room_col_index];
+                break;
+            case "lower":
+                this.lower_neighbour = this.room_array.array[this.room_row_index + 1][this.room_col_index];
+                var border_wall = this.lower_wall;
+                break;
+        }
+        
         for (var i = 0; i < this.static_object_list.length; i++){
             //console.log("iteration: " + i);
             if (this.static_object_list[i] == border_wall.second_block){
-                console.log("Found second block, its status is " + border_wall.gate_status);
+                //console.log("Found second block, its status is " + border_wall.gate_status);
                 this.static_object_list.splice(i, 1);
                 border_wall.second_block.color = this.color;
                 border_wall.gate_status = "open";
-                console.log("second block status is now " + border_wall.gate_status);
+                //console.log("second block status is now " + border_wall.gate_status);
             }
             
             else{
@@ -226,7 +242,7 @@ class Room{
             }
         }
         
-        console.log("+++++++++finished iterating");
+        //console.log("+++++++++finished iterating");
     }
 
 }

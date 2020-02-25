@@ -23,8 +23,8 @@ function init(){
 
     
     //console.log("TP: room index is " + room_list.current_room.room_index);
-
-    hero = new Hero1(50, 50, 50, 30, "purple",room_list.current_room, 30,direct);
+    console.log("TD: " + canvas.width);
+    hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],50);
     room_list.addEntity(henry, 2, 2);
 
@@ -197,7 +197,9 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
 
       //  hero.bullet.drawSelf(ctx,hero.bullet.x, hero.bullet.y);
     }
-
+        //console.log("ECHING BOUNDS");
+        hero.outOfBounds();
+        //console.log("BOUNDS checked");
         hero.drawSelf(ctx);
   //  hero.bullet.drawSelf(ctx,hero.bullet.x, hero.bullet.y);
 

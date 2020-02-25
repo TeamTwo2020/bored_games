@@ -7,6 +7,7 @@ class RoomArray{
         this.current_room = this.array[2][2];
         this.definePremadeMapLayout1(canvas);
         this.associateNeighbours();
+        
         //this.printArray();
         
     }
@@ -29,13 +30,18 @@ class RoomArray{
     //define the spawn room
     defineSpawnRoom(room_row_index, room_col_index, canvas){
         console.log("row index in method defineSpawnRoom " + room_row_index);
-        this.array[room_row_index][room_col_index] = new Room(canvas, room_row_index, room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+        this.array[room_row_index][room_col_index] = new Room(canvas, this, room_row_index, room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
         console.log("Therefore this should be 2: " + this.array[room_row_index][room_col_index].room_row_index);
     }
     
     definePremadeMapLayout1(canvas){
-        this.array[1][2] = new Room(canvas, 1, 2, 30, "closed", "closed", "closed", "closed", this.color);
-        this.array[2][1] = new Room(canvas, 2, 1, 30, "closed", "closed", "closed", "closed", this.color);
+        console.log("spawn room is " + this.current_room);
+        this.array[1][2] = new Room(canvas, this, 1, 2, 30, "closed", "closed", "closed", "closed", this.color);
+        this.array[2][1] = new Room(canvas, this, 2, 1, 30, "closed", "closed", "closed", "closed", this.color);
+        this.current_room.openGate("left");
+        this.array[2][1].openGate("right");
+        this.current_room.openGate("upper");
+        this.array[1][2].openGate("lower");
     }
     
     associateNeighbours(){
