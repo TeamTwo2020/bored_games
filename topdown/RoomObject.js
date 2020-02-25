@@ -1,5 +1,5 @@
 class Room{
-	constructor(canvas, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door){
+	constructor(canvas, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -11,6 +11,7 @@ class Room{
 		this.right_wall = new Border(canvas.width - wall_thickness, 0, wall_thickness, canvas.height, "black", right_door);
 		this.upper_wall = new Border(wall_thickness, 0, canvas.width - wall_thickness, wall_thickness, "black", upper_door);
 		this.lower_wall = new Border(wall_thickness, canvas.height - wall_thickness, canvas.width - wall_thickness, wall_thickness, "black", lower_door);
+        this.color = room_color;
 
         this.static_object_list = [];//wall
         this.projectile_object_list = [];//bullet
@@ -18,13 +19,27 @@ class Room{
         this.particle_list = [];
         this.wall_list = this.generateWalls(10, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
-            console.log("Item in wall list: " + i);
+            //console.log("Item in wall list: " + i);
             for (var j = 0; j < this.wall_list[i].wall_blocks.length; j++){
                 //console.log("block in wall: " + j);
                 this.static_object_list.push(this.wall_list[i].wall_blocks[j]);
             }
         }
+        console.log("LEFT DOOR STATUS: " + left_door);
+        this.addBorderBlocks();
+        this.openGate(this.left_wall);
+        
 
+
+        //this.static_object_list.push(new Wall(200, 200, 0, "black"));
+
+    }
+
+    returnIndex(){
+        return this.room_index;
+    }
+    
+    addBorderBlocks(){
         //add borders to static objects
         this.static_object_list.push(this.left_wall.first_block);
         this.static_object_list.push(this.left_wall.third_block);
@@ -49,14 +64,6 @@ class Room{
         if (this.lower_wall.gate_status != "open"){
             this.static_object_list.push(this.lower_wall.second_block);
         }
-
-
-        //this.static_object_list.push(new Wall(200, 200, 0, "black"));
-
-    }
-
-    returnIndex(){
-        return this.room_index;
     }
 
 
@@ -199,6 +206,27 @@ class Room{
 
     addParticle(particle){
 	    this.particle_list.push(particle);
+    }
+    
+    //When given a border wall, it's gate will be opened
+    openGate(border_wall){
+        console.log("-----------------------\nsearching static blocks. Length of list: " + this.static_object_list.length);
+        for (var i = 0; i < this.static_object_list.length; i++){
+            //console.log("iteration: " + i);
+            if (this.static_object_list[i] == border_wall.second_block){
+                console.log("Found second block, its status is " + border_wall.gate_status);
+                this.static_object_list.splice(i, 1);
+                border_wall.second_block.color = this.color;
+                border_wall.gate_status = "open";
+                console.log("second block status is now " + border_wall.gate_status);
+            }
+            
+            else{
+                //console.log("haven't found second block yet");
+            }
+        }
+        
+        console.log("+++++++++finished iterating");
     }
 
 }

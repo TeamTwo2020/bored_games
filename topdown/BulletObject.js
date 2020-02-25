@@ -91,7 +91,7 @@ class Bullet extends Rectangle{
     checkCollisionWithPlayerObject(){
         if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
           if(this.entity.health>0)
-          { this.entity.takeDamage(10);return true;}
+          { this.entity.takeDamage(5);return true;}
           else alert("game over");
 
         } else {

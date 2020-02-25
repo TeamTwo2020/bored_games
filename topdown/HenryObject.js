@@ -7,7 +7,7 @@ class Henry extends Entity{
         //console.log("room index in henry: " + this.room.room_index);
         //console.log("Henry room is : " + room.returnIndex());
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
-        this.shot_timer = 70;
+        this.shot_timer = 40;
         this
         this.collide_timer=0;
     }
@@ -18,7 +18,7 @@ class Henry extends Entity{
             //give bullet the coords of hero here, so its only passed once
             this.room.addProjectile(new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", this.entity, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
-            this.shot_timer = 70;
+            this.shot_timer = 40;
         } else {
             this.shot_timer -= 1;
         }

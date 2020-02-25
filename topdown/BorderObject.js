@@ -14,6 +14,7 @@ class Border{
         this.third_block;
         
         this.generateWallBlockPositions();
+        
     }
     
     //during construction, the border object must discover the positions of the wall chunks
@@ -24,6 +25,8 @@ class Border{
         } else if (this.gate_status == "open"){
             this.gate_color = "#01a88c";
         } else if (this.gate_status == "none"){
+            this.gate_color = this.color;
+        } else if (this.gate_status == "closed"){
             this.gate_color = this.color;
         }
             // excellent solution!

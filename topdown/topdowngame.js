@@ -5,12 +5,12 @@ var direct=0;// represent forward direction;
 var direct2=0;// represent  bullet direction;
 function init(){
     //Instantiate the canvas and its context.
-
+    var room_color = "#01a88c";
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
     //var new_room = new Room(canvas, 0, 30, "none", "open", "closed", "closed");
     //var right_room = new Room(canvas, 1, 30, "open", "none", "closed", "closed");
-    room_list = new RoomArray(canvas);
+    room_list = new RoomArray(canvas, room_color);
     //new_room.right_neighbour = right_room;
     //right_room.left_neighbour = new_room;
     /*var room_info = {
@@ -22,10 +22,11 @@ function init(){
     room_info.rooms.push(right_room);*/
 
     
-    console.log("TP: room index is " + room_list.current_room.room_index);
+    //console.log("TP: room index is " + room_list.current_room.room_index);
 
     hero = new Hero1(50, 50, 50, 30, "purple",room_list.current_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],50);
+    room_list.addEntity(henry, 2, 2);
 
     //room_info.rooms[0].addEntity(henry);
 
@@ -134,11 +135,11 @@ function init(){
 
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_list, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#01a88c";
+    ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
-    henry.drawSelf(ctx);
+    //henry.drawSelf(ctx);
     //wall.drawSelf(ctx);
     onclick = function () {
         console.log("shoot");
