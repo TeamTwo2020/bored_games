@@ -8,7 +8,6 @@ class Henry extends Entity{
         //console.log("Henry room is : " + room.returnIndex());
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
         this.shot_timer = 40;
-        this
         this.collide_timer=0;
     }
     
@@ -28,65 +27,46 @@ class Henry extends Entity{
 
     //ai stuff
     moveAi(){
+        var moving={
+            moving_up: false,
+            moving_down: false,
+            moving_left: false,
+            moving_right: false,
+
+            moving_up_speed: 0,
+            moving_down_speed: 0,
+            moving_left_speed: 0,
+            moving_right_speed: 0,
+
+            colliding_up: false,
+            colliding_down: false,
+            colliding_left: false,
+            colliding_right: false
+
+        };
         //update x and y position here to be close to target using trig
         //assuming
         //x speed is x_dist/y_dist x5:
         //put the smaller of x/y on top of other in fraction to get the percentage
-        if (this.collide_timer==0){
-            if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects())){
-                var targetLeft=false;
-                var targetUp=false;
-
-                var x_dist=this.entity.middle.x - this.middle.x;
-
-                if(x_dist < 0){
-                    targetLeft=true;
-                    x_dist*=-1;
-                }
-                //compare two entities
-                var y_dist=this.entity.middle.y - this.middle.y ;
-                if(y_dist < 0){
-                    targetUp=true;
-                    y_dist*=-1;
-                }
-
-                var total_dist=x_dist+y_dist;
-
-                var x_speed=(x_dist / total_dist)*2;
-                var y_speed=(y_dist/total_dist)*2;
-
-                //console.log("this.x_speed: ", this.x_speed, "-- this.y_speed: ", this.y_speed);
-                //console.log("MOVING: ", x_speed, y_speed);
-                if (targetLeft==true)  {this.x-=x_speed;}
-                else{this.x+=x_speed;}
-                if (targetUp==true){this.y-=y_speed;}
-                else{this.y+=y_speed;}
-
-            }
-            else if (this.checkCollisionWithPlayerObject()){
-                this.entity.health=0;
-            }
-            else{
-                this.collide_timer=60;
-            }
-        }
-        else{ //if colliding with static object
-            this.collide_timer-=1;
-
-            var targetLeft=false;
-            var targetUp=false;
+        if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects())){
+            //var targetLeft=false;
+            //var targetUp=false;
 
             var x_dist=this.entity.middle.x - this.middle.x;
 
             if(x_dist < 0){
-                targetLeft=true;
+                moving.moving_left=true;
                 x_dist*=-1;
+            }else{
+                moving.moving_right=true;
             }
             //compare two entities
             var y_dist=this.entity.middle.y - this.middle.y ;
             if(y_dist < 0){
-                targetUp=true;
+                moving.moving_up=true;
                 y_dist*=-1;
+            }else{
+                moving.moving_down=true;
             }
 
             var total_dist=x_dist+y_dist;
@@ -94,15 +74,75 @@ class Henry extends Entity{
             var x_speed=(x_dist / total_dist)*2;
             var y_speed=(y_dist/total_dist)*2;
 
-            //if theres collision with a wall move away from the player's location
-            //using targetLeft we know what direction the ai is moving, we can therefore try to move around the blocking object
-            //need to accurately check the 4 zones
+            //console.log("this.x_speed: ", this.x_speed, "-- this.y_speed: ", this.y_speed);
+            //console.log("MOVING: ", x_speed, y_speed);
+            if (moving.moving_left==true)  {moving.moving_left_speed=x_speed;}
+            if (moving.moving_right==true)  {moving.moving_right_speed=x_speed;}
+            if (moving.moving_up==true)  {moving.moving_up_speed=y_speed;}
+            if (moving.moving_down==true)  {moving.moving_down_speed=y_speed;}
+        }
+        else if (this.checkCollisionWithPlayerObject()){
+            this.entity.health=0;
+        }
 
-            //to do this there there needs to be a way to check in which direction the collision occured
-            if (targetLeft==true)  {this.x+=x_speed;}
-            else{this.x-=x_speed;}
-            if (targetUp==true){this.y+=y_speed;}
-            else{this.y-=y_speed;}
+        for (var i = 0; i < this.room.static_object_list.length; i++) {
+            if (moving.moving_up_speed > 0) {
+                if (testCollision(this.x, this.y - 5, this.width, this.height, this.room.static_object_list[i])) {
+                    moving.moving_up = false;
+                    moving.colliding_up = true;
+
+                } else {
+                    moving.moving_up = true;
+
+                }
+            }
+            if (moving.moving_down_speed > 0) {
+                if (testCollision(this.x, this.y + 5, this.width, this.height, this.room.static_object_list[i])) {
+                    moving.moving_down = false;
+                    moving.colliding_down = true;
+
+                } else {
+                    moving.moving_down = true;
+
+                }
+            }
+            if (moving.moving_left_speed > 0) {
+                if (testCollision(this.x - 5, this.y, this.width, this.height, this.room.static_object_list[i])) {
+                    moving.moving_left = false;
+                    moving.colliding_left = true;
+
+                } else {
+                    moving.moving_left = true;
+                    //this.x = this.x - moving.moving_left_speed;
+                }
+            }
+            if (moving.moving_right_speed > 0) {
+                if (testCollision(this.x + 5, this.y, this.width, this.height, this.room.static_object_list[i])) {
+                    moving.moving_right = false;
+                    moving.colliding_right = true;
+
+                } else {
+                    moving.moving_right = true;
+                    //this.x=this.x + moving.moving_right_speed;
+                }
+            }
+        }
+
+        //console.log("r1 o1: " + rooms[0].static_object_list[0].x + " " + rooms[0].static_object_list[0].y + "\nr2 o1: " + rooms[1].static_object_list[0].x + " " + rooms[1].static_object_list[0].y);
+        if (moving.colliding_up == false) {
+            this.y = this.y - moving.moving_up_speed;
+        }
+
+        if (moving.colliding_down == false) {
+            this.y = this.y + moving.moving_down_speed;
+        }
+
+        if (moving.colliding_left == false) {
+            this.x = this.x - moving.moving_left_speed;
+        }
+
+        if (moving.colliding_right == false) {
+            this.x = this.x + moving.moving_right_speed;
         }
     }
 }
