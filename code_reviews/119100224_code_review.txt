@@ -1,0 +1,25 @@
+	Review for page：
+        https://github.com/TeamTwo2020/bored_games/blob/canvas_branch/topdown/RoomObject.js
+
+	The code readable with same indentation except line 10 to line 13. And the layout of the code is very good, The logic of the whole code is very clear. But the entire file only have few comment, which makes it hard for the reader to understand, especially the large number of variable names, even though they're reasonably named. Such as line 166 to line 167, The principle of generating random coordinates is not well explained.
+	
+
+	Review for page:
+	https://github.com/TeamTwo2020/bored_games/blob/canvas_branch/topdown/BorderObject.js
+
+	The code is readable and well layout. But logically speaking, there are still something not pretty good , like line 23 and line 25, The former users letters （red）for colors, while the latter use hexadecimal Numbers （#01a88c）.there are no comments, but it is not a big problem. Variables are simple and named as they are, so they are easy to understand without comments.
+	
+
+	Review for page:
+	https://github.com/TeamTwo2020/bored_games/blob/canvas_branch/topdown/RectangleObject.js
+
+	The code is uniform and good in logic. There are also consistent indentation.And  the code is not long. So it is super easy to understand. But I suggest it could be better if delete some unnecessary blank line like line 36 and line 39.
+
+	
+
+	Review for page:
+	https://github.com/TeamTwo2020/bored_games/blob/canvas_branch/topdown/topdowngame.js
+the code is well layout and has reasonable variable and function name. but there are some line which has been commented, and I think it will never be used again. For example , line  277 to line 287, I guess it would be better to read if delete it. There are no enough comment to explain the function, some functions like keydown (wasd) is for movement, that is very easy to guess, but some functions like setInterval may different, the readers need some comment to help them understand. There are some places where empty lines don't make a lot of sense.like line 139, line 140, line 162. But The overall code is pretty good
+
+
+
