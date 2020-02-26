@@ -141,9 +141,13 @@ class Henry extends Entity{
                 }
             }
         }
-
+        //Add a maneuver left etc method
         if (moving.colliding_up == false) {
             this.y = this.y - moving.moving_up_speed;
+        }else if (moving.colliding_up == true && moving.colliding_left == true) {
+            this.collideUpAndLeft(dest_x, dest_y);
+        }else if (moving.colliding_up == true && moving.colliding_right == true) {
+            this.collideUpAndRight(dest_x, dest_y);
         }else if(moving.colliding_up == true){
             if (moving.moving_left==true){
                 this.maneuver_x=dest_x-100;
@@ -156,10 +160,13 @@ class Henry extends Entity{
             }
         }
 
-        //if henry is moving left when he collides up then move 100 left and vice versa
 
         if (moving.colliding_down == false) {
             this.y = this.y + moving.moving_down_speed;
+        }else if(moving.colliding_down == true && moving.colliding_left == true) {
+            this.collideDownAndLeft(dest_x, dest_y);
+        }else if(moving.colliding_down == true && moving.colliding_right == true) {
+            this.collideDownAndRight(dest_x, dest_y)
         }else if(moving.colliding_down == true){
             if (moving.moving_left==true){
                 this.maneuver_x=dest_x-100;
@@ -174,6 +181,10 @@ class Henry extends Entity{
 
         if (moving.colliding_left == false) {
             this.x = this.x - moving.moving_left_speed;
+        }else if (moving.colliding_up == true && moving.colliding_left == true) {
+            this.collideUpAndLeft(dest_x, dest_y);
+        }else if(moving.colliding_down == true && moving.colliding_left == true) {
+            this.collideDownAndLeft(dest_x, dest_y);
         }else if(moving.colliding_left == true){
             if (moving.moving_up==true){
                 this.maneuver_x=dest_x;
@@ -188,6 +199,10 @@ class Henry extends Entity{
 
         if (moving.colliding_right == false) {
             this.x = this.x + moving.moving_right_speed;
+        }else if (moving.colliding_up == true && moving.colliding_right == true) {
+            this.collideUpAndRight(dest_x, dest_y);
+        }else if(moving.colliding_down == true && moving.colliding_right == true) {
+            this.collideDownAndRight(dest_x, dest_y)
         }else if(moving.colliding_right == true){
             if (moving.moving_up==true){
                 this.maneuver_x=dest_x;
@@ -199,59 +214,63 @@ class Henry extends Entity{
                 this.maneuver_timer=30;
             }
         }
+    }
 
-        //must add 4 more test cases for colliding with left & up, left & down, right & up, right & down
-        console.log("COLLIDING LEFT? ", this.just_collided_left);
-        if (moving.colliding_up == true && moving.colliding_left == true) {
-            if (this.just_collided_left == false){  //to stop repeated collisions
-                this.just_collided_left=true;
-                this.maneuver_x = dest_x+100;
-                this.maneuver_y = dest_y;
-                this.maneuver_timer = 30;
-            }else{
-                console.log("Moving away from wall");
-                this.just_collided_left=false;
-                console.log("current x value: ", this.x)
-                this.maneuver_x = this.x;
-                this.maneuver_y = dest_y+100;
-                this.maneuver_timer = 100;
-            }
-        }else if(moving.colliding_up == true && moving.colliding_right == true) {
-            if (this.just_collided_right == false){
-                this.just_collided_right=true;
-                this.maneuver_x = dest_x-100;
-                this.maneuver_y = dest_y;
-                this.maneuver_timer = 30;
-            }else{
-                this.just_collided_right=false;
-                this.maneuver_x = this.x;
-                this.maneuver_y = dest_y+100;
-                this.maneuver_timer = 100;
-            }
-        }else if(moving.colliding_down == true && moving.colliding_left == true) {
-            if (this.just_collided_left == false){  //to stop repeated collisions
-                this.just_collided_left=true;
-                this.maneuver_x = dest_x+100;
-                this.maneuver_y = dest_y;
-                this.maneuver_timer = 30;
-            }else{
-                this.just_collided_left=false;
-                this.maneuver_x = this.x+40;
-                this.maneuver_y = dest_y-100;
-                this.maneuver_timer = 30;
-            }
-        }else if(moving.colliding_down == true && moving.colliding_right == true) {
-            if (this.just_collided_right == false) {
-                this.just_collided_right = true;
-                this.maneuver_x = dest_x-100;
-                this.maneuver_y = dest_y;
-                this.maneuver_timer = 30;
-            }else{
-                this.just_collided_right = false;
-                this.maneuver_x = this.x-40;
-                this.maneuver_y = dest_y-100;
-                this.maneuver_timer = 30;
-            }
+    collideUpAndLeft(dest_x, dest_y){
+        if (this.just_collided_left == false){  //to stop repeated collisions
+            this.just_collided_left=true;
+            this.maneuver_x = dest_x+100;
+            this.maneuver_y = dest_y;
+            this.maneuver_timer = 30;
+        }else{
+            console.log("Moving away from wall");
+            this.just_collided_left=false;
+            console.log("current x value: ", this.x)
+            this.maneuver_x = this.x;
+            this.maneuver_y = dest_y+100;
+            this.maneuver_timer = 100;
+        }
+    }
+
+    collideUpAndRight(dest_x, dest_y){
+        if (this.just_collided_right == false){
+            this.just_collided_right=true;
+            this.maneuver_x = dest_x-100;
+            this.maneuver_y = dest_y;
+            this.maneuver_timer = 30;
+        }else{
+            this.just_collided_right=false;
+            this.maneuver_x = this.x;
+            this.maneuver_y = dest_y+100;
+            this.maneuver_timer = 100;
+        }
+    }
+
+    collideDownAndLeft(dest_x, dest_y){
+        if (this.just_collided_left == false){  //to stop repeated collisions
+            this.just_collided_left=true;
+            this.maneuver_x = dest_x+100;
+            this.maneuver_y = dest_y;
+            this.maneuver_timer = 30;
+        }else{
+            this.just_collided_left=false;
+            this.maneuver_x = this.x+40;
+            this.maneuver_y = dest_y-100;
+            this.maneuver_timer = 30;
+        }
+    }
+
+    collideDownAndRight(dest_x, dest_y){
+        if (this.just_collided_right == false) {
+            this.just_collided_right = true;
+            this.maneuver_x = dest_x-100;
+            this.maneuver_y = dest_y;
+            this.maneuver_timer = 30;
+        }else{
+            this.just_collided_right = false;
+            this.maneuver_x = this.x-40;
+            this.maneuver_y = dest_y-100;
+            this.maneuver_timer = 30;
         }
     }
 }
