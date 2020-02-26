@@ -51,12 +51,10 @@ class Bullet extends Rectangle{
             if (this.targetUp==true){this.y-=this.y_speed;}
             else{this.y+=this.y_speed; }//this.drawSelf(ctx);
         }
-       //  else if(testCollision(this.x, this.y, this.width, this.height, this.entity) )
-       // { //alert("you are defeated");//this.entity.clear1();
-        //}
+
 
         else{
-            //shot=false;
+
             this.stopped = true;
             this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up"));
             this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 10, Math.random()*10, "straight-up-right"));
@@ -70,7 +68,7 @@ class Bullet extends Rectangle{
             this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
 
             }
-        //return shot;
+
     }
     
     checkCollisionWithStaticObjects(){

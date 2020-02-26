@@ -3,32 +3,20 @@ document.addEventListener("DOMContentLoaded", function(event){
 });
 var direct=0;// represent forward direction;
 var direct2=0;// represent  bullet direction;
+var cursorX=0;
+var cursorY=0;
 function init(){
     //Instantiate the canvas and its context.
     var room_color = "#01a88c";
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
-    //var new_room = new Room(canvas, 0, 30, "none", "open", "closed", "closed");
-    //var right_room = new Room(canvas, 1, 30, "open", "none", "closed", "closed");
     room_list = new RoomArray(canvas, room_color);
-    //new_room.right_neighbour = right_room;
-    //right_room.left_neighbour = new_room;
-    /*var room_info = {
-        rooms : [],
-        current_room: 0
-    };
-    room_info.rooms.push(new_room);
 
-    room_info.rooms.push(right_room);*/
-
-    
-    //console.log("TP: room index is " + room_list.current_room.room_index);
     console.log("TD: " + canvas.width);
     hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],50);
     room_list.addEntity(henry, 2, 2);
 
-    //room_info.rooms[0].addEntity(henry);
 
     var moving={
         moving_up: false,
@@ -47,12 +35,8 @@ function init(){
         colliding_right: false
         
     };
-
     var vertical_speed = 0;
     var horizontal_speed = 0;
-    
-
-    //
     document.addEventListener('keydown', function(event){
         if(event.key == "w" || event.key == "W"){
             moving.moving_up = true;
@@ -106,11 +90,7 @@ function init(){
             moving.moving_left_speed = 0;
         }
     });
-  
-  
-    //wall = new Rectangle(500, 300, 20, 350, "blue")
-    
-    //start the animations
+
     var changing=setInterval(myfunction, 10);
     function myfunction()
     {
@@ -133,6 +113,13 @@ function init(){
 
 }
 
+function showCoords(event) {
+   cursorX = event.screenX;
+   cursorY = event.screenY-210;
+
+    //console.log("screenX"+cursorX2);
+}
+
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_list, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = room_list.color;
@@ -143,25 +130,60 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     //wall.drawSelf(ctx);
     onclick = function () {
         console.log("shoot");
+        showCoords(event);
+       // console.log("xxxx"+cursorX);
+
+        console.log("xxxx"+(cursorX));
+        console.log("heroX"+(hero.x+25));
+        console.log("YYYYY"+(cursorY));
+
+        console.log("heroY"+(hero.y+15));
+
         if(hero.bullet!=null) //Continuous shooting
         {hero.bullet.x=0;
-        hero.bullet.y=0;}
+         hero.bullet.y=0;}
 
-      //  hero.shoot(ctx);
+    
         hero.generate();
        // hero.bullet.x=hero.middle.x;
        // hero.bullet.y=hero.middle.y;
         hero.bullet.drawSelf(ctx);
 
         function fire() {
+            var x_dist=cursorX-(hero.x+25);
+            var y_dist=cursorY-(hero.y+15);
+            if(x_dist<0) x_dist=(-1)*x_dist;
+            if(y_dist<0) y_dist=(-1)*y_dist;
+            var total_dist=x_dist+y_dist;
 
-            switch (direct2) {
+            var bullet_speed=8;
+
+
+            if(cursorX>=hero.x)
+            {
+                if(cursorY>=hero.y) {hero.bullet.x+=(x_dist / total_dist)*bullet_speed;hero.bullet.y+=(y_dist / total_dist)*bullet_speed;}
+                else {hero.bullet.x+=(x_dist / total_dist)*bullet_speed;hero.bullet.y-=(y_dist / total_dist)*bullet_speed;}
+            }
+            if (cursorX<hero.x)
+            {
+                if(cursorY>=hero.y) {hero.bullet.x-=(x_dist / total_dist)*bullet_speed;hero.bullet.y+=(y_dist / total_dist)*bullet_speed;}
+                else {hero.bullet.x-=(x_dist / total_dist)*bullet_speed;hero.bullet.y-=(y_dist / total_dist)*bullet_speed;}
+            }
+
+            console.log("hero.bullet XX"+hero.bullet.x);
+            console.log("hero.bullet YY"+hero.bullet.y);
+
+           /* switch (direct2) {
                 case 0: hero.bullet.y=  hero.bullet.y-5;break;
                 case 1: hero.bullet.y=  hero.bullet.y+5;break;
                 case 2: hero.bullet.x=  hero.bullet.x-5;break;
                 case 3: hero.bullet.x=  hero.bullet.x+5;
 
             }
+
+            */
+
+
             //hero.bullet.y=  hero.bullet.y+5;
             //console.log("bullet.x="+hero.bullet.x);
             //console.log("bullet.y="+hero.bullet.y);
@@ -276,16 +298,6 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
         if (moving.colliding_right == false) {
             hero.x = hero.x + moving.moving_right_speed;
         }
-
-        /*if ((room_info.current_room == 0) && (hero.x + hero.width > canvas.width)) {
-            hero.x = room_info.rooms[0].wall_thickness;
-            room_info.current_room = 1;
-        }
-
-        if ((room_info.current_room == 1) && (hero.x < 0)) {
-            hero.x = canvas.width - room_info.rooms[0].wall_thickness - hero.width;
-            room_info.current_room = 0;
-        }*/
 
     }
 
