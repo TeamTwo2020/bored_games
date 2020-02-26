@@ -18,7 +18,7 @@ class Room{
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
         this.particle_list = [];
-        this.wall_list = this.generateWalls(10, canvas);
+        this.wall_list = this.generateWalls(30, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             //console.log("Item in wall list: " + i);
             for (var j = 0; j < this.wall_list[i].wall_blocks.length; j++){
