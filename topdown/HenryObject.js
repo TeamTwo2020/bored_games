@@ -15,6 +15,10 @@ class Henry extends Entity{
         this.just_collided_right=false;
         this.just_collided_up=false;
         this.just_collided_down=false;
+        this.left_long_timer=0;
+        this.right_long_timer=0;
+        this.up_long_timer=0;
+        this.down_long_timer=0;
     }
     
 
@@ -141,12 +145,17 @@ class Henry extends Entity{
                 }
             }
         }
+
+        var already_colliding=false;
+
         //Add a maneuver left etc method
         if (moving.colliding_up == false) {
             this.y = this.y - moving.moving_up_speed;
         }else if (moving.colliding_up == true && moving.colliding_left == true) {
+            already_colliding=true;
             this.collideUpAndLeft(dest_x, dest_y);
         }else if (moving.colliding_up == true && moving.colliding_right == true) {
+            already_colliding=true;
             this.collideUpAndRight(dest_x, dest_y);
         }else if(moving.colliding_up == true){
             if (moving.moving_left==true){
@@ -160,58 +169,57 @@ class Henry extends Entity{
             }
         }
 
-
-        if (moving.colliding_down == false) {
-            this.y = this.y + moving.moving_down_speed;
-        }else if(moving.colliding_down == true && moving.colliding_left == true) {
-            this.collideDownAndLeft(dest_x, dest_y);
-        }else if(moving.colliding_down == true && moving.colliding_right == true) {
-            this.collideDownAndRight(dest_x, dest_y)
-        }else if(moving.colliding_down == true){
-            if (moving.moving_left==true){
-                this.maneuver_x=dest_x-100;
-                this.maneuver_y=dest_y;
-                this.maneuver_timer=30;
-            }else{
-                this.maneuver_x=dest_x+100;
-                this.maneuver_y=dest_y;
-                this.maneuver_timer=30;
+        if (!already_colliding) {
+            if (moving.colliding_down == false) {
+                this.y = this.y + moving.moving_down_speed;
+            } else if (moving.colliding_down == true && moving.colliding_left == true) {
+                already_colliding = true;
+                this.collideDownAndLeft(dest_x, dest_y);
+            } else if (moving.colliding_down == true && moving.colliding_right == true) {
+                already_colliding = true;
+                this.collideDownAndRight(dest_x, dest_y)
+            } else if (moving.colliding_down == true) {
+                if (moving.moving_left == true) {
+                    this.maneuver_x = dest_x - 100;
+                    this.maneuver_y = dest_y;
+                    this.maneuver_timer = 30;
+                } else {
+                    this.maneuver_x = dest_x + 100;
+                    this.maneuver_y = dest_y;
+                    this.maneuver_timer = 30;
+                }
             }
         }
 
-        if (moving.colliding_left == false) {
-            this.x = this.x - moving.moving_left_speed;
-        }else if (moving.colliding_up == true && moving.colliding_left == true) {
-            this.collideUpAndLeft(dest_x, dest_y);
-        }else if(moving.colliding_down == true && moving.colliding_left == true) {
-            this.collideDownAndLeft(dest_x, dest_y);
-        }else if(moving.colliding_left == true){
-            if (moving.moving_up==true){
-                this.maneuver_x=dest_x;
-                this.maneuver_y=dest_y-100;
-                this.maneuver_timer=30;
-            }else{
-                this.maneuver_x=dest_x;
-                this.maneuver_y=dest_y+100;
-                this.maneuver_timer=30;
+        if (!already_colliding) {
+            if (moving.colliding_left == false) {
+                this.x = this.x - moving.moving_left_speed;
+            } else if (moving.colliding_left == true) {
+                if (moving.moving_up == true) {
+                    this.maneuver_x = dest_x;
+                    this.maneuver_y = dest_y - 100;
+                    this.maneuver_timer = 30;
+                } else {
+                    this.maneuver_x = dest_x;
+                    this.maneuver_y = dest_y + 100;
+                    this.maneuver_timer = 30;
+                }
             }
         }
 
-        if (moving.colliding_right == false) {
-            this.x = this.x + moving.moving_right_speed;
-        }else if (moving.colliding_up == true && moving.colliding_right == true) {
-            this.collideUpAndRight(dest_x, dest_y);
-        }else if(moving.colliding_down == true && moving.colliding_right == true) {
-            this.collideDownAndRight(dest_x, dest_y)
-        }else if(moving.colliding_right == true){
-            if (moving.moving_up==true){
-                this.maneuver_x=dest_x;
-                this.maneuver_y=dest_y-100;
-                this.maneuver_timer=30;
-            }else{
-                this.maneuver_x=dest_x;
-                this.maneuver_y=dest_y+100;
-                this.maneuver_timer=30;
+        if (!already_colliding) {
+            if (moving.colliding_right == false) {
+                this.x = this.x + moving.moving_right_speed;
+            } else if (moving.colliding_right == true) {
+                if (moving.moving_up == true) {
+                    this.maneuver_x = dest_x;
+                    this.maneuver_y = dest_y - 100;
+                    this.maneuver_timer = 30;
+                } else {
+                    this.maneuver_x = dest_x;
+                    this.maneuver_y = dest_y + 100;
+                    this.maneuver_timer = 30;
+                }
             }
         }
     }
@@ -223,9 +231,7 @@ class Henry extends Entity{
             this.maneuver_y = dest_y;
             this.maneuver_timer = 30;
         }else{
-            console.log("Moving away from wall");
             this.just_collided_left=false;
-            console.log("current x value: ", this.x)
             this.maneuver_x = this.x;
             this.maneuver_y = dest_y+100;
             this.maneuver_timer = 100;
@@ -254,7 +260,7 @@ class Henry extends Entity{
             this.maneuver_timer = 30;
         }else{
             this.just_collided_left=false;
-            this.maneuver_x = this.x+40;
+            this.maneuver_x = this.x;
             this.maneuver_y = dest_y-100;
             this.maneuver_timer = 30;
         }
@@ -268,11 +274,9 @@ class Henry extends Entity{
             this.maneuver_timer = 30;
         }else{
             this.just_collided_right = false;
-            this.maneuver_x = this.x-40;
+            this.maneuver_x = this.x;
             this.maneuver_y = dest_y-100;
             this.maneuver_timer = 30;
         }
     }
 }
-
-
