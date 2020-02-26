@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <script>
+        function validateForm(){
+            var x = document.forms["myForm"]
+    </script>
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bored-Games</title>
     
@@ -82,30 +86,72 @@
      
       <div class ="row">
 
-        <div class="col-md-4">
-
-            <h2 class="star"><a href="topdown/topdown1.html">Top-Down Game</h2></a>
-             <a href="topdown/topdown1.html"><img class="img-left" src="images/word1.png"  alt="Top-Down Game"/></a>
-          
-        </div><!--close col-md-8-->
+        <div class="col-md-12">
+            
+                <h2  class="star">Sign up</h2>
+                <h5  class="star">please fill in this form to create an account</h5>
+                <h5 class="star">By creating an account you agree to our <a href="#" style="color:yellow">Terms and Privacy</a>.</h5>
+            <br>
+                <p class="blocktext"> 
+            <ul align="center">
+        <li><label for="username"><h5 class="star">username :</h5> </label>
+            <input type="text" id="fname" name="firstname" placeholder="Your Username..">
+        </li>
+        <br>
+        <li>
+            <label for="email"><h5 class="star">Email Addr:</h5> </label>
+            <input type="text" id="email" name="email" placeholder="name@address.xxx">
+        </li>
+        <br>
         
-        <div class ="col-md-4">
-        <h2 class="star"><a href="hangman/index.html"> Hangman </h2></a>
-        <a href="hangman/index.html"><img class="img-left" src="images/hangman1.png"  alt="Hangman"/></a>
+        <li>
+            <label for="password"><h5 class="star">password :</h5> </label>
+            <input type="password" id="password"  placeholder="Password.." name="password" required>
+        </li>
+            <br>
+        <li>
+            <label for="repeat-password"><h5 class="star">confirm :</h5> </label>
+            <input type="repeat-password" id="repeat-password"  placeholder="Repeat-Password.." name="repeat-password" required>
+        </li>
+            <br>
+        <li>
+            <label for="remember"> <h5 class="star">Remember me</h5></label>
+            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">
+        </li>
+        <br>
+        <li>
+            <input type="submit" value="Sign-Up"></input>
+            
+        </li>
+        <br>
+        
+        
+    
+
+    
+        <li>
+           
+              
+            
+             
+           
+        </li>
+    </ul>
+    </p>
+        
+    
+
+
+           
          
-        </div>
+        
 
        
-      <div class="row"> 
-        <div class ="col-md-4">
-        <h2 class="star">Coming Soon</h2>
-        <img class="img-left" src="images/coming1.png"  alt="Coming Soon"/>
-        </div> 
-         </div>
+     
           
                  
          
-          </div>
+          
         
 
           <nav class="navbar navbar-inverse col-md-12">
