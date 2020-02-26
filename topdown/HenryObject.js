@@ -15,10 +15,6 @@ class Henry extends Entity{
         this.just_collided_right=false;
         this.just_collided_up=false;
         this.just_collided_down=false;
-        this.left_long_timer=0;
-        this.right_long_timer=0;
-        this.up_long_timer=0;
-        this.down_long_timer=0;
     }
     
 
@@ -147,7 +143,6 @@ class Henry extends Entity{
         }
 
         var already_colliding=false;
-
         //Add a maneuver left etc method
         if (moving.colliding_up == false) {
             this.y = this.y - moving.moving_up_speed;
