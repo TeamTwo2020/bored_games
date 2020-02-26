@@ -5,10 +5,10 @@ class RoomArray{
         this.color = room_color;
         this.defineSpawnRoom(2, 2, canvas);
         this.current_room = this.array[2][2];
-        this.definePremadeMapLayout1(canvas);
-        this.associateNeighbours();
-        
-        //this.printArray();
+        //this.definePremadeMapLayout1(canvas);
+        //this.associateNeighbours();
+        this.generateRooms(canvas, 10, this.current_room);
+        this.printArray();
         
     }
     
@@ -44,6 +44,61 @@ class RoomArray{
         this.array[1][2].openGate("lower");
     }
     
+    generateRooms(canvas, room_quantity, start_room){
+        console.log("genrating rooms..... room_quantity: " + room_quantity);
+        while (room_quantity > 0){
+            var rnumber = Math.round(Math.random() * 3);
+            //console.log("RNUMBERRRRRRr is " + rnumber);
+            console.log("start room row index is " + start_room.room_row_index);
+            console.log("start room col index is " + start_room.room_col_index);
+            console.log("array width is " + this.array[0].length);
+            console.log("start room upper neighbour is: " + start_room.room_row_index);
+            //var rnumber = 3;
+            if (rnumber === 0 && start_room.room_row_index > 0 && this.array[start_room.room_row_index -1][start_room.room_col_index] == null){
+                this.array[start_room.room_row_index - 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index - 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+                start_room.openGate("upper");
+                console.log("Lower neighbour is " + this.array[start_room.room_row_index - 1][start_room.room_col_index].lower_neighbour);
+                this.array[start_room.room_row_index - 1][start_room.room_col_index].openGate("lower");
+                room_quantity -= 1;
+                this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index - 1][start_room.room_col_index]);
+            } 
+            
+            else if (rnumber === 1 && start_room.room_col_index < this.array[0].length && this.array[start_room.room_row_index][start_room.room_col_index + 1] == null){
+                this.array[start_room.room_row_index][start_room.room_col_index + 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index + 1, 30, "closed", "closed", "closed", "closed", this.color);
+                start_room.openGate("right");
+                console.log("Right neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
+                this.array[start_room.room_row_index][start_room.room_col_index + 1].openGate("left");
+                room_quantity -= 1;
+                this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index + 1]);
+            }
+            
+            /*else if (rnumber === 2 && start_room.room_row_index < this.array.length && this.array[start_room.room_row_index + 1][start_room.room_col_index] == null){
+                this.array[start_room.room_row_index + 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index + 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+                start_room.openGate("lower");
+                console.log("Upper neighbour is " + this.array[start_room.room_row_index + 1][start_room.room_col_index].lower_neighbour);
+                this.array[start_room.room_row_index + 1][start_room.room_col_index].openGate("upper");
+                room_quantity -= 1;
+                this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index + 1][start_room.room_col_index]);
+            }*/
+            
+            else if ((rnumber === 3 || rnumber === 2) && start_room.room_col_index > 0 && this.array[start_room.room_row_index][start_room.room_col_index -1] == null){
+                this.array[start_room.room_row_index][start_room.room_col_index - 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index - 1, 30, "closed", "closed", "closed", "closed", this.color);
+                start_room.openGate("left");
+                console.log("Left neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
+                this.array[start_room.room_row_index][start_room.room_col_index - 1].openGate("right");
+                room_quantity -= 1;
+                this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index - 1]);
+            }
+            
+            return room_quantity;
+                
+            
+            
+        }
+    }
+    
+    
+    //Outdated function. Now done using openGate
     associateNeighbours(){
         for (var i = 0; i < this.array.length; i++){
             for (var j; j < this.array[i].length; j++){
