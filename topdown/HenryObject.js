@@ -23,7 +23,7 @@ class Henry extends Entity{
         /*
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", this.entity, this.room));
+            this.room.addProjectile(new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = 40;
         } else {

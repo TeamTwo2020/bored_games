@@ -11,7 +11,7 @@ class RoomArray{
         this.beginGeneratingRooms(canvas, 150, this.current_room);
         //console.log("remaining rooms: " + rr);
         //console.log("roo00000000000000000m counter: " + this.room_counter);
-        this.printArray();
+        //this.printArray();
         
     }
     

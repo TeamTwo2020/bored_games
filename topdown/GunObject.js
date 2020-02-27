@@ -92,7 +92,7 @@ class Gun {
     rifleFire(x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.rifle.width, this.rifle.height, this.rifle.travel_time, this.rifle.damage, this.rifle.color, this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.rifle.width, this.rifle.height, this.rifle.travel_time, this.rifle.damage, this.rifle.color, this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = this.rifle.timer;
         } else {
@@ -103,7 +103,7 @@ class Gun {
     smgFire(x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.smg.width, this.smg.height, this.smg.travel_time, this.smg.damage, this.smg.color, this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.smg.width, this.smg.height, this.smg.travel_time, this.smg.damage, this.smg.color, this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = this.smg.timer;
         } else {
@@ -114,7 +114,7 @@ class Gun {
     sniperFire(x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sniper.width, this.sniper.height, this.sniper.travel_time, this.sniper.damage, this.sniper.color, this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sniper.width, this.sniper.height, this.sniper.travel_time, this.sniper.damage, this.sniper.color, this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = this.sniper.timer;
         } else {
@@ -125,7 +125,7 @@ class Gun {
     shotgunFire(x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = this.shotgun.timer;
         } else {
@@ -136,7 +136,7 @@ class Gun {
     twoWayFire(x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.two_way.width, this.two_way.height, this.two_way.travel_time, this.two_way.damage, this.two_way.color, this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.two_way.width, this.two_way.height, this.two_way.travel_time, this.two_way.damage, this.two_way.color, this.entity, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = this.two_way.timer;
         } else {

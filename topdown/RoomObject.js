@@ -18,6 +18,7 @@ class Room{
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
         this.particle_list = [];
+        this.hero_list = [];
         this.wall_list = this.generateWalls(10, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             //console.log("Item in wall list: " + i);
@@ -161,7 +162,7 @@ class Room{
         var new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
         // wall_thickness has been initialized in the room class
         var new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-        walls.push(new Wall(new_x, new_y, 0, "black"));
+        //walls.push(new Wall(new_x, new_y, 0, "black"));
         arrayx.push(new_x);
         arrayy.push(new_y);
         for (var i = 1; i < amount_of_walls; ){
