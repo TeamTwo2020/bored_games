@@ -3,11 +3,10 @@ class Henry extends Entity{
         super(x, y, width, height, color, room, health);
         //this.shot=false;
         this.entity=entity;
-        this.room = room;
         //console.log("room index in henry: " + this.room.room_index);
         //console.log("Henry room is : " + room.returnIndex());
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
-        this.gun=new Gun(this.entity, this.room, 1);
+        this.gun=new Gun(this.room, 3, 2);
         this.shot_timer = 40;
         this.maneuver_timer=0;
         this.maneuver_x=0;
@@ -20,18 +19,7 @@ class Henry extends Entity{
     
 
     shoot(){
-        /*
-        if (this.shot_timer==0){
-            //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(this.middle.x, this.middle.y, 5, 5, "navy", this.entity, 2, this.room));
-            //console.log("room index in henry shoot " + this.room.room_index);
-            this.shot_timer = 40;
-        } else {
-            this.shot_timer -= 1;
-        }*/
-        this.gun.shootGun(this.middle.x, this.middle.y);
-        
-        
+        this.gun.shootGun(this.entity.middle.x, this.entity.middle.y, this.middle.x, this.middle.y);
     }
 
     moveAi(){

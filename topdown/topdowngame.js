@@ -11,7 +11,7 @@ function init(){
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
-    hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
+    hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
     room_list.current_room.hero_list = [hero];
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
     room_list.addEntity(henry, 2, 2);
@@ -71,6 +71,11 @@ function init(){
         }
     });
 
+    document.addEventListener('click', function(event){
+        //console.log("x: ", event.clientX+15, " - y: ", event.clientY-103);
+        hero.shoot(event.clientX+15, event.clientY-103);
+    });
+
     document.addEventListener('keyup', function(event){
         if(event.key == "w" || event.key == "W"){
             moving.moving_up = false;
@@ -110,31 +115,26 @@ function init(){
 
 }
 
+/*
 function showCoords(event) {
     cursorX=event.pageX-10;
     cursorY=event.pageY-141;
-    /*console.log("cursorX"+(cursorX));
+    console.log("cursorX"+(cursorX));
     console.log("cursorY"+(cursorY));
     console.log("hero.middle.x"+hero.middle.x);
-    console.log("hero.middle.y"+(hero.middle.y));*/
+    console.log("hero.middle.y"+(hero.middle.y));
 
-}
+}*/
 
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_list, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    onclick = function () {
+    /*onclick = function () {
         //console.log("shoot");
-
-        if(hero.bullet!=null) //Continuous shooting
-        {
-           // hero.bullet.x=0;
-            //hero.bullet.y=0;
-            hero.bullet=null;
-        }
-        hero.generate();
         function fire() {
+            console.log("x: ", cursorX, " - y: ", cursorY);
+            hero.shoot(cursorX, cursorY);
 
             var x_dist=cursorX-(hero.x+25);
             var y_dist=cursorY-(hero.y+15);
@@ -161,7 +161,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
             console.log("hero.bullet Y"+hero.bullet.y);
             console.log("cursorX"+(cursorX));
             console.log("cursorY"+(cursorY));
-*/
+
 
 
             if(hero.bullet.checkCollisionWithStaticObjects())
@@ -181,7 +181,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
 
         var myVar = setInterval(fire, 10);//can"t be 5
 
-    }
+    }*/
 
 
 

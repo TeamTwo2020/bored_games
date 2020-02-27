@@ -1,9 +1,10 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, travel_speed, damage, color, entity, source, room){
+    constructor(x, y, width, height, travel_speed, damage, color, target_x, target_y, source, room){
         super(x, y, width, height, color);
         this.travel_speed=travel_speed;
         this.damage=damage;
-        this.entity=entity;
+        this.target_x=target_x;
+        this.target_y=target_y;
         this.source = source;
         this.room = room;
         this.room.addProjectile(this);
@@ -26,13 +27,13 @@ class Bullet extends Rectangle{
                 //assuming 
                 //x speed is x_dist/y_dist x5:
                 //put the smaller of x/y on top of other in fraction to get the percentage
-                var x_dist=this.entity.middle.x - this.middle.x;
+                var x_dist=this.target_x - this.middle.x;
                 if(x_dist < 0){
                     this.targetLeft=true;
                     x_dist*=-1;
                 }
                 //compare two entities
-                var y_dist=this.entity.middle.y - this.middle.y ;
+                var y_dist=this.target_y - this.middle.y ;
                 if(y_dist < 0){
                     this.targetUp=true;
                     y_dist*=-1;

@@ -1,20 +1,25 @@
-class Hero1 extends Entity{
-    constructor(canvas, x, y, width, height, color, room_list, room,health,direct){
-        super(x, y, width, height, color, room,health);
+class Hero extends Entity{
+    constructor(canvas, x, y, width, height, color, room_list, room, health, direct){
+        super(x, y, width, height, color, room, health);
         
         this.canvas = canvas;
         this.bullet = null;
         this.room_list = room_list;
-        console.log("generate a bullet");
+        //console.log("generate a bullet");
         this.direct=direct;
         this.shot=false;
-        console.log("hero says its room is " + this.room + " at r: " + this.room.room_row_index);
+        //console.log("hero says its room is " + this.room + " at r: " + this.room.room_row_index);
+        this.gun=new Gun(this.room, 1, 1);
 
     }
-
-   generate(ctx){
+/*
+   generate(target_x, target_y){
        //var Entitytemp = new Henry(700, 200, 50, 50, "red", hero, new_room,50);
-       this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, 8, 8, "navy", henry, 1, this.room);
+       this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, 8, 8, "navy", target_x, target_y, 1, this.room);
+    }*/
+
+    shoot(target_x, target_y){
+        this.gun.shootGun(target_x, target_y, this.middle.x, this.middle.y);
     }
     
     outOfBounds(){
@@ -25,7 +30,7 @@ class Hero1 extends Entity{
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
             this.x = this.canvas.width - this.room.wall_thickness - this.width;
-            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.x + hero.width > this.canvas.width && this.room.right_neighbour != null){
@@ -34,7 +39,7 @@ class Hero1 extends Entity{
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
             this.x = this.room.wall_thickness;
-            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.y < 0 && this.room.upper_neighbour != null){
@@ -43,7 +48,7 @@ class Hero1 extends Entity{
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
             this.y = this.canvas.height - this.room.wall_thickness;
-            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.y + hero.height > this.canvas.height && this.room.lower_neighbour != null){
@@ -52,7 +57,7 @@ class Hero1 extends Entity{
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
             this.y = this.room.wall_thickness;
-            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         }
 
         
