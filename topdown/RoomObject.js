@@ -18,7 +18,7 @@ class Room{
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
         this.particle_list = [];
-        this.wall_list = this.generateWalls(15, canvas);
+        this.wall_list = this.generateWalls(10, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             //console.log("Item in wall list: " + i);
             for (var j = 0; j < this.wall_list[i].wall_blocks.length; j++){
@@ -123,10 +123,10 @@ class Room{
 
     generateWalls(amount_of_walls, canvas){
 	    function not_block_gate(x,y){
-	        if(y>=460&&y<=540&&x<=80) return false;//avoid block left gate
-            if(y>=460&&y<=540&&x>=1215) return false;// avoid block right gate
-            if(y<=80&&x>=540&&x<=795) return false;// avoid block top gate
-            if(y>=890&&x>=540&&x<=795) return false;// avoid block low gate
+	        if(y>=430&&y<=570&&x<=110) return false;//avoid block left gate
+            if(y>=460&&y<=540&&x>=1185) return false;// avoid block right gate
+            if(y<=80&&x>=480&&x<=795) return false;// avoid block top gate
+            if(y>=890&&x>=510&&x<=765) return false;// avoid block low gate
             else return true;
 
         }
@@ -134,8 +134,8 @@ class Room{
 
 
         function not_block_entity(x,y){
-            if(y>=155&&y<=250&&x<=750&&x>=525) return false;//avoid block henry
-            if(y>=15&&y<=35&&x<=100) return false;//avoid block henry
+            if(y>=140&&y<=360&&x<=820&&x>=495) return false;//avoid block henry
+            if(y>=15&&y<=80&&x<=130) return false;//avoid block hero
 
             else return true;
 
@@ -210,7 +210,7 @@ class Room{
             case "left":
                 var border_wall = this.left_wall;
                 this.left_neighbour = this.room_array.array[this.room_row_index][this.room_col_index - 1];
-                console.log("left neighbour: " + this.left_neighbour);
+                //console.log("left neighbour: " + this.left_neighbour);
                 break;
             case "right":
                 var border_wall = this.right_wall;

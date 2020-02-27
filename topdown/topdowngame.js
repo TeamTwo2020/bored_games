@@ -12,8 +12,15 @@ function init(){
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
     hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
-    henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],10);
+//<<<<<<< HEAD
+    henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
+//=======
+    //henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],10);
+//>>>>>>> bd3a530047a961e4da539b0fb67ae8f3b3392311
     room_list.addEntity(henry, 2, 2);
+    console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
+    
+    
 
 
     var moving={

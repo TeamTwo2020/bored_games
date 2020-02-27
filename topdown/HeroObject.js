@@ -24,24 +24,28 @@ class Hero1 extends Entity{
             this.room = this.room.left_neighbour;
             this.room_list.current_room = this.room;
             this.x = this.canvas.width - this.room.wall_thickness - this.width;
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.x + hero.width > this.canvas.width && this.room.right_neighbour != null){
             this.room = this.room.right_neighbour;
             this.room_list.current_room = this.room;
             this.x = this.room.wall_thickness;
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.y < 0 && this.room.upper_neighbour != null){
             this.room = this.room.upper_neighbour;
             this.room_list.current_room = this.room;
             this.y = this.canvas.height - this.room.wall_thickness;
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
         else if (hero.y + hero.height > this.canvas.height && this.room.lower_neighbour != null){
             this.room = this.room.lower_neighbour;
             this.room_list.current_room = this.room;
             this.y = this.room.wall_thickness;
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         }
 
         
