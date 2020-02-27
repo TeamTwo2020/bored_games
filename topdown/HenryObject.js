@@ -7,7 +7,7 @@ class Henry extends Entity{
         //console.log("room index in henry: " + this.room.room_index);
         //console.log("Henry room is : " + room.returnIndex());
         //this.bullet = new Bullet(this.middle.x, this.middle.y, 5, 5, "gold", this.entity, this.room);
-        this.gun=new Gun(this.entity, this.room, 2);
+        this.gun=new Gun(this.entity, this.room, 1);
         this.shot_timer = 40;
         this.maneuver_timer=0;
         this.maneuver_x=0;
