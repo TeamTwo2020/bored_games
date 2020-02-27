@@ -1,6 +1,8 @@
 class Room{
 	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
-        this.room_array = room_array
+        this.room_array = room_array;
+        this.canvas = canvas;
+        this.locked = true;
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -33,6 +35,11 @@ class Room{
 
     returnIndex(){
         return this.room_index;
+    }
+    
+    generateEnemies(hero){
+        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 2) + 1));
+        this.room_array.entity_counter += 1;
     }
     
     addBorderBlocks(){
@@ -91,9 +98,10 @@ class Room{
             this.static_object_list[j].drawSelf(ctx);
             //console.log("drawing static object");
         }
-
+        
         for (var e = 0; e < this.entity_list.length; e++){
             this.entity_list[e].moveAi();
+            this.entity_list[e].shoot();
             this.entity_list[e].drawSelf(ctx);
         }
         //console.log("Drawing something...");
@@ -205,7 +213,7 @@ class Room{
     }
     
     //When given a border wall, it's gate will be opened
-    openGate(border_direction){
+    createGate(border_direction){
         //Which border wall should be opened?
         switch(border_direction){
             case "left":
@@ -228,13 +236,39 @@ class Room{
                 break;
         }
         
+        this.lockGates(border_direction);
+        
+        
+        
+        //console.log("+++++++++finished iterating");
+    }
+    
+    lockGates(border_direction){
+        var border_walls = [this.left_wall, this.right_wall, this.upper_wall, this.lower_wall];
+        switch(border_direction){
+            case "upper":
+                var border_wall = this.upper_wall;
+                break;
+            
+            case "right":
+                var border_wall = this.right_wall;
+                break;
+            
+            case "lower":
+                var border_wall = this.lower_wall;
+                break;
+                
+            case "left":
+                var border_wall = this.left_wall;
+                break;
+        }
+        
         for (var i = 0; i < this.static_object_list.length; i++){
             //console.log("iteration: " + i);
             if (this.static_object_list[i] == border_wall.second_block){
                 //console.log("Found second block, its status is " + border_wall.gate_status);
-                this.static_object_list.splice(i, 1);
-                border_wall.second_block.color = this.color;
-                border_wall.gate_status = "open";
+                border_wall.second_block.color = "red";
+                border_wall.gate_status = "locked";
                 //console.log("second block status is now " + border_wall.gate_status);
             }
             
@@ -243,7 +277,29 @@ class Room{
             }
         }
         
-        //console.log("+++++++++finished iterating");
+    }
+    
+    openGates(){
+        var border_walls = [this.upper_wall, this.right_wall, this.lower_wall, this.left_wall];
+        for (var j = 0; j < border_walls.length + 1; j++){
+            if (border_walls[j] != null){
+                for (var i = 0; i < this.static_object_list.length + 1; i++){
+                    //console.log("iteration: " + i);
+                    if (this.static_object_list[i] == border_walls[j].second_block && border_walls[j].gate_status === "locked"){
+                        //console.log("Found second block, its status is " + border_wall.gate_status);
+                        this.static_object_list.splice(i, 1);
+                        border_walls[j].second_block.color = this.color;
+                        border_walls[j].gate_status = "open";
+                        console.log("opened gate");
+                        //console.log("second block status is now " + border_wall.gate_status);
+                    }
+                    
+                    else{
+                        //console.log("haven't found second block yet");
+                    }
+                }
+            }
+        }
     }
 
 }

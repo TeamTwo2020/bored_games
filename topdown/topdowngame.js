@@ -11,10 +11,10 @@ function init(){
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
-    hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
+    hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30, direct);
     room_list.current_room.hero_list = [hero];
-    henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
-    room_list.addEntity(henry, 2, 2);
+    henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room, 50, 2);
+    room_list.generateEnemies(hero);
     //console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
     
     
@@ -170,7 +170,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
                 hero.bullet=null;
 
             }
-            else if(hero.bullet.checkCollisionWithPlayerObject()){
+            /*else if(hero.bullet.checkCollisionWithPlayerObject()){
                 clearInterval(myVar);console.log("shoot successful");
                 henry.drawSelfColorShift(ctx,"black");
                 hero.bullet=null;
@@ -196,7 +196,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     hero.drawSelf(ctx);
     if (room_list.current_room.room_row_index == henry.room.room_row_index && room_list.current_room.room_col_index == henry.room.room_col_index) {
         if (ii <= 2000) ii += 10;
-        else henry.shoot();// 2seconds for player prepare , after that opponent will shoot
+        //else henry.shoot();// 2seconds for player prepare , after that opponent will shoot
     }
     room_list.current_room.drawSelf(ctx);
     //console.log("drawing room: " + room_info.current_room);

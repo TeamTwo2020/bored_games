@@ -27,23 +27,33 @@ class Bullet extends Rectangle{
                 //assuming 
                 //x speed is x_dist/y_dist x5:
                 //put the smaller of x/y on top of other in fraction to get the percentage
-                var x_dist=this.target_x - this.middle.x;
+                var x_dist=this.target_x - this.middle.x -30;
+                console.log("target_x: ", this.target_x);
+                console.log("source x: ", this.x);
+                console.log("x_dist: ", x_dist);
                 if(x_dist < 0){
                     this.targetLeft=true;
                     x_dist*=-1;
                 }
+                console.log("targetLeft: ", this.targetLeft);
                 //compare two entities
-                var y_dist=this.target_y - this.middle.y ;
+                var y_dist=this.target_y - this.middle.y - 20;
+                console.log("target_y: ", this.target_y);
+                console.log("source y: ", this.y);
+                console.log("y_dist: ", y_dist);
                 if(y_dist < 0){
                     this.targetUp=true;
                     y_dist*=-1;
                 }
+                console.log("targetUp: ", this.targetUp);
                 
                 var total_dist=x_dist+y_dist;
+                console.log("total_dist: ", total_dist)
                 
                 this.x_speed=(x_dist / total_dist)*this.travel_speed;
+                console.log("x_speed: ", this.x_speed);
                 this.y_speed=(y_dist/total_dist)*this.travel_speed;
-                
+                console.log("y_speed: ", this.y_speed);
                 this.targetAcquired=true;
             }
             
@@ -96,8 +106,10 @@ class Bullet extends Rectangle{
             for (var i = 0; i < this.room.entity_list.length; i++){
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.entity_list[i])){
-                    this.room.entity_list[i].takeDamage(5);
+                    this.room.entity_list[i].takeDamage(50);
+                    //alert("health of enemy: " + this.room.entity_list[i].health);
                     if (this.room.entity_list[i].health < 0){
+                        //alert("killed enemy");
                         this.room.entity_list[i].deleteFromEntityList();
                         
                     }
@@ -114,7 +126,7 @@ class Bullet extends Rectangle{
             for (var i = 0; i < this.room.hero_list.length; i++){
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.hero_list[i])){
-                    this.room.hero_list[i].takeDamage(10);
+                    this.room.hero_list[i].takeDamage(this.damage);
                     if (this.room.hero_list[i].health < 0){
                         alert("GAME OVER");
                     }

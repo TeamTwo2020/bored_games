@@ -10,7 +10,6 @@ class Hero extends Entity{
         this.shot=false;
         //console.log("hero says its room is " + this.room + " at r: " + this.room.room_row_index);
         this.gun=new Gun(this.room, 1, 1);
-
     }
 /*
    generate(target_x, target_y){
@@ -20,6 +19,7 @@ class Hero extends Entity{
 
     shoot(target_x, target_y){
         this.gun.shootGun(target_x, target_y, this.middle.x, this.middle.y);
+        console.log("this.middle.x: ", this.middle.x);
     }
     
     outOfBounds(){
@@ -29,7 +29,7 @@ class Hero extends Entity{
             this.room = this.room.left_neighbour;
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
-            this.x = this.canvas.width - this.room.wall_thickness - this.width;
+            this.x = this.canvas.width - this.room.wall_thickness - this.width - 1;
             //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
@@ -38,7 +38,7 @@ class Hero extends Entity{
             this.room = this.room.right_neighbour;
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
-            this.x = this.room.wall_thickness;
+            this.x = this.room.wall_thickness + 1;
             //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
@@ -47,7 +47,7 @@ class Hero extends Entity{
             this.room = this.room.upper_neighbour;
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
-            this.y = this.canvas.height - this.room.wall_thickness;
+            this.y = this.canvas.height - this.room.wall_thickness - this.height - 1;
             //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         } 
         
@@ -56,7 +56,7 @@ class Hero extends Entity{
             this.room = this.room.lower_neighbour;
             this.room_list.current_room = this.room;
             this.room.hero_list.push(this);
-            this.y = this.room.wall_thickness;
+            this.y = this.room.wall_thickness + 1;
             //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
         }
 
