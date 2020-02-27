@@ -210,7 +210,7 @@ class Room{
             case "left":
                 var border_wall = this.left_wall;
                 this.left_neighbour = this.room_array.array[this.room_row_index][this.room_col_index - 1];
-                console.log("left neighbour: " + this.left_neighbour);
+                //console.log("left neighbour: " + this.left_neighbour);
                 break;
             case "right":
                 var border_wall = this.right_wall;
