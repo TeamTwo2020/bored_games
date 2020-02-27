@@ -88,11 +88,8 @@ class RoomArray{
             //console.log("ROOM QUANTITY AFTER SUB: " + room_quantity);
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE  " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_row_index + "   " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_col_index);
-            console.log("--------------------------");
             //this.printArray();
-            console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
-            console.log("Just generated a room above");
             room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index - 1][start_room.room_col_index]);
             //console.log("AFTER RETURN: " + room_quantity);
             
@@ -108,11 +105,8 @@ class RoomArray{
             room_quantity -= 1;
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
-            console.log("--------------------------");
             //this.printArray();
-            console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
-            console.log("Just generated a room to the right");
             room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index + 1]);
             
             
@@ -126,12 +120,7 @@ class RoomArray{
             room_quantity -= 1;
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
-            console.log("--------------------------");
-            //this.printArray();
-            console.log("room count: " + (this.room_counter + 1));
-            //console.log("finished generating room, row is: " + start_room.room_row_index + "  col is " + start_room.room_col_index);
             this.room_counter++;
-            console.log("Just generated a room below");
             room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index + 1][start_room.room_col_index]);
             
             
@@ -144,12 +133,7 @@ class RoomArray{
             this.array[start_room.room_row_index][start_room.room_col_index - 1].createGate("right");
             room_quantity -= 1;
             single_generation_success = true;
-            //console.log("ROOOOOOOOOOOOOM MADE");
-            console.log("--------------------------");
-            //this.printArray();
-            console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
-            console.log("Just generated a room to the left");
             room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index - 1]);
             
             
@@ -167,16 +151,7 @@ class RoomArray{
         }
             
             
-            
-            /*
-             * ((this.array[start_room.room_row_index -1][start_room.room_col_index] != null) && this.array[start_room.room_row_index][start_room.room_col_index + 1] != null && this.array[start_room.room_row_index + 1][start_room.room_col_index] != null && this.array[start_room.room_row_index][start_room.room_col_index -1] == null)*/
-                
-            
-            
-        
-        
-        console.log("IN METHOD remaining rooms: " + room_quantity);
-        return room_quantity;
+           return room_quantity;
     }
     
     

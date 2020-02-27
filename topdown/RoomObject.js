@@ -1,6 +1,7 @@
 class Room{
 	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
         this.room_array = room_array;
+        this.canvas = canvas;
         this.locked = true;
         this.right_neighbour;
         this.left_neighbour;
@@ -37,7 +38,7 @@ class Room{
     }
     
     generateEnemies(hero){
-        this.entity_list.push(new Henry(700, 200, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 2) + 1));
+        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 2) + 1));
         this.room_array.entity_counter += 1;
     }
     
@@ -262,7 +263,6 @@ class Room{
                 break;
         }
         
-        console.log("direction of lock: " + border_direction);
         for (var i = 0; i < this.static_object_list.length; i++){
             //console.log("iteration: " + i);
             if (this.static_object_list[i] == border_wall.second_block){
@@ -283,7 +283,6 @@ class Room{
         var border_walls = [this.upper_wall, this.right_wall, this.lower_wall, this.left_wall];
         for (var j = 0; j < border_walls.length + 1; j++){
             if (border_walls[j] != null){
-                console.log("checking wall " + j + ", status is " + border_walls[j].gate_status);
                 for (var i = 0; i < this.static_object_list.length + 1; i++){
                     //console.log("iteration: " + i);
                     if (this.static_object_list[i] == border_walls[j].second_block && border_walls[j].gate_status === "locked"){
