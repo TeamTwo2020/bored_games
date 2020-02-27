@@ -76,7 +76,7 @@ class RoomArray{
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE  " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_row_index + "   " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_col_index);
             console.log("--------------------------");
-            this.printArray();
+            //this.printArray();
             console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
             console.log("Just generated a room above");
@@ -96,7 +96,7 @@ class RoomArray{
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
             console.log("--------------------------");
-            this.printArray();
+            //this.printArray();
             console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
             console.log("Just generated a room to the right");
@@ -114,7 +114,7 @@ class RoomArray{
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
             console.log("--------------------------");
-            this.printArray();
+            //this.printArray();
             console.log("room count: " + (this.room_counter + 1));
             //console.log("finished generating room, row is: " + start_room.room_row_index + "  col is " + start_room.room_col_index);
             this.room_counter++;
@@ -133,7 +133,7 @@ class RoomArray{
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
             console.log("--------------------------");
-            this.printArray();
+            //this.printArray();
             console.log("room count: " + (this.room_counter + 1));
             this.room_counter++;
             console.log("Just generated a room to the left");

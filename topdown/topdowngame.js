@@ -12,13 +12,9 @@ function init(){
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
     hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
-//<<<<<<< HEAD
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
-//=======
-    //henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],10);
-//>>>>>>> bd3a530047a961e4da539b0fb67ae8f3b3392311
     room_list.addEntity(henry, 2, 2);
-    console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
+    //console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
     
     
 
@@ -116,10 +112,10 @@ function init(){
 function showCoords(event) {
     cursorX=event.pageX-10;
     cursorY=event.pageY-141;
-    console.log("cursorX"+(cursorX));
+    /*console.log("cursorX"+(cursorX));
     console.log("cursorY"+(cursorY));
     console.log("hero.middle.x"+hero.middle.x);
-    console.log("hero.middle.y"+(hero.middle.y));
+    console.log("hero.middle.y"+(hero.middle.y));*/
 
 }
 
@@ -128,7 +124,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     onclick = function () {
-        console.log("shoot");
+        //console.log("shoot");
 
         if(hero.bullet!=null) //Continuous shooting
         {
@@ -160,11 +156,11 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
             //  hero.bullet.x-=7.63;
             // hero.bullet.y-=0.37;
 
-            console.log("hero.bullet X"+hero.bullet.x);
+            /*console.log("hero.bullet X"+hero.bullet.x);
             console.log("hero.bullet Y"+hero.bullet.y);
             console.log("cursorX"+(cursorX));
             console.log("cursorY"+(cursorY));
-
+*/
 
 
             if(hero.bullet.checkCollisionWithStaticObjects())
