@@ -1,10 +1,11 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, color, entity, source, room){
+    constructor(x, y, width, height, travel_speed, damage, color, entity, source, room){
         super(x, y, width, height, color);
+        this.travel_speed=travel_speed;
+        this.damage=damage;
         this.entity=entity;
         this.source = source;
         this.room = room;
-        console.log("Room of bullet: " + room);
         this.room.addProjectile(this);
         this.stopped = false;
         this.targetAcquired=false;
@@ -12,7 +13,6 @@ class Bullet extends Rectangle{
         this.y_speed=0;
         this.targetLeft=false;
         this.targetUp=false;
-        this.total_speed_multiplier = 8;
     }
     
     
@@ -40,8 +40,8 @@ class Bullet extends Rectangle{
                 
                 var total_dist=x_dist+y_dist;
                 
-                this.x_speed=(x_dist / total_dist)*this.total_speed_multiplier;
-                this.y_speed=(y_dist/total_dist)*this.total_speed_multiplier;
+                this.x_speed=(x_dist / total_dist)*this.travel_speed;
+                this.y_speed=(y_dist/total_dist)*this.travel_speed;
                 
                 this.targetAcquired=true;
             }
@@ -96,7 +96,9 @@ class Bullet extends Rectangle{
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.entity_list[i])){
                     this.room.entity_list[i].takeDamage(5);
+                    //alert("health of enemy: " + this.room.entity_list[i].health);
                     if (this.room.entity_list[i].health < 0){
+                        //alert("killed enemy");
                         this.room.entity_list[i].deleteFromEntityList();
                         
                     }
@@ -127,7 +129,7 @@ class Bullet extends Rectangle{
         
         /*else if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
           if(this.entity.health>0)
-          { this.entity.takeDamage(5);
+          { this.entity.takeDamage(this.damage);
               //console.log("colliding with player, player-health: " + this.entity.health);
               return true;
               

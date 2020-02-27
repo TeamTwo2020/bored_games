@@ -4,6 +4,7 @@ class Entity extends Rectangle {
         super(x, y, width, height, color);
         this.room = room;
         this.health = health;
+        this.hostile = false;
         this.damage_animation_timer = 0;
 
     }
@@ -19,6 +20,12 @@ class Entity extends Rectangle {
             if (this == this.room.entity_list[e]){
                 //alert("deleting enemy...");
                 this.room.entity_list.splice(e, 1);
+                if (this.hostile == true){
+                    this.room.room_array.entity_counter -= 1;
+                    if (this.room.room_array.entity_counter === 0){
+                        alert("YOU WIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN!");
+                    }
+                }
                 break;
             }
         }

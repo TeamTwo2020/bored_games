@@ -1,6 +1,6 @@
 class Room{
 	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
-        this.room_array = room_array
+        this.room_array = room_array;
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -36,7 +36,8 @@ class Room{
     }
     
     generateEnemies(hero){
-        this.entity_list.push(new Henry(700, 200, 50, 50, "red", hero, this, 50));
+        this.entity_list.push(new Henry(700, 200, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 2) + 1));
+        this.room_array.entity_counter += 1;
     }
     
     addBorderBlocks(){

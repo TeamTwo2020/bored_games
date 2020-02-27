@@ -13,13 +13,12 @@ function init(){
     room_list = new RoomArray(canvas, room_color);
     hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
     room_list.current_room.hero_list = [hero];
-//<<<<<<< HEAD
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
-//=======
-    //henry = new Henry(700, 200, 50, 50, "red", hero, room_list.array[2][2],10);
-//>>>>>>> bd3a530047a961e4da539b0fb67ae8f3b3392311
-    //room_list.addEntity(henry, 2, 2);
+//room_list.addEntity(henry, 2, 2);
     room_list.generateEnemies(hero);
+//=======
+    //room_list.addEntity(henry, 2, 2);
+//>>>>>>> 4db1370d674cedd0fe1c8090e1eb83506219bd20
     //console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
     
     
@@ -130,7 +129,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     onclick = function () {
-        console.log("shoot");
+        //console.log("shoot");
 
         if(hero.bullet!=null) //Continuous shooting
         {
@@ -165,8 +164,8 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
             /*console.log("hero.bullet X"+hero.bullet.x);
             console.log("hero.bullet Y"+hero.bullet.y);
             console.log("cursorX"+(cursorX));
-            console.log("cursorY"+(cursorY));*/
-
+            console.log("cursorY"+(cursorY));
+*/
 
 
             if(hero.bullet.checkCollisionWithStaticObjects())
