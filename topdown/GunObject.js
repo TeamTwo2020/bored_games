@@ -13,8 +13,18 @@ class Gun {
     //sniper - v slow rate of fire, fast travel time, high damage
     //shotgun - mid-low fire rate, slow travel time, high damage -- 3 projectiles
     //two way gun, 4 way gun
-
     //big boss - smg, but in a spiral
+
+    get rifle_gun(){
+        var rifle={
+            width: 5,
+            height: 5,
+            travel_time: 8,
+            damage: 8
+        }
+        return rifle;
+    }
+
 
     shootGun(x, y){
         if (this.gun_type == 1){    //rifle
@@ -29,11 +39,15 @@ class Gun {
             this.twoWay(x, y);
         }
     }
-    //Add new attributes to Bullet for travel time and damage
+
+    //Create a new object? for each gun type
     rifle(x_spawn, y_spawn){
+        var rifle={
+
+        }
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, 5, 5, "navy", this.entity, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, 5, 5, 8, 8, "navy", this.entity, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer = 40;
         } else {

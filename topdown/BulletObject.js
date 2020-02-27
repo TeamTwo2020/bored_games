@@ -1,6 +1,8 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, color, entity, room){
+    constructor(x, y, width, height, travel_speed, damage, color, entity, room){
         super(x, y, width, height, color);
+        this.travel_speed=travel_speed;
+        this.damage=damage;
         this.entity=entity;
         this.room = room;
         this.room.addProjectile(this);
@@ -10,7 +12,6 @@ class Bullet extends Rectangle{
         this.y_speed=0;
         this.targetLeft=false;
         this.targetUp=false;
-        this.total_speed_multiplier = 8;
     }
     
     
@@ -38,8 +39,8 @@ class Bullet extends Rectangle{
                 
                 var total_dist=x_dist+y_dist;
                 
-                this.x_speed=(x_dist / total_dist)*this.total_speed_multiplier;
-                this.y_speed=(y_dist/total_dist)*this.total_speed_multiplier;
+                this.x_speed=(x_dist / total_dist)*this.travel_speed;
+                this.y_speed=(y_dist/total_dist)*this.travel_speed;
                 
                 this.targetAcquired=true;
             }
@@ -89,7 +90,7 @@ class Bullet extends Rectangle{
     checkCollisionWithPlayerObject(){
         if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
           if(this.entity.health>0)
-          { this.entity.takeDamage(5);
+          { this.entity.takeDamage(this.damage);
               //console.log("colliding with player, player-health: " + this.entity.health);
               return true;
               
