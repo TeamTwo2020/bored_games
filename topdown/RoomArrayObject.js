@@ -8,7 +8,7 @@ class RoomArray{
         this.current_room = this.array[2][2];
         //this.definePremadeMapLayout1(canvas);
         //this.associateNeighbours();
-        this.beginGeneratingRooms(canvas, 15, this.current_room);
+        this.beginGeneratingRooms(canvas, 150, this.current_room);
         //console.log("remaining rooms: " + rr);
         //console.log("roo00000000000000000m counter: " + this.room_counter);
         this.printArray();
@@ -66,7 +66,7 @@ class RoomArray{
         //console.log("start room upper neighbour is: " + start_room.room_row_index);
         //var rnumber = 3;
         
-        if (rnumber === 0 && start_room.room_row_index > 0 && this.array[start_room.room_row_index -1][start_room.room_col_index] == null && this.room_counter < 15){
+        if (rnumber === 0 && start_room.room_row_index > 0 && this.array[start_room.room_row_index -1][start_room.room_col_index] == null && this.room_counter < room_quantity){
             this.array[start_room.room_row_index - 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index - 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
             start_room.openGate("upper");
             //console.log("Lower neighbour is " + this.array[start_room.room_row_index - 1][start_room.room_col_index].lower_neighbour);
@@ -87,7 +87,7 @@ class RoomArray{
             
         } 
         
-        if (rnumber === 1 && start_room.room_col_index < this.array[0].length - 1 && this.array[start_room.room_row_index][start_room.room_col_index + 1] == null && this.room_counter < 15){
+        if (rnumber === 1 && start_room.room_col_index < this.array[0].length - 1 && this.array[start_room.room_row_index][start_room.room_col_index + 1] == null && this.room_counter < room_quantity){
             this.array[start_room.room_row_index][start_room.room_col_index + 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index + 1, 30, "closed", "closed", "closed", "closed", this.color);
             start_room.openGate("right");
             //console.log("Right neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
@@ -105,7 +105,7 @@ class RoomArray{
             
         }
         
-        if (rnumber === 2 && start_room.room_row_index < this.array.length -1 && this.array[start_room.room_row_index + 1][start_room.room_col_index] == null && this.room_counter < 15){
+        if (rnumber === 2 && start_room.room_row_index < this.array.length -1 && this.array[start_room.room_row_index + 1][start_room.room_col_index] == null && this.room_counter < room_quantity){
             this.array[start_room.room_row_index + 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index + 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
             start_room.openGate("lower");
             //console.log("Upper neighbour is " + this.array[start_room.room_row_index + 1][start_room.room_col_index].lower_neighbour);
@@ -124,7 +124,7 @@ class RoomArray{
             
         }
         
-        if (rnumber === 3 && start_room.room_col_index > 0 && this.array[start_room.room_row_index][start_room.room_col_index -1] == null && this.room_counter < 15){
+        if (rnumber === 3 && start_room.room_col_index > 0 && this.array[start_room.room_row_index][start_room.room_col_index -1] == null && this.room_counter < room_quantity){
             this.array[start_room.room_row_index][start_room.room_col_index - 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index - 1, 30, "closed", "closed", "closed", "closed", this.color);
             start_room.openGate("left");
             //console.log("Left neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
@@ -146,7 +146,7 @@ class RoomArray{
             //console.log("GENERATION FAILURE");
         }
         //console.log("In row: " + start_room.room_row_index + "  and col: " + start_room.room_row_index + "\nRoom quantity is: " + room_quantity + "\n@@@@@@");
-        if (this.room_counter < 15 && this.checkSurroundingRooms(start_room.room_row_index, start_room.room_col_index)){
+        if (this.room_counter < room_quantity && this.checkSurroundingRooms(start_room.room_row_index, start_room.room_col_index)){
             //room_quantity -= 1;
             //console.log("SKIPPING");
             
