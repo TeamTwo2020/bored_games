@@ -35,6 +35,10 @@ class Room{
         return this.room_index;
     }
     
+    generateEnemies(hero){
+        this.entity_list.push(new Henry(700, 200, 50, 50, "red", hero, this, 50));
+    }
+    
     addBorderBlocks(){
         //add borders to static objects
         this.static_object_list.push(this.left_wall.first_block);
@@ -94,6 +98,7 @@ class Room{
 
         for (var e = 0; e < this.entity_list.length; e++){
             this.entity_list[e].moveAi();
+            this.entity_list[e].shoot();
             this.entity_list[e].drawSelf(ctx);
         }
         //console.log("Drawing something...");

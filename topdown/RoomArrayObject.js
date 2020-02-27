@@ -47,6 +47,16 @@ class RoomArray{
         this.array[1][2].openGate("lower");
     }
     
+    generateEnemies(hero){
+        //alert("generating enemies for the first time");
+        for (var i = 0; i < this.array.length; i++){
+            for (var j = 0; j < this.array[i].length; j++){
+                //alert.log("new enemy...");
+                this.array[i][j].generateEnemies(hero);
+            }
+        }
+    }
+    
     beginGeneratingRooms(canvas, room_quantity, start_room){
         this.generateRooms(canvas, room_quantity, start_room);
     }
