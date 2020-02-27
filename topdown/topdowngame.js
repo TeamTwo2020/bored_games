@@ -12,6 +12,7 @@ function init(){
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
     hero = new Hero1(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30,direct);
+    room_list.current_room.hero_list = [hero];
 //<<<<<<< HEAD
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room,50);
 //=======
@@ -116,10 +117,10 @@ function init(){
 function showCoords(event) {
     cursorX=event.pageX-10;
     cursorY=event.pageY-141;
-    console.log("cursorX"+(cursorX));
+    /*console.log("cursorX"+(cursorX));
     console.log("cursorY"+(cursorY));
     console.log("hero.middle.x"+hero.middle.x);
-    console.log("hero.middle.y"+(hero.middle.y));
+    console.log("hero.middle.y"+(hero.middle.y));*/
 
 }
 
@@ -160,10 +161,10 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
             //  hero.bullet.x-=7.63;
             // hero.bullet.y-=0.37;
 
-            console.log("hero.bullet X"+hero.bullet.x);
+            /*console.log("hero.bullet X"+hero.bullet.x);
             console.log("hero.bullet Y"+hero.bullet.y);
             console.log("cursorX"+(cursorX));
-            console.log("cursorY"+(cursorY));
+            console.log("cursorY"+(cursorY));*/
 
 
 

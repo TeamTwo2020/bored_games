@@ -1,8 +1,10 @@
 class Bullet extends Rectangle{
-    constructor(x, y, width, height, color, entity, room){
+    constructor(x, y, width, height, color, entity, source, room){
         super(x, y, width, height, color);
         this.entity=entity;
+        this.source = source;
         this.room = room;
+        console.log("Room of bullet: " + room);
         this.room.addProjectile(this);
         this.stopped = false;
         this.targetAcquired=false;
@@ -87,7 +89,43 @@ class Bullet extends Rectangle{
     }
 
     checkCollisionWithPlayerObject(){
-        if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
+        if (this.source === 1){
+            //alert("source one detected");
+        
+            for (var i = 0; i < this.room.entity_list.length; i++){
+                //console.log("checking collision in for loop..."+i);
+                if (testCollision(this.x, this.y, this.width, this.height, this.room.entity_list[i])){
+                    this.room.entity_list[i].takeDamage(5);
+                    if (this.room.entity_list[i].health < 0){
+                        this.room.entity_list[i].deleteFromEntityList();
+                        
+                    }
+                    return true;
+                } else {
+                    //console.log("not colliding");
+                }
+            }
+        }
+        
+        if (this.source === 2){
+            //alert("source one detected");
+        
+            for (var i = 0; i < this.room.hero_list.length; i++){
+                //console.log("checking collision in for loop..."+i);
+                if (testCollision(this.x, this.y, this.width, this.height, this.room.hero_list[i])){
+                    this.room.hero_list[i].takeDamage(10);
+                    if (this.room.hero_list[i].health < 0){
+                        alert("GAME OVER");
+                    }
+                    return true;
+                } else {
+                    //console.log("not colliding");
+                }
+            }
+        }
+        
+        
+        /*else if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
           if(this.entity.health>0)
           { this.entity.takeDamage(5);
               //console.log("colliding with player, player-health: " + this.entity.health);
@@ -100,6 +138,6 @@ class Bullet extends Rectangle{
 
         } else {
             return false;
-        }
+        }*/
     }
 }

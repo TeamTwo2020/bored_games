@@ -13,6 +13,16 @@ class Entity extends Rectangle {
         this.health -= damage_value;
         this.damage_animation_timer = 8;
     }
+    
+    deleteFromEntityList(){
+        for (var e = 0; e < this.room.entity_list.length + 1; e++){
+            if (this == this.room.entity_list[e]){
+                //alert("deleting enemy...");
+                this.room.entity_list.splice(e, 1);
+                break;
+            }
+        }
+    }
 
     drawSelf(ctx) {
         if (this.damage_animation_timer > 0) {
