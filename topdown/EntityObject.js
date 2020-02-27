@@ -25,6 +25,10 @@ class Entity extends Rectangle {
                     if (this.room.room_array.entity_counter === 0){
                         alert("YOU WIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN!");
                     }
+                    
+                    if (this.room.entity_list.length === 0){
+                        this.room.openGates();
+                    }
                 }
                 break;
             }

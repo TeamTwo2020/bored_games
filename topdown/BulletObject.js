@@ -95,7 +95,7 @@ class Bullet extends Rectangle{
             for (var i = 0; i < this.room.entity_list.length; i++){
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.entity_list[i])){
-                    this.room.entity_list[i].takeDamage(5);
+                    this.room.entity_list[i].takeDamage(50);
                     //alert("health of enemy: " + this.room.entity_list[i].health);
                     if (this.room.entity_list[i].health < 0){
                         //alert("killed enemy");
@@ -115,7 +115,7 @@ class Bullet extends Rectangle{
             for (var i = 0; i < this.room.hero_list.length; i++){
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.hero_list[i])){
-                    this.room.hero_list[i].takeDamage(10);
+                    this.room.hero_list[i].takeDamage(this.damage);
                     if (this.room.hero_list[i].health < 0){
                         alert("GAME OVER");
                     }
