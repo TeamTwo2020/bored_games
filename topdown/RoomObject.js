@@ -3,7 +3,7 @@ class Room{
         this.room_array = room_array;
         this.canvas = canvas;
         this.locked = true;
-        this.door_mats = [new Rectangle(wall_thickness, (canvas.height/2), 100, (canvas.height/2), "lime")];
+        this.door_mats = [new Rectangle(wall_thickness, (canvas.height/2)-100, 200, 200, "lime"), new Rectangle(canvas.width - wall_thickness - 200, (canvas.height/2)-100, 200, 200, "lime"), new Rectangle((canvas.width/2) - 100, wall_thickness, 200, 200, "lime"), new Rectangle((canvas.width/2) - 100, (canvas.height - wall_thickness - 200), 200, 200, "lime")];
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -91,12 +91,9 @@ class Room{
             this.lower_wall.drawSelf(ctx);
         }
 
-        //console.log("wall list len: " + this.wall_list.length);
-        //for (var i = 0; i < this.room_contents_list.length; i++){
-            //console.log("drawing wall at x: " + this.room_contents_list[0][i].x);
-            //console.log("wall color: " + this.wall_list[i].color);
+        
         //draw the door mats for debugging purposes
-        this.drawDoorMats(ctx);    
+        //this.drawDoorMats(ctx);    
         
         
         for (var j = 0; j < this.static_object_list.length; j++){
@@ -157,6 +154,7 @@ class Room{
             if(y>=890&&x>=510&&x<=765) {
                 return false;// avoid block low gate
             }
+            
             else {
                 return true;
             }
@@ -182,11 +180,11 @@ class Room{
 
 
 
-        function not_block_entity(x,y){
+        function not_block_entity(x,y, room){
             if(y>=165&&y<=250&&x<=750&&x>=525) {
                 return false;//avoid block henry
             }
-            if(y>=15&&y<=80&&x<=100) {
+            if((y>=15&&y<=80&&x<=100) && (room.room_row_index == 2 && room.room_col_index == 2)) {
                 return false;//avoid block hero
             }
 
@@ -230,31 +228,89 @@ class Room{
             }
             return true;
         }
-
+        
+        
+        
         var spawn_space = 175;//150
+        var wall_type;
         var walls = [];
         var arrayx=[];
         var arrayy=[];
-        for (var i = 0; i < amount_of_walls; ){
-          var  new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
-          var  new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-            if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y)&&i%2==0)
-            {
-                walls.push(new Wall(new_x, new_y, 0, "black"));
-                arrayx.push(new_x);
-                arrayy.push(new_y);
-                i++;
+        var attempted_spawns = 0;
+        for (var i = 0; i < amount_of_walls; i++){
+            //console.log("wall: " + i);
+            wall_type = Math.round(Math.random() * 1);
+            while (attempted_spawns < 50){
+                var  new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
+                var  new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
+                    if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y, this) && !this.isOnDoorMat(wall_type, new_x, new_y))
+                    {
+                        walls.push(new Wall(new_x, new_y, wall_type, "black"));
+                        arrayx.push(new_x);
+                        arrayy.push(new_y);
+                        //console.log("pushed wall number: " + i);
+                        break;
+                        
+                        
+                        
+                    } else{
+                        //console.log("can't place line at " + new_x + "   " + new_y);
+                    }
+                    /*if(islegal_zone_vertical(new_x ,new_y,arrayx,arrayy)&&not_block_gate_vertical(new_x,new_y)&&not_block_entity_vertical(new_x,new_y)&&i%2==1)
+                    {
+                        walls.push(new Wall(new_x, new_y, 1, "black"));
+                        arrayx.push(new_x);
+                        arrayy.push(new_y);
+                        
+                    }*/
+                attempted_spawns++;
+                //console.log("attempted spawn: " + attempted_spawns);
             }
-            if(islegal_zone_vertical(new_x ,new_y,arrayx,arrayy)&&not_block_gate_vertical(new_x,new_y)&&not_block_entity_vertical(new_x,new_y)&&i%2==1)
-            {
-                walls.push(new Wall(new_x, new_y, 1, "black"));
-                arrayx.push(new_x);
-                arrayy.push(new_y);
-                i++;
-            }
-}
+            
+            attempted_spawns = 0;
+            
+        }
+        
+        /*for (var j = 0; j < walls.length; j++){
+            console.log("block " + j + " has an x of: " + walls[i].x);
+        }*/
         return walls;
     }
+    
+    isOnDoorMat(type, new_x, new_y){
+            var block_thickness = 35;
+                
+            
+            //alert("horizontal wall detected");
+            var test_wall = new Wall(new_x, new_y, type, "black");
+            for (var i = 0; i < this.door_mats.length; i++){
+                //console.log("CHECKING DOORMAT. mat x: " + this.door_mats[i].x + " mat y is " + this.door_mats[i].y);
+                if ((test_wall.x < this.door_mats[i].x + this.door_mats[i].width && test_wall.x > this.door_mats[i].x) && (test_wall.y < this.door_mats[i].y + this.door_mats[i].height && test_wall.y > this.door_mats[i].y)){
+                    //alert("reeee");
+                    //console.log("attempted to place x at " + new_x);
+                    return true;
+                }
+                
+                else if ((test_wall.x < this.door_mats[i].x + this.door_mats[i].width && test_wall.x > this.door_mats[i].x) && (test_wall.y + test_wall.height < this.door_mats[i].y + this.door_mats[i].height && test_wall.y + test_wall.height > this.door_mats[i].y)){
+                    //console.log("attempted to place x at " + new_x);
+                    return true;
+                }
+                
+                else if ((test_wall.x + test_wall.width < this.door_mats[i].x + this.door_mats[i].width && test_wall.x + test_wall.width > this.door_mats[i].x) && (test_wall.y < this.door_mats[i].y + this.door_mats[i].height && test_wall.y > this.door_mats[i].y)){
+                    //console.log("attempted to place x at " + new_x);
+                    return true;
+                }
+                
+                else if ((test_wall.x + test_wall.width < this.door_mats[i].x + this.door_mats[i].width && test_wall.x + test_wall.width > this.door_mats[i].x) && (test_wall.y + test_wall.height < this.door_mats[i].y + this.door_mats[i].height && test_wall.y + test_wall.height > this.door_mats[i].y)){
+                    //console.log("attempted to place x at " + new_x);
+                    return true;
+                }
+                    
+            }
+                    
+            console.log("working...");
+            return false;
+        }
 
     assignNeighbour(direction, room){
         if (direction == "upper"){
