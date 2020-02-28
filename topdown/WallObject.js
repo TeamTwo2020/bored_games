@@ -13,28 +13,34 @@ class Wall{
     }
     
     populateWallBlocks(preset_wall){
+        this.wall_blocks.push(new Rectangle(this.x, this.y, this.block_thickness, this.block_thickness, this.color));
+        
         switch(preset_wall){
             case 0:
-                for (var i = 0; i < 5; i++){
-                    
-                    if (this.wall_blocks.length == 0){
-                       this.wall_blocks.push(new Rectangle(this.x, this.y, this.block_thickness, this.block_thickness, this.color));
-                    } else {
-                        this.wall_blocks.push(new Rectangle(this.wall_blocks[i-1].x+this.block_thickness, this.y, this.block_thickness, this.block_thickness, this.color));
-                    }
+                for (var i = 1; i < 5; i++){
+                    this.wall_blocks.push(new Rectangle(this.wall_blocks[i-1].x+this.block_thickness, this.y, this.block_thickness, this.block_thickness, this.color));
                 }
                 //console.log("case 0");
                 break;
             
             case 1:
+                for (var i = 1; i < 5; i++){
+                    this.wall_blocks.push(new Rectangle(this.x,this.wall_blocks[i-1].y+this.block_thickness,  this.block_thickness, this.block_thickness, this.color));
+                }
                 //console.log("case 1");
                 break;
                 
             case 2:
+                for (var i = 1; i < 5; i++){
+                    this.wall_blocks.push(new Rectangle(this.wall_blocks[i-1].x+this.block_thickness,this.wall_blocks[i-1].y+this.block_thickness,  this.block_thickness, this.block_thickness, this.color));
+                }
                 //console.log("case 2");
                 break;
                 
             case 3:
+                for (var i = 1; i < 5; i++){
+                    this.wall_blocks.push(new Rectangle(this.wall_blocks[i-1].x-this.block_thickness,this.wall_blocks[i-1].y-this.block_thickness,  this.block_thickness, this.block_thickness, this.color));
+                }
                 //console.log("case 3");
                 break;
                 

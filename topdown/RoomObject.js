@@ -3,6 +3,7 @@ class Room{
         this.room_array = room_array;
         this.canvas = canvas;
         this.locked = true;
+        this.door_mats = [new Rectangle(wall_thickness, (canvas.height/2), 100, (canvas.height/2), "lime")];
         this.right_neighbour;
         this.left_neighbour;
         this.upper_neighbour;
@@ -94,6 +95,10 @@ class Room{
         //for (var i = 0; i < this.room_contents_list.length; i++){
             //console.log("drawing wall at x: " + this.room_contents_list[0][i].x);
             //console.log("wall color: " + this.wall_list[i].color);
+        //draw the door mats for debugging purposes
+        this.drawDoorMats(ctx);    
+        
+        
         for (var j = 0; j < this.static_object_list.length; j++){
             this.static_object_list[j].drawSelf(ctx);
             //console.log("drawing static object");
@@ -122,32 +127,85 @@ class Room{
                 this.particle_list[l].drawSelf(ctx);
             }
         }
+        
+        
         //}
 
         //this.examplewall.drawSelf();
         //console.log("frm room: " + this.examplewall.color);
     }
-
+    
+    drawDoorMats(ctx){
+        for (var i = 0; i < this.door_mats.length; i++){
+            //console.log("drawing doormat");
+            this.door_mats[i].drawSelf(ctx);
+        }
+    }
 
 
     generateWalls(amount_of_walls, canvas){
 	    function not_block_gate(x,y){
-	        if(y>=430&&y<=570&&x<=110) return false;//avoid block left gate
-            if(y>=460&&y<=540&&x>=1185) return false;// avoid block right gate
-            if(y<=80&&x>=480&&x<=795) return false;// avoid block top gate
-            if(y>=890&&x>=510&&x<=765) return false;// avoid block low gate
-            else return true;
+	        if(y>=425&&y<=540&&x<=85) {
+                return false;//avoid block left gate
+            }
+            if(y>=425&&y<=540&&x>=1000) {
+                return false;// avoid block right gate
+            }
+            if(y<=80&&x>=480&&x<=795) {
+                return false;// avoid block top gate
+            }
+            if(y>=890&&x>=510&&x<=765) {
+                return false;// avoid block low gate
+            }
+            else {
+                return true;
+            }
 
+        }
+        function not_block_gate_vertical(x,y){
+            if(y>=285&&y<=540&&x<=85) {
+                return false;//avoid block left gate
+            }
+            if(y>=285&&y<=540&&x>=1290) {
+                return false;// avoid block right gate
+            }
+            if(y<=80&&x>=680&&x<=795) {
+                return false;// avoid block top gate
+            }
+            if(y>=675&&x>=680&&x<=795) {
+                return false;// avoid block low gate
+            }
+            else {
+                return true;
+            }
         }
 
 
 
         function not_block_entity(x,y){
-            if(y>=140&&y<=360&&x<=820&&x>=495) return false;//avoid block henry
-            if(y>=15&&y<=80&&x<=130) return false;//avoid block hero
+            if(y>=165&&y<=250&&x<=750&&x>=525) {
+                return false;//avoid block henry
+            }
+            if(y>=15&&y<=80&&x<=100) {
+                return false;//avoid block hero
+            }
 
-            else return true;
+            else {
+                return true;
+            }
+        }
 
+        function not_block_entity_vertical(x,y){
+            if(y<=250&&x<=750&&x>=665) {
+                return false;//avoid block henry
+            }
+            if(x>=15&&x<=80&&y<=100) {
+                return false;//avoid block hero
+            }
+
+            else {
+                return true;
+            }
         }
 
 
@@ -163,22 +221,33 @@ class Room{
             return true;
         }   //if you generate a wall(rectangle), assume that it begins from (x,y), then (x-175,x+175),(y-35,y+35) is illegal zone
 
+        function islegal_zone_vertical(x, y, arrayxV, arrayyV) {
+            var i=0;
+            while(i<arrayxV.length)
+            {
+                if(x>arrayxV[i]-35&&x<arrayxV[i]+35&&y>arrayyV[i]-175&&y<arrayyV[i]+175) return false;
+                else i++;
+            }
+            return true;
+        }
+
         var spawn_space = 175;//150
         var walls = [];
         var arrayx=[];
         var arrayy=[];
-        var new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
-        // wall_thickness has been initialized in the room class
-        var new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-        //walls.push(new Wall(new_x, new_y, 0, "black"));
-        arrayx.push(new_x);
-        arrayy.push(new_y);
-        for (var i = 1; i < amount_of_walls; ){
-            new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
-            new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-            if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y))
+        for (var i = 0; i < amount_of_walls; ){
+          var  new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
+          var  new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
+            if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y)&&i%2==0)
             {
                 walls.push(new Wall(new_x, new_y, 0, "black"));
+                arrayx.push(new_x);
+                arrayy.push(new_y);
+                i++;
+            }
+            if(islegal_zone_vertical(new_x ,new_y,arrayx,arrayy)&&not_block_gate_vertical(new_x,new_y)&&not_block_entity_vertical(new_x,new_y)&&i%2==1)
+            {
+                walls.push(new Wall(new_x, new_y, 1, "black"));
                 arrayx.push(new_x);
                 arrayy.push(new_y);
                 i++;
