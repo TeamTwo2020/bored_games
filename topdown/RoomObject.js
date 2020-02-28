@@ -39,7 +39,7 @@ class Room{
     }
     
     generateEnemies(hero){
-        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 2) + 1));
+        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, 5));
         this.room_array.entity_counter += 1;
     }
     
@@ -279,6 +279,12 @@ class Room{
 
     addParticle(particle){
 	    this.particle_list.push(particle);
+    }
+
+    printProjectile(){
+	    for (var i=0;i<this.projectile_object_list.length;i++){
+	        console.log("List item at pos: ", i, "=== ", this.projectile_object_list[i].y_speed);
+        }
     }
     
     //When given a border wall, it's gate will be opened

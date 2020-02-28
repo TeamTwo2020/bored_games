@@ -4,6 +4,7 @@ class Gun {
         this.gun_type=gun_type;
         this.source=source;
         this.shot_timer = 100;    //shot timer will be set by the gun type methods -- if shot_timer>0 dont reset it
+        this.boss_color_value=0; //increment to 999 then reset to 0
     }
 
     //rifle - mid-low fire rate, mid travel time, mid damage
@@ -61,16 +62,16 @@ class Gun {
         return shotgun;
     }
 
-    get two_way(){
-        var two_way={
+    get sprinkler(){
+        var sprinkler={
             width: 5,
             height: 5,
             travel_time: 8,
-            damage: 8,
-            timer: 40,
-            color: "navy"
+            damage: 4,
+            timer: 10,
+            color: ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00", "#00ff40", "#00ff80", "#00ffbf", "#00ffff", "#00bfff", "#0080ff", "#0040ff", "#0000ff", "#4000ff", "#8000ff", "#bf00ff", "#ff00ff", "#ff00bf", "#ff0080", "#ff0066", "#ff0040", "#ff0000"]
         }
-        return two_way;
+        return sprinkler;
     }
 
 
@@ -87,7 +88,7 @@ class Gun {
             }else if(this.gun_type==4){ //shotgun
                 this.shotgunFire(target_x, target_y, x, y);
             }else if(this.gun_type==5){ //two way
-                this.twoWayFire(target_x, target_y, x, y);
+                this.sprinklerFire(target_x, target_y, x, y);
             }
         }
     }
@@ -134,8 +135,39 @@ class Gun {
 
     shotgunFire(target_x, target_y, x_spawn, y_spawn){
         if (this.shot_timer==0){
-            //give bullet the coords of hero here, so its only passed once
             this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, target_x, target_y, 2, this.room));
+            //console.log("last projectile", this.room.projectile_object_list[this.room.projectile_object_list.length-1])
+            //this.room.printProjectile();
+            var pellet0=this.room.projectile_object_list[this.room.projectile_object_list.length-3];
+            //console.log(pellet0);
+            if (pellet0.x_speed<0){
+                pellet0.x_speed*=-1;
+            }
+            if (pellet0.y_speed<0){
+                pellet0.y_speed*=-1;
+            }
+
+            var pellet1={
+                dest_x: target_x,
+                dest_y: target_y
+            };
+            var pellet2={
+                dest_x: target_x,
+                dest_y: target_y
+            };
+
+            //if the hero is left then the x_speed will be less than half of negative total speed
+            if (pellet0.x_speed > (this.shotgun.travel_time / 2)){
+                pellet1.dest_y+=200;
+                pellet2.dest_y-=200;
+            }else{
+                pellet1.dest_x+=200;
+                pellet2.dest_x-=200;
+            }
+
+            //use pellet0's x_speed and y_speed to check whether veritcal or horizontal
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, pellet1.dest_x, pellet1.dest_y, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, pellet2.dest_x, pellet2.dest_y, 2, this.room));
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer += this.shotgun.timer;
         } else {
@@ -143,12 +175,23 @@ class Gun {
         }
     }
 
-    twoWayFire(target_x, target_y, x_spawn, y_spawn){
+    sprinklerFire(target_x, target_y, x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.two_way.width, this.two_way.height, this.two_way.travel_time, this.two_way.damage, this.two_way.color, target_x, target_y, 2, this.room));
+            var bullet_color;
+            bullet_color=this.sprinkler.color[this.boss_color_value];
+            this.boss_color_value+=1;
+            if (this.boss_color_value==this.sprinkler.color.length){
+                this.boss_color_value=0;
+            }
+
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn-100, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+100, y_spawn, 2, this.room))
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn+100, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn-100, y_spawn, 2, this.room));
+
             //console.log("room index in henry shoot " + this.room.room_index);
-            this.shot_timer += this.two_way.timer;
+            this.shot_timer += this.sprinkler.timer;
         } else {
             this.shot_timer -= 1;
         }
