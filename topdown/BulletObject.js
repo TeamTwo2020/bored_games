@@ -73,16 +73,16 @@ class Bullet extends Rectangle{
         else{
 
             this.stopped = true;
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-up"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-up-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-down-right"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-down"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-down-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 15, Math.random()*10, "straight-up-left"));
-            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
-            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-up"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-up-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-down-right"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-down"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-down-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 2, 3, "yellow", 20, Math.random()*10, "straight-up-left"));
+            this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 6));
+            //this.room.particle_list.push(new Particle(this.x, this.y, 3, 4, this.color, 4, 8));
 
             }
 
@@ -110,7 +110,7 @@ class Bullet extends Rectangle{
             for (var i = 0; i < this.room.entity_list.length; i++){
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.entity_list[i])){
-                    this.room.entity_list[i].takeDamage(50);
+                    this.room.entity_list[i].takeDamage(10);
                     //alert("health of enemy: " + this.room.entity_list[i].health);
                     if (this.room.entity_list[i].health < 0){
                         //alert("killed enemy");
