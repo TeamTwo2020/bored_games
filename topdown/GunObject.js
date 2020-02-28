@@ -5,6 +5,15 @@ class Gun {
         this.source=source;
         this.shot_timer = 100;    //shot timer will be set by the gun type methods -- if shot_timer>0 dont reset it
         this.boss_color_value=0; //increment to 999 then reset to 0
+        this.boss_stuff={
+            color_value: 0,
+            gun1_x: -30,
+            gun1_upset: false,
+            gun1_down_set: true,
+            gun1_y: -30,
+            gun1_right_set: true,
+            gun1_left_set: true
+        }
     }
 
     //rifle - mid-low fire rate, mid travel time, mid damage
@@ -68,7 +77,7 @@ class Gun {
             height: 5,
             travel_time: 8,
             damage: 4,
-            timer: 10,
+            timer: 5,
             color: ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00", "#00ff40", "#00ff80", "#00ffbf", "#00ffff", "#00bfff", "#0080ff", "#0040ff", "#0000ff", "#4000ff", "#8000ff", "#bf00ff", "#ff00ff", "#ff00bf", "#ff0080", "#ff0066", "#ff0040", "#ff0000"]
         }
         return sprinkler;
@@ -141,10 +150,10 @@ class Gun {
             var pellet0=this.room.projectile_object_list[this.room.projectile_object_list.length-3];
             //console.log(pellet0);
             if (pellet0.x_speed<0){
-                pellet0.x_speed*=-1;
+                pellet0.x_speed*=-2;
             }
             if (pellet0.y_speed<0){
-                pellet0.y_speed*=-1;
+                pellet0.y_speed*=-2;
             }
 
             var pellet1={
@@ -178,22 +187,57 @@ class Gun {
     sprinklerFire(target_x, target_y, x_spawn, y_spawn){
         if (this.shot_timer==0){
             //give bullet the coords of hero here, so its only passed once
-            var bullet_color;
-            bullet_color=this.sprinkler.color[this.boss_color_value];
-            this.boss_color_value+=1;
-            if (this.boss_color_value==this.sprinkler.color.length){
-                this.boss_color_value=0;
+
+            //add the offset here to be added to x_spawn & y_spawn
+
+            if (this.boss_stuff.gun1_x>30){
+                this.boss_stuff.gun1_x=30;
+                this.boss_stuff.gun1_upset=true;
+                this.boss_stuff.gun1_right_set=false;
+            }else if (this.boss_stuff.gun1_x<-30){
+                this.boss_stuff.gun1_x=-30;
+                this.boss_stuff.gun1_down_set=true;
+                this.boss_stuff.gun1_left_set=false;
+            }
+            if(this.boss_stuff.gun1_y>30){
+                this.boss_stuff.gun1_y=30;
+                this.boss_stuff.gun1_right_set=true;
+                this.boss_stuff.gun1_down_set=false;
+            }else if (this.boss_stuff.gun1_y<-30){
+                this.boss_stuff.gun1_y=-30
+                this.boss_stuff.gun1_left_set=true;
+                this.boss_stuff.gun1_upset=false;
+            }
+            if (!this.boss_stuff.gun1_upset){
+                this.boss_stuff.gun1_x+=1;
+            }else if (!this.boss_stuff.gun1_right_set){
+                this.boss_stuff.gun1_y+=1;
+            }else if (!this.boss_stuff.gun1_down_set){
+                this.boss_stuff.gun1_x-=1;
+            }else if (!this.boss_stuff.gun1_left_set){
+                this.boss_stuff.gun1_y-=1;
             }
 
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn-100, 2, this.room));
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+100, y_spawn, 2, this.room))
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn+100, 2, this.room));
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn-100, y_spawn, 2, this.room));
+
+            var bullet_color=this.bossColor();
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_stuff.gun1_x, y_spawn+this.boss_stuff.gun1_y, 2, this.room));
+            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_stuff.gun2_x, y_spawn+this.boss_stuff.gun2_y, 2, this.room));
+            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn+100, 2, this.room));
+            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn-100, y_spawn, 2, this.room));
 
             //console.log("room index in henry shoot " + this.room.room_index);
             this.shot_timer += this.sprinkler.timer;
         } else {
             this.shot_timer -= 1;
         }
+    }
+
+    bossColor(){
+        var bullet_color=this.sprinkler.color[this.boss_stuff.color_value];
+        this.boss_stuff.color_value+=1;
+        if (this.boss_stuff.color_value==this.sprinkler.color.length){
+            this.boss_stuff.color_value=0;
+        }
+        return bullet_color;
     }
 }
