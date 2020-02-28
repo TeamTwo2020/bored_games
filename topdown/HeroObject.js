@@ -19,7 +19,8 @@ class Hero extends Entity{
 
     shoot(target_x, target_y){
         this.gun.shootGun(target_x, target_y, this.middle.x, this.middle.y);
-        console.log("this.middle.x: ", this.middle.x);
+        //console.log("this.middle.x: ", this.middle.x);
+        //console.log("this.middle.y: ", this.middle.y);
     }
     
     outOfBounds(){

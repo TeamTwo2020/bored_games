@@ -27,33 +27,37 @@ class Bullet extends Rectangle{
                 //assuming 
                 //x speed is x_dist/y_dist x5:
                 //put the smaller of x/y on top of other in fraction to get the percentage
-                var x_dist=this.target_x - this.middle.x -30;
+                var x_dist=this.target_x - this.middle.x;
+                /*
                 console.log("target_x: ", this.target_x);
                 console.log("source x: ", this.x);
                 console.log("x_dist: ", x_dist);
+                */
                 if(x_dist < 0){
                     this.targetLeft=true;
                     x_dist*=-1;
                 }
-                console.log("targetLeft: ", this.targetLeft);
+                //console.log("targetLeft: ", this.targetLeft);
                 //compare two entities
-                var y_dist=this.target_y - this.middle.y - 20;
+                var y_dist=this.target_y - this.middle.y;
+                /*
                 console.log("target_y: ", this.target_y);
                 console.log("source y: ", this.y);
                 console.log("y_dist: ", y_dist);
+                */
                 if(y_dist < 0){
                     this.targetUp=true;
                     y_dist*=-1;
                 }
-                console.log("targetUp: ", this.targetUp);
+                //console.log("targetUp: ", this.targetUp);
                 
                 var total_dist=x_dist+y_dist;
-                console.log("total_dist: ", total_dist)
+                //console.log("total_dist: ", total_dist)
                 
                 this.x_speed=(x_dist / total_dist)*this.travel_speed;
-                console.log("x_speed: ", this.x_speed);
+                //console.log("x_speed: ", this.x_speed);
                 this.y_speed=(y_dist/total_dist)*this.travel_speed;
-                console.log("y_speed: ", this.y_speed);
+                //console.log("y_speed: ", this.y_speed);
                 this.targetAcquired=true;
             }
             

@@ -93,6 +93,8 @@ class Gun {
     }
 
     playerFire(target_x, target_y, x_spawn, y_spawn){
+        //console.log("target_x: ", target_x, " -- target_y: ", target_y);
+        //console.log*("x_spawn: ", x_spawn, " -- y_spawn: ", y_spawn);
         this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.rifle.width, this.rifle.height, this.rifle.travel_time, this.rifle.damage, this.rifle.color, target_x, target_y, 1, this.room));
     }
 

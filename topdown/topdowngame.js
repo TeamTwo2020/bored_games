@@ -71,10 +71,19 @@ function init(){
         }
     });
 
-    document.addEventListener('click', function(event){
-        //console.log("x: ", event.clientX+15, " - y: ", event.clientY-103);
-        hero.shoot(event.clientX+15, event.clientY-103);
-    });
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        //console.log("x: " + x + " y: " + y);
+        hero.shoot(x, y);
+
+    }
+
+    const check_canvas = document.querySelector('canvas');
+    canvas.addEventListener('mousedown', function(e){
+        getCursorPosition(canvas, e);
+    })
 
     document.addEventListener('keyup', function(event){
         if(event.key == "w" || event.key == "W"){
