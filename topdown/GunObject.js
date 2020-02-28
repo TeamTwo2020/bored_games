@@ -177,7 +177,7 @@ class Gun {
             //use pellet0's x_speed and y_speed to check whether veritcal or horizontal
             this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, pellet1.dest_x, pellet1.dest_y, 2, this.room));
             this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.shotgun.width, this.shotgun.height, this.shotgun.travel_time, this.shotgun.damage, this.shotgun.color, pellet2.dest_x, pellet2.dest_y, 2, this.room));
-            //console.log("room index in henry shoot " + this.room.room_index);
+
             this.shot_timer += this.shotgun.timer;
         } else {
             this.shot_timer -= 1;

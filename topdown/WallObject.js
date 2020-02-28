@@ -74,8 +74,8 @@ class Wall{
             this.height = (furthest_down_block.y + this.block_thickness) - this.wall_blocks[0].y;
             this.width = (furthest_right_block.x + this.block_thickness) - this.wall_blocks[0].x;
             
-            console.log("height is: " + this.height);
-            console.log("width is: " + this.width);
+            //console.log("height is: " + this.height);
+            //console.log("width is: " + this.width);
             
             
             
