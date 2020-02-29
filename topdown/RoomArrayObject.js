@@ -7,9 +7,10 @@ class RoomArray{
         this.color = room_color;
         this.defineSpawnRoom(2, 2, canvas);
         this.current_room = this.array[2][2];
+        
         //this.definePremadeMapLayout1(canvas);
         //this.associateNeighbours();
-        this.beginGeneratingRooms(canvas, 2, this.current_room);
+        //this.beginGeneratingRooms(canvas, 2, this.current_room);
         //console.log("remaining rooms: " + rr);
         //console.log("roo00000000000000000m counter: " + this.room_counter);
         //this.printArray();
@@ -54,17 +55,38 @@ class RoomArray{
             for (var j = 0; j < this.array[i].length; j++){
                 //alert.log("new enemy...");
                 if (this.array[i][j] != null){
-                    this.array[i][j].generateEnemies(hero);
+                    this.array[i][j].generateEnemies(hero, 2);
                 }
             }
         }
     }
     
-    beginGeneratingRooms(canvas, room_quantity, start_room){
-        this.generateRooms(canvas, room_quantity, start_room);
+    populateRoom(hero, room, room_quantity){
+        if (hero == null){
+            alert("Undefined hero!");
+        } else{
+            if (this.room_counter < 2 || (this.room_counter / room_quantity) * 100 < 10){                       
+                room.generateEnemies(hero, 1);
+            } else if ((this.room_counter / room_quantity) * 100 < 30){
+                room.generateEnemies(hero, 2);
+            } else if ((this.room_counter / room_quantity) * 100 < 60){
+                room.generateEnemies(hero, 3);
+            } else if ((this.room_counter == room_quantity)){
+                room.generateEnemies(hero, 1);
+            } else {
+                room.generateEnemies(hero, 4);
+            }
+        }
+        
+        
     }
     
-    generateRooms(canvas, room_quantity, start_room){
+    beginGeneratingRooms(canvas, room_quantity, start_room, hero){
+        this.populateRoom(hero, this.current_room, room_quantity);
+        this.generateRooms(canvas, room_quantity, start_room, hero);
+    }
+    
+    generateRooms(canvas, room_quantity, start_room, hero){
         if (room_quantity <= 0){
             return room_quantity;
         }
@@ -90,7 +112,8 @@ class RoomArray{
             //console.log("ROOOOOOOOOOOOOM MADE  " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_row_index + "   " + this.array[start_room.room_row_index - 1][start_room.room_col_index].room_col_index);
             //this.printArray();
             this.room_counter++;
-            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index - 1][start_room.room_col_index]);
+            this.populateRoom(hero, this.array[start_room.room_row_index - 1][start_room.room_col_index], room_quantity);
+            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index - 1][start_room.room_col_index], hero);
             //console.log("AFTER RETURN: " + room_quantity);
             
             
@@ -107,7 +130,8 @@ class RoomArray{
             //console.log("ROOOOOOOOOOOOOM MADE");
             //this.printArray();
             this.room_counter++;
-            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index + 1]);
+            this.populateRoom(hero, this.array[start_room.room_row_index][start_room.room_col_index + 1], room_quantity);
+            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index + 1], hero);
             
             
         }
@@ -121,7 +145,8 @@ class RoomArray{
             single_generation_success = true;
             //console.log("ROOOOOOOOOOOOOM MADE");
             this.room_counter++;
-            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index + 1][start_room.room_col_index]);
+            this.populateRoom(hero, this.array[start_room.room_row_index + 1][start_room.room_col_index], room_quantity);
+            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index + 1][start_room.room_col_index], hero);
             
             
         }
@@ -134,7 +159,8 @@ class RoomArray{
             room_quantity -= 1;
             single_generation_success = true;
             this.room_counter++;
-            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index - 1]);
+            this.populateRoom(hero, this.array[start_room.room_row_index][start_room.room_col_index - 1], room_quantity);
+            room_quantity = this.generateRooms(canvas, room_quantity, this.array[start_room.room_row_index][start_room.room_col_index - 1], hero);
             
             
         }
@@ -147,7 +173,7 @@ class RoomArray{
             //room_quantity -= 1;
             //console.log("SKIPPING");
             
-            room_quantity = this.generateRooms(canvas, room_quantity, start_room);
+            room_quantity = this.generateRooms(canvas, room_quantity, start_room, hero);
         }
             
             

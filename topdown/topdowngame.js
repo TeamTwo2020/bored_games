@@ -12,9 +12,10 @@ function init(){
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
     hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30, direct);
+    room_list.beginGeneratingRooms(canvas, 10, room_list.current_room, hero);
     room_list.current_room.hero_list = [hero];
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room, 50, 2);
-    room_list.generateEnemies(hero);
+    //room_list.generateEnemies(hero);
     //console.log("INITIAL INSTANTIAION\n+++++++++++++++++++++\nSpawn room row: " + room_list.current_room.room_row_index + "  col: " + room_list.current_room.room_row_index + "\nHenry claims to be in row: " + henry.room.room_row_index + "  col: " + henry.room.room_col_index + "\nThe spawnroom claims that there is " + room_list.array[2][2].entity_list.length + " entities in it\nHero claims to be in row: " + hero.room.room_row_index + "  col: " + hero.room.room_col_index);
     
     

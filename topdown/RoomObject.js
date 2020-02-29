@@ -22,7 +22,7 @@ class Room{
         this.entity_list = [];//hero
         this.particle_list = [];
         this.hero_list = [];
-        this.wall_list = this.generateWalls(10, canvas);
+        this.wall_list = this.generateWalls(15, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             //console.log("Item in wall list: " + i);
             for (var j = 0; j < this.wall_list[i].wall_blocks.length; j++){
@@ -38,9 +38,33 @@ class Room{
         return this.room_index;
     }
     
-    generateEnemies(hero){
-        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 4) + 1));
-        this.room_array.entity_counter += 1;
+    generateEnemies(hero, enemy_quantity){
+        /*for (var i = 0; i < enemy_quantity; i++{
+        }*/
+        var henry_size = 50;
+        var spawn_x;
+        var spawn_y;
+        var new_henry;
+        var attempted_spawns = 0;
+        for (var i = 0; i < enemy_quantity; i++){
+            
+            while (attempted_spawns < 50){
+                spawn_x = Math.random() * (this.canvas.width - (this.wall_thickness*2) - henry_size) + this.wall_thickness;
+                spawn_y = Math.random() * (this.canvas.height - (this.wall_thickness*2) - henry_size) + this.wall_thickness;
+                new_henry = new Henry(spawn_x, spawn_y, henry_size, henry_size, "red", hero, this, 50, Math.round(Math.random() * 4) + 1);
+                if (!this.isOnDoorMat(new_henry) && !this.isOnWall(new_henry)){
+                    this.entity_list.push(new_henry);
+                    this.room_array.entity_counter += 1;
+                    attempted_spawns = -1;
+                    break;
+                }
+                attempted_spawns += 1;
+            }
+            
+            if (attempted_spawns >= 50){
+                break;
+            }
+        }
     }
     
     addBorderBlocks(){
@@ -237,15 +261,17 @@ class Room{
         var arrayx=[];
         var arrayy=[];
         var attempted_spawns = 0;
+        var wall;
         for (var i = 0; i < amount_of_walls; i++){
             //console.log("wall: " + i);
             wall_type = Math.round(Math.random() * 1);
             while (attempted_spawns < 50){
                 var  new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
                 var  new_y = Math.round((Math.random() * (canvas.height - this.wall_thickness - spawn_space)) + this.wall_thickness);
-                    if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y, this) && !this.isOnDoorMat(wall_type, new_x, new_y))
+                wall = new Wall(new_x, new_y, wall_type, "black");
+                    if(islegal_zone(new_x ,new_y,arrayx,arrayy)&&not_block_gate(new_x,new_y)&&not_block_entity(new_x,new_y, this) && !this.isOnDoorMat(wall))
                     {
-                        walls.push(new Wall(new_x, new_y, wall_type, "black"));
+                        walls.push(wall);
                         arrayx.push(new_x);
                         arrayy.push(new_y);
                         //console.log("pushed wall number: " + i);
@@ -277,12 +303,9 @@ class Room{
         return walls;
     }
     
-    isOnDoorMat(type, new_x, new_y){
-            var block_thickness = 35;
-                
-            
+    isOnDoorMat(object){
             //alert("horizontal wall detected");
-            var test_wall = new Wall(new_x, new_y, type, "black");
+            var test_wall = object;
             for (var i = 0; i < this.door_mats.length; i++){
                 //console.log("CHECKING DOORMAT. mat x: " + this.door_mats[i].x + " mat y is " + this.door_mats[i].y);
                 if ((test_wall.x < this.door_mats[i].x + this.door_mats[i].width && test_wall.x > this.door_mats[i].x) && (test_wall.y < this.door_mats[i].y + this.door_mats[i].height && test_wall.y > this.door_mats[i].y)){
@@ -311,6 +334,43 @@ class Room{
             //console.log("working...");
             return false;
         }
+    
+    isOnWall(object){
+        for (var i = 0; i < this.wall_list.length; i++){
+                //console.log("CHECKING DOORMAT. mat x: " + this.wall_list[i].x + " mat y is " + this.wall_list[i].y);
+                if ((object.x < this.wall_list[i].x + this.wall_list[i].width + 20 && object.x > this.wall_list[i].x) && (object.y < this.wall_list[i].y + this.wall_list[i].height + 20 && object.y > this.wall_list[i].y)){
+                    //alert("reeee");
+                    //console.log("attempted to place x at " + object.x);
+                    //this.static_object_list.push(new Rectangle(object.x, object.y, 50, 50, "lime"));
+                    return true;
+                }
+                
+                else if ((object.x < this.wall_list[i].x + this.wall_list[i].width + 20 && object.x > this.wall_list[i].x) && (object.y + object.height < this.wall_list[i].y + this.wall_list[i].height + 20 && object.y + object.height > this.wall_list[i].y)){
+                    //console.log("attempted to place x at " + object.x);
+                    //this.static_object_list.push(new Rectangle(object.x, object.y, 50, 50, "lime"));
+                    
+                    return true;
+                }
+                
+                else if ((object.x + object.width < this.wall_list[i].x + this.wall_list[i].width + 20 && object.x + object.width > this.wall_list[i].x) && (object.y < this.wall_list[i].y + this.wall_list[i].height + 20 && object.y > this.wall_list[i].y)){
+                    //console.log("attempted to place x at " + object.x);
+                    //this.static_object_list.push(new Rectangle(object.x, object.y, 50, 50, "lime"));
+                    
+                    return true;
+                }
+                
+                else if ((object.x + object.width < this.wall_list[i].x + this.wall_list[i].width + 20 && object.x + object.width > this.wall_list[i].x) && (object.y + object.height < this.wall_list[i].y + this.wall_list[i].height + 20 && object.y + object.height > this.wall_list[i].y)){
+                    //console.log("attempted to place x at " + object.x);
+                    //this.static_object_list.push(new Rectangle(object.x, object.y, 50, 50, "lime"));
+                    
+                    return true;
+                }
+                    
+            }
+                    
+            //console.log("working...");
+            return false;
+    }
 
     assignNeighbour(direction, room){
         if (direction == "upper"){

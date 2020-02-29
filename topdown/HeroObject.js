@@ -32,7 +32,7 @@ class Hero extends Entity{
             this.room.hero_list.push(this);
             this.gun.room=this.room;
             this.x = this.canvas.width - this.room.wall_thickness - this.width - 1;
-            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index + "\nList of entities: " + this.room.entity_list);
         } 
         
         else if (hero.x + hero.width > this.canvas.width && this.room.right_neighbour != null){
@@ -42,7 +42,7 @@ class Hero extends Entity{
             this.room.hero_list.push(this);
             this.gun.room=this.room;
             this.x = this.room.wall_thickness + 1;
-            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index + "\nList of entities: " + this.room.entity_list);
         } 
         
         else if (hero.y < 0 && this.room.upper_neighbour != null){
@@ -52,7 +52,7 @@ class Hero extends Entity{
             this.room.hero_list.push(this);
             this.gun.room=this.room;
             this.y = this.canvas.height - this.room.wall_thickness - this.height - 1;
-            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index + "\nList of entities: " + this.room.entity_list);
         } 
         
         else if (hero.y + hero.height > this.canvas.height && this.room.lower_neighbour != null){
@@ -62,7 +62,7 @@ class Hero extends Entity{
             this.room.hero_list.push(this);
             this.gun.room=this.room;
             this.y = this.room.wall_thickness + 1;
-            //console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index);
+            console.log("player is now in row: " + this.room.room_row_index + "  col: " +  this.room.room_col_index + "\nList of entities: " + this.room.entity_list);
         }
 
         
