@@ -61,11 +61,9 @@ class Entity extends Rectangle {
         return false;
     }
 
-    checkCollisionWithPlayerObject(){
-        if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
-            if(this.entity.health>0)
-            { this.entity.takeDamage(10);return true;}
-            //else alert("game over");
+    checkCollisionWithPlayerObject(player){
+        if (testCollision(this.x, this.y, this.width, this.height, player)) {
+            return true;
 
         } else {
             return false;

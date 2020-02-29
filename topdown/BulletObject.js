@@ -131,7 +131,7 @@ class Bullet extends Rectangle{
                 //console.log("checking collision in for loop..."+i);
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.hero_list[i])){
                     this.room.hero_list[i].takeDamage(this.damage);
-                    if (this.room.hero_list[i].health < 0){
+                    if (this.room.hero_list[i].health <= 0){
                         window.location.href="lose.html";
                     }
                     return true;
