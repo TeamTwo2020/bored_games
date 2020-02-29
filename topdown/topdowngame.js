@@ -150,7 +150,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
      var situation=0;
-     if (hero.health<=30)  {
+     if (hero.health<=10)  {
 
              generateHealthPack(ctx,situation,room_list.current_room);
      }
