@@ -11,7 +11,7 @@ function init(){
     var canvas = document.getElementById('game_canvas');
     var ctx = canvas.getContext('2d');
     room_list = new RoomArray(canvas, room_color);
-    hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 30, direct);
+    hero = new Hero(canvas, 50, 50, 50, 30, "purple", room_list, room_list.current_room, 60, direct);
     room_list.beginGeneratingRooms(canvas, 10, room_list.current_room, hero);
     room_list.current_room.hero_list = [hero];
     henry = new Henry(700, 200, 50, 50, "red", hero, room_list.current_room, 50, 2);

@@ -58,7 +58,7 @@ class Henry extends Entity{
         //assuming
         //x speed is x_dist/y_dist x5:
         //put the smaller of x/y on top of other in fraction to get the percentage
-        if (!(this.checkCollisionWithPlayerObject()) && !(this.checkCollisionWithStaticObjects())){
+        if (!(this.checkCollisionWithPlayerObject(this.entity)) && !(this.checkCollisionWithStaticObjects())){
             //var targetLeft=false;
             //var targetUp=false;
 
@@ -91,8 +91,8 @@ class Henry extends Entity{
             if (moving.moving_up==true)  {moving.moving_up_speed=y_speed;}
             if (moving.moving_down==true)  {moving.moving_down_speed=y_speed;}
         }
-        else if (this.checkCollisionWithPlayerObject()){
-            this.entity.health=0;
+        else if (this.checkCollisionWithPlayerObject(this.entity)){
+            window.location.href="lose.html";
         }
 
         for (var i = 0; i < this.room.static_object_list.length; i++) {

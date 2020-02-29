@@ -5,14 +5,39 @@ class Gun {
         this.source=source;
         this.shot_timer = 100;    //shot timer will be set by the gun type methods -- if shot_timer>0 dont reset it
         this.boss_color_value=0; //increment to 999 then reset to 0
-        this.boss_stuff={
+        this.boss_attributes={
             color_value: 0,
+            gun1: 1,
             gun1_x: -30,
-            gun1_upset: false,
+            gun1_up_set: false,
             gun1_down_set: true,
             gun1_y: -30,
             gun1_right_set: true,
-            gun1_left_set: true
+            gun1_left_set: true,
+
+            gun2: 2,
+            gun2_x: 30,
+            gun2_up_set: true,
+            gun2_down_set: true,
+            gun2_y: -30,
+            gun2_right_set: false,
+            gun2_left_set: true,
+
+            gun3: 3,
+            gun3_x: 30,
+            gun3_up_set: true,
+            gun3_down_set: false,
+            gun3_y: 30,
+            gun3_right_set: true,
+            gun3_left_set: true,
+
+            gun4: 4,
+            gun4_x: -30,
+            gun4_up_set: true,
+            gun4_down_set: true,
+            gun4_y: 30,
+            gun4_right_set: true,
+            gun4_left_set: false
         }
     }
 
@@ -76,8 +101,8 @@ class Gun {
             width: 5,
             height: 5,
             travel_time: 8,
-            damage: 4,
-            timer: 5,
+            damage: 3,
+            timer: 2,
             color: ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00", "#00ff40", "#00ff80", "#00ffbf", "#00ffff", "#00bfff", "#0080ff", "#0040ff", "#0000ff", "#4000ff", "#8000ff", "#bf00ff", "#ff00ff", "#ff00bf", "#ff0080", "#ff0066", "#ff0040", "#ff0000"]
         }
         return sprinkler;
@@ -190,53 +215,194 @@ class Gun {
 
             //add the offset here to be added to x_spawn & y_spawn
 
-            if (this.boss_stuff.gun1_x>30){
-                this.boss_stuff.gun1_x=30;
-                this.boss_stuff.gun1_upset=true;
-                this.boss_stuff.gun1_right_set=false;
-            }else if (this.boss_stuff.gun1_x<-30){
-                this.boss_stuff.gun1_x=-30;
-                this.boss_stuff.gun1_down_set=true;
-                this.boss_stuff.gun1_left_set=false;
-            }
-            if(this.boss_stuff.gun1_y>30){
-                this.boss_stuff.gun1_y=30;
-                this.boss_stuff.gun1_right_set=true;
-                this.boss_stuff.gun1_down_set=false;
-            }else if (this.boss_stuff.gun1_y<-30){
-                this.boss_stuff.gun1_y=-30
-                this.boss_stuff.gun1_left_set=true;
-                this.boss_stuff.gun1_upset=false;
-            }
-            if (!this.boss_stuff.gun1_upset){
-                this.boss_stuff.gun1_x+=1;
-            }else if (!this.boss_stuff.gun1_right_set){
-                this.boss_stuff.gun1_y+=1;
-            }else if (!this.boss_stuff.gun1_down_set){
-                this.boss_stuff.gun1_x-=1;
-            }else if (!this.boss_stuff.gun1_left_set){
-                this.boss_stuff.gun1_y-=1;
-            }
-
+            this.setBossGuns();
 
             var bullet_color=this.bossColor();
-            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_stuff.gun1_x, y_spawn+this.boss_stuff.gun1_y, 2, this.room));
-            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_stuff.gun2_x, y_spawn+this.boss_stuff.gun2_y, 2, this.room));
-            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn, y_spawn+100, 2, this.room));
-            //this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn-100, y_spawn, 2, this.room));
 
-            //console.log("room index in henry shoot " + this.room.room_index);
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_attributes.gun1_x, y_spawn+this.boss_attributes.gun1_y, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_attributes.gun2_x, y_spawn+this.boss_attributes.gun2_y, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_attributes.gun3_x, y_spawn+this.boss_attributes.gun3_y, 2, this.room));
+            this.room.addProjectile(new Bullet(x_spawn, y_spawn, this.sprinkler.width, this.sprinkler.height, this.sprinkler.travel_time, this.sprinkler.damage, bullet_color, x_spawn+this.boss_attributes.gun4_x, y_spawn+this.boss_attributes.gun4_y, 2, this.room));
+
             this.shot_timer += this.sprinkler.timer;
         } else {
             this.shot_timer -= 1;
         }
     }
 
+    setBossGuns(){
+
+        this.setVertical(this.boss_attributes.gun1);
+        this.setHorizontal(this.boss_attributes.gun1);
+
+        this.setVertical(this.boss_attributes.gun2);
+        this.setHorizontal(this.boss_attributes.gun2);
+
+        this.setVertical(this.boss_attributes.gun3);
+        this.setHorizontal(this.boss_attributes.gun3);
+
+        this.setVertical(this.boss_attributes.gun4);
+        this.setHorizontal(this.boss_attributes.gun4);
+
+        this.moveAim(this.boss_attributes.gun1);
+        this.moveAim(this.boss_attributes.gun2);
+        this.moveAim(this.boss_attributes.gun3);
+        this.moveAim(this.boss_attributes.gun4);
+    }
+
+    setVertical(gun_num){
+        if (gun_num==1){
+            if (this.boss_attributes.gun1_x>30){
+                console.log("Gun 1 set top right");
+                this.boss_attributes.gun1_x=30;
+                this.boss_attributes.gun1_up_set=true;
+                this.boss_attributes.gun1_right_set=false;
+            }else if (this.boss_attributes.gun1_x<-30){
+                console.log("Gun 1 set bottom left");
+                this.boss_attributes.gun1_x=-30;
+                this.boss_attributes.gun1_down_set=true;
+                this.boss_attributes.gun1_left_set=false;
+            }
+        }else if(gun_num==2){
+            if (this.boss_attributes.gun2_x>30){
+                console.log("Gun 2 set top right");
+                this.boss_attributes.gun2_x=30;
+                this.boss_attributes.gun2_up_set=true;
+                this.boss_attributes.gun2_right_set=false;
+            }else if (this.boss_attributes.gun2_x<-30){
+                console.log("Gun 2 set bottom left");
+                this.boss_attributes.gun2_x=-30;
+                this.boss_attributes.gun2_down_set=true;
+                this.boss_attributes.gun2_left_set=false;
+            }
+        }else if(gun_num==3){
+            if (this.boss_attributes.gun3_x>30){
+                console.log("Gun 3 set top right");
+                this.boss_attributes.gun3_x=30;
+                this.boss_attributes.gun3_up_set=true;
+                this.boss_attributes.gun3_right_set=false;
+            }else if (this.boss_attributes.gun3_x<-30){
+                console.log("Gun 3 set bottom left");
+                this.boss_attributes.gun3_x=-30;
+                this.boss_attributes.gun3_down_set=true;
+                this.boss_attributes.gun3_left_set=false;
+            }
+        }else if(gun_num==4){
+            if (this.boss_attributes.gun4_x>30){
+                console.log("Gun 4 set top right");
+                this.boss_attributes.gun4_x=30;
+                this.boss_attributes.gun4_up_set=true;
+                this.boss_attributes.gun4_right_set=false;
+            }else if (this.boss_attributes.gun4_x<-30){
+                console.log("Gun 4 set bottom left");
+                this.boss_attributes.gun4_x=-30;
+                this.boss_attributes.gun4_down_set=true;
+                this.boss_attributes.gun4_left_set=false;
+            }
+        }
+    }
+
+    setHorizontal(gun_num){
+        if (gun_num==1){
+            if (this.boss_attributes.gun1_y>30){
+                console.log("Gun 1 set bottom right");
+                this.boss_attributes.gun1_y=30;
+                this.boss_attributes.gun1_right_set=true;
+                this.boss_attributes.gun1_down_set=false;
+            }else if (this.boss_attributes.gun1_y<-30){
+                console.log("Gun 1 set top left");
+                this.boss_attributes.gun1_y=-30;
+                this.boss_attributes.gun1_left_set=true;
+                this.boss_attributes.gun1_up_set=false;
+            }
+        }else if(gun_num==2){
+            if (this.boss_attributes.gun2_y>30){
+                console.log("Gun 2 set bottom right");
+                this.boss_attributes.gun2_y=30;
+                this.boss_attributes.gun2_right_set=true;
+                this.boss_attributes.gun2_down_set=false;
+            }else if (this.boss_attributes.gun2_y<-30){
+                console.log("Gun 2 set top left");
+                this.boss_attributes.gun2_y=-30;
+                this.boss_attributes.gun2_left_set=true;
+                this.boss_attributes.gun2_up_set=false;
+            }
+        }else if(gun_num==3){
+            if (this.boss_attributes.gun3_y>30){
+                console.log("Gun 3 set bottom right");
+                this.boss_attributes.gun3_y=30;
+                this.boss_attributes.gun3_right_set=true;
+                this.boss_attributes.gun3_down_set=false;
+            }else if (this.boss_attributes.gun3_y<-30){
+                console.log("Gun 3 set top left");
+                this.boss_attributes.gun3_y=-30;
+                this.boss_attributes.gun3_left_set=true;
+                this.boss_attributes.gun3_up_set=false;
+            }
+        }else if(gun_num==4){
+            if (this.boss_attributes.gun4_y>30){
+                console.log("Gun 4 set bottom right");
+                this.boss_attributes.gun4_y=30;
+                this.boss_attributes.gun4_right_set=true;
+                this.boss_attributes.gun4_down_set=false;
+            }else if (this.boss_attributes.gun4_y<-30){
+                console.log("Gun 4 set top left");
+                this.boss_attributes.gun4_y=-30;
+                this.boss_attributes.gun4_left_set=true;
+                this.boss_attributes.gun4_up_set=false;
+            }
+        }
+    }
+
+    moveAim(gun_num){
+        if (gun_num==1){
+            if (!this.boss_attributes.gun1_up_set){
+                this.boss_attributes.gun1_x+=1;
+            }else if (!this.boss_attributes.gun1_right_set){
+                this.boss_attributes.gun1_y+=1;
+            }else if (!this.boss_attributes.gun1_down_set){
+                this.boss_attributes.gun1_x-=1;
+            }else if (!this.boss_attributes.gun1_left_set){
+                this.boss_attributes.gun1_y-=1;
+            }
+        }else if (gun_num==2){
+            if (!this.boss_attributes.gun2_up_set){
+                this.boss_attributes.gun2_x+=1;
+            }else if (!this.boss_attributes.gun2_right_set){
+                this.boss_attributes.gun2_y+=1;
+            }else if (!this.boss_attributes.gun2_down_set){
+                this.boss_attributes.gun2_x-=1;
+            }else if (!this.boss_attributes.gun2_left_set){
+                this.boss_attributes.gun2_y-=1;
+            }
+        }else if (gun_num==3){
+            if (!this.boss_attributes.gun3_up_set){
+                this.boss_attributes.gun3_x+=1;
+            }else if (!this.boss_attributes.gun3_right_set){
+                this.boss_attributes.gun3_y+=1;
+            }else if (!this.boss_attributes.gun3_down_set){
+                this.boss_attributes.gun3_x-=1;
+            }else if (!this.boss_attributes.gun3_left_set){
+                this.boss_attributes.gun3_y-=1;
+            }
+        }else if (gun_num==4){
+            if (!this.boss_attributes.gun4_up_set){
+                this.boss_attributes.gun4_x+=1;
+            }else if (!this.boss_attributes.gun4_right_set){
+                this.boss_attributes.gun4_y+=1;
+            }else if (!this.boss_attributes.gun4_down_set){
+                this.boss_attributes.gun4_x-=1;
+            }else if (!this.boss_attributes.gun4_left_set){
+                this.boss_attributes.gun4_y-=1;
+            }
+        }
+    }
+
     bossColor(){
-        var bullet_color=this.sprinkler.color[this.boss_stuff.color_value];
-        this.boss_stuff.color_value+=1;
-        if (this.boss_stuff.color_value==this.sprinkler.color.length){
-            this.boss_stuff.color_value=0;
+        var bullet_color=this.sprinkler.color[this.boss_attributes.color_value];
+        this.boss_attributes.color_value+=1;
+        if (this.boss_attributes.color_value==this.sprinkler.color.length){
+            this.boss_attributes.color_value=0;
         }
         return bullet_color;
     }
