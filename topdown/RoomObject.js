@@ -39,7 +39,8 @@ class Room{
     }
     
     generateEnemies(hero){
-        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 4) + 1));
+        //this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, Math.round(Math.random() * 4) + 1));
+        this.entity_list.push(new Henry(this.canvas.width/2, this.canvas.height/2, 50, 50, "red", hero, this, 50, 5));
         this.room_array.entity_counter += 1;
     }
     
