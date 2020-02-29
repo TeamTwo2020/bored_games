@@ -35,7 +35,7 @@ class RoomArray{
     //define the spawn room
     defineSpawnRoom(room_row_index, room_col_index, canvas){
         //console.log("row index in method defineSpawnRoom " + room_row_index);
-        this.array[room_row_index][room_col_index] = new Room(canvas, this, room_row_index, room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+        this.array[room_row_index][room_col_index] = new Room(canvas, this, room_row_index, room_col_index, 30, "closed", "closed", "closed", "closed", this.color, 15);
         //console.log("Therefore this should be 2: " + this.array[room_row_index][room_col_index].room_row_index);
     }
     
@@ -66,15 +66,15 @@ class RoomArray{
             alert("Undefined hero!");
         } else{
             if (this.room_counter < 2 || (this.room_counter / room_quantity) * 100 < 10){                       
-                room.generateEnemies(hero, 1);
+                room.generateEnemies(hero, 1, 1);
             } else if ((this.room_counter / room_quantity) * 100 < 30){
-                room.generateEnemies(hero, 2);
+                room.generateEnemies(hero, 2, 2);
             } else if ((this.room_counter / room_quantity) * 100 < 60){
-                room.generateEnemies(hero, 3);
+                room.generateEnemies(hero, 3, 3);
             } else if ((this.room_counter == room_quantity)){
-                room.generateEnemies(hero, 1);
+                room.generateEnemies(hero, 1, 5);
             } else {
-                room.generateEnemies(hero, 4);
+                room.generateEnemies(hero, 4, 1);
             }
         }
         
@@ -91,7 +91,11 @@ class RoomArray{
             return room_quantity;
         }
         //console.log("genrating rooms..... room_quantity: " + room_quantity);
-    
+        if (room_quantity === this.room_counter){
+            var wall_quantity = 5;
+        } else {
+            var wall_quantity = 15;
+        }
         var rnumber = Math.round(Math.random() * 3);
         var single_generation_success = false;
         //console.log("RNUMBERRRRRRr is " + rnumber);
@@ -102,7 +106,7 @@ class RoomArray{
         //var rnumber = 3;
         
         if (rnumber === 0 && start_room.room_row_index > 0 && this.array[start_room.room_row_index -1][start_room.room_col_index] == null && this.room_counter < room_quantity){
-            this.array[start_room.room_row_index - 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index - 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+            this.array[start_room.room_row_index - 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index - 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color, wall_quantity);
             start_room.createGate("upper");
             //console.log("Lower neighbour is " + this.array[start_room.room_row_index - 1][start_room.room_col_index].lower_neighbour);
             this.array[start_room.room_row_index - 1][start_room.room_col_index].createGate("lower");
@@ -121,7 +125,7 @@ class RoomArray{
         } 
         
         if (rnumber === 1 && start_room.room_col_index < this.array[0].length - 1 && this.array[start_room.room_row_index][start_room.room_col_index + 1] == null && this.room_counter < room_quantity){
-            this.array[start_room.room_row_index][start_room.room_col_index + 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index + 1, 30, "closed", "closed", "closed", "closed", this.color);
+            this.array[start_room.room_row_index][start_room.room_col_index + 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index + 1, 30, "closed", "closed", "closed", "closed", this.color, wall_quantity);
             start_room.createGate("right");
             //console.log("Right neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
             this.array[start_room.room_row_index][start_room.room_col_index + 1].createGate("left");
@@ -137,7 +141,7 @@ class RoomArray{
         }
         
         if (rnumber === 2 && start_room.room_row_index < this.array.length -1 && this.array[start_room.room_row_index + 1][start_room.room_col_index] == null && this.room_counter < room_quantity){
-            this.array[start_room.room_row_index + 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index + 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color);
+            this.array[start_room.room_row_index + 1][start_room.room_col_index] = new Room(canvas, this, start_room.room_row_index + 1, start_room.room_col_index, 30, "closed", "closed", "closed", "closed", this.color, wall_quantity);
             start_room.createGate("lower");
             //console.log("Upper neighbour is " + this.array[start_room.room_row_index + 1][start_room.room_col_index].lower_neighbour);
             this.array[start_room.room_row_index + 1][start_room.room_col_index].createGate("upper");
@@ -152,7 +156,7 @@ class RoomArray{
         }
         
         if (rnumber === 3 && start_room.room_col_index > 0 && this.array[start_room.room_row_index][start_room.room_col_index -1] == null && this.room_counter < room_quantity){
-            this.array[start_room.room_row_index][start_room.room_col_index - 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index - 1, 30, "closed", "closed", "closed", "closed", this.color);
+            this.array[start_room.room_row_index][start_room.room_col_index - 1] = new Room(canvas, this, start_room.room_row_index, start_room.room_col_index - 1, 30, "closed", "closed", "closed", "closed", this.color, wall_quantity);
             start_room.createGate("left");
             //console.log("Left neighbour is " + this.array[start_room.room_row_index][start_room.room_col_index].right_neighbour);
             this.array[start_room.room_row_index][start_room.room_col_index - 1].createGate("right");

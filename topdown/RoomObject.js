@@ -1,5 +1,6 @@
 class Room{
-	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color){
+	constructor(canvas, room_array, room_row_index, room_col_index, wall_thickness, left_door, right_door, upper_door, lower_door, room_color, wall_quantity){
+        console.log("wall quantity is " + wall_quantity);
         this.room_array = room_array;
         this.canvas = canvas;
         this.locked = true;
@@ -22,7 +23,7 @@ class Room{
         this.entity_list = [];//hero
         this.particle_list = [];
         this.hero_list = [];
-        this.wall_list = this.generateWalls(15, canvas);
+        this.wall_list = this.generateWalls(wall_quantity, canvas);
         for (var i = 0; i < this.wall_list.length; i++){
             //console.log("Item in wall list: " + i);
             for (var j = 0; j < this.wall_list[i].wall_blocks.length; j++){
@@ -38,7 +39,7 @@ class Room{
         return this.room_index;
     }
     
-    generateEnemies(hero, enemy_quantity){
+    generateEnemies(hero, enemy_quantity, weapon_value){
         /*for (var i = 0; i < enemy_quantity; i++{
         }*/
         var henry_size = 50;
@@ -51,7 +52,11 @@ class Room{
             while (attempted_spawns < 50){
                 spawn_x = Math.random() * (this.canvas.width - (this.wall_thickness*2) - henry_size) + this.wall_thickness;
                 spawn_y = Math.random() * (this.canvas.height - (this.wall_thickness*2) - henry_size) + this.wall_thickness;
-                new_henry = new Henry(spawn_x, spawn_y, henry_size, henry_size, "red", hero, this, 50, Math.round(Math.random() * 4) + 1);
+                if (weapon_value == 5){
+                    new_henry = new Henry(spawn_x, spawn_y, henry_size, henry_size, "#ff9020", hero, this, 400, weapon_value);
+                } else {
+                    new_henry = new Henry(spawn_x, spawn_y, henry_size, henry_size, "#9c1000", hero, this, 50, Math.round(Math.random() * weapon_value) + 1);
+                }
                 if (!this.isOnDoorMat(new_henry) && !this.isOnWall(new_henry)){
                     this.entity_list.push(new_henry);
                     this.room_array.entity_counter += 1;
