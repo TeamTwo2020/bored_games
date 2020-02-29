@@ -51,13 +51,24 @@ class Entity extends Rectangle {
 
         for (var i = 0; i < this.room.static_object_list.length; i++){
             //console.log("checking collision in for loop..."+i);
-            if (testCollision(this.x, this.y, this.width, this.height, this.room.static_object_list[i])){
+            if (testCollision(this.x, this.y, this.width, this.height, this.room.static_object_list[i])) {
                 return true;
-            } else {
-                //console.log("not colliding");
             }
         }
 
+        return false;
+    }
+
+    checkCollisionWithBorderObjects(){
+
+        var check_upper = testCollision(this.x, this.y, this.width, this.height, this.room.upper_wall);
+        var check_lower = testCollision(this.x, this.y, this.width, this.height, this.room.lower_wall);
+        var check_left = testCollision(this.x, this.y, this.width, this.height, this.room.left_wall);
+        var check_right = testCollision(this.x, this.y, this.width, this.height, this.room.right_wall);
+
+        if (check_upper || check_lower || check_left || check_right){
+            return true;
+        }
         return false;
     }
 
