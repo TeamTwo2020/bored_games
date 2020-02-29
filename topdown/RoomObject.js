@@ -17,7 +17,6 @@ class Room{
 		this.upper_wall = new Border(wall_thickness, 0, canvas.width - wall_thickness, wall_thickness, "black", upper_door);
 		this.lower_wall = new Border(wall_thickness, canvas.height - wall_thickness, canvas.width - wall_thickness, wall_thickness, "black", lower_door);
         this.color = room_color;
-
         this.static_object_list = [];//wall
         this.projectile_object_list = [];//bullet
         this.entity_list = [];//hero
@@ -32,13 +31,9 @@ class Room{
             }
         }
         this.addBorderBlocks();
-        
-    }
 
-    returnIndex(){
-        return this.room_index;
+
     }
-    
     generateEnemies(hero, enemy_quantity, weapon_value){
         /*for (var i = 0; i < enemy_quantity; i++{
         }*/
@@ -153,21 +148,7 @@ class Room{
                 this.particle_list[l].drawSelf(ctx);
             }
         }
-        
-        
-        //}
-
-        //this.examplewall.drawSelf();
-        //console.log("frm room: " + this.examplewall.color);
     }
-    
-    drawDoorMats(ctx){
-        for (var i = 0; i < this.door_mats.length; i++){
-            //console.log("drawing doormat");
-            this.door_mats[i].drawSelf(ctx);
-        }
-    }
-
 
     generateWalls(amount_of_walls, canvas){
 	    function not_block_gate(x,y){
@@ -189,24 +170,6 @@ class Room{
             }
 
         }
-        function not_block_gate_vertical(x,y){
-            if(y>=285&&y<=540&&x<=85) {
-                return false;//avoid block left gate
-            }
-            if(y>=285&&y<=540&&x>=1290) {
-                return false;// avoid block right gate
-            }
-            if(y<=80&&x>=680&&x<=795) {
-                return false;// avoid block top gate
-            }
-            if(y>=675&&x>=680&&x<=795) {
-                return false;// avoid block low gate
-            }
-            else {
-                return true;
-            }
-        }
-
 
 
         function not_block_entity(x,y, room){
@@ -221,23 +184,6 @@ class Room{
                 return true;
             }
         }
-
-        function not_block_entity_vertical(x,y){
-            if(y<=250&&x<=750&&x>=665) {
-                return false;//avoid block henry
-            }
-            if(x>=15&&x<=80&&y<=100) {
-                return false;//avoid block hero
-            }
-
-            else {
-                return true;
-            }
-        }
-
-
-
-
         function islegal_zone(x, y, arrayx, arrayy) {
             var i=0;
             while(i<arrayx.length)
@@ -247,19 +193,6 @@ class Room{
             }
             return true;
         }   //if you generate a wall(rectangle), assume that it begins from (x,y), then (x-175,x+175),(y-35,y+35) is illegal zone
-
-        function islegal_zone_vertical(x, y, arrayxV, arrayyV) {
-            var i=0;
-            while(i<arrayxV.length)
-            {
-                if(x>arrayxV[i]-35&&x<arrayxV[i]+35&&y>arrayyV[i]-175&&y<arrayyV[i]+175) return false;
-                else i++;
-            }
-            return true;
-        }
-        
-        
-        
         var spawn_space = 175;//150
         var wall_type;
         var walls = [];
@@ -268,7 +201,6 @@ class Room{
         var attempted_spawns = 0;
         var wall;
         for (var i = 0; i < amount_of_walls; i++){
-            //console.log("wall: " + i);
             wall_type = Math.round(Math.random() * 1);
             while (attempted_spawns < 50){
                 var  new_x = Math.round((Math.random() * (canvas.width - this.wall_thickness - spawn_space)) + this.wall_thickness);
@@ -281,19 +213,9 @@ class Room{
                         arrayy.push(new_y);
                         //console.log("pushed wall number: " + i);
                         break;
-                        
-                        
-                        
                     } else{
                         //console.log("can't place line at " + new_x + "   " + new_y);
                     }
-                    /*if(islegal_zone_vertical(new_x ,new_y,arrayx,arrayy)&&not_block_gate_vertical(new_x,new_y)&&not_block_entity_vertical(new_x,new_y)&&i%2==1)
-                    {
-                        walls.push(new Wall(new_x, new_y, 1, "black"));
-                        arrayx.push(new_x);
-                        arrayy.push(new_y);
-                        
-                    }*/
                 attempted_spawns++;
                 //console.log("attempted spawn: " + attempted_spawns);
             }
@@ -301,10 +223,7 @@ class Room{
             attempted_spawns = 0;
             
         }
-        
-        /*for (var j = 0; j < walls.length; j++){
-            console.log("block " + j + " has an x of: " + walls[i].x);
-        }*/
+
         return walls;
     }
     

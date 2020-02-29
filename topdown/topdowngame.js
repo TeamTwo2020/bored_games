@@ -5,6 +5,12 @@ var direct=0;// represent forward direction;
 var direct2=0;// represent  bullet direction;
 var cursorX=0;
 var cursorY=0;
+var new_x = Math.random() * 200+650;
+var new_y = Math.random() * 200+ 35;
+var new_x1 = Math.random() * 200+35;
+var new_y1 = Math.random() * 200+ 350;
+var randomnum = Math.random() * 2;
+var numofHealthpack=0;
 function init(){
     //Instantiate the canvas and its context.
     var room_color = "#01a88c";
@@ -108,6 +114,8 @@ function init(){
         }
     });
 
+
+
     var changing=setInterval(myfunction, 10);
     function myfunction()
     {
@@ -120,6 +128,7 @@ function init(){
         }
 
         draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_list, moving,changing);
+
 
     }
 
@@ -140,64 +149,11 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = room_list.color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    /*onclick = function () {
-        //console.log("shoot");
-        function fire() {
-            console.log("x: ", cursorX, " - y: ", cursorY);
-            hero.shoot(cursorX, cursorY);
+     var situation=0;
+     if (hero.health<=30)  {
 
-            var x_dist=cursorX-(hero.x+25);
-            var y_dist=cursorY-(hero.y+15);
-            if(x_dist<0) x_dist=(-1)*x_dist;
-            if(y_dist<0) y_dist=(-1)*y_dist;
-            var total_dist=x_dist+y_dist;
-            var bullet_speed=10;
-            if(cursorX>=hero.middle.x)
-            {
-                if(cursorY>=hero.middle.y) {hero.bullet.x+=(x_dist / total_dist)*bullet_speed;hero.bullet.y+=(y_dist / total_dist)*bullet_speed;}
-                else {hero.bullet.x+=(x_dist / total_dist)*bullet_speed;hero.bullet.y-=(y_dist / total_dist)*bullet_speed;}
-            }
-            if (cursorX<hero.middle.x)
-            {
-                if(cursorY>=hero.middle.y) {hero.bullet.x-=(x_dist / total_dist)*bullet_speed;hero.bullet.y+=(y_dist / total_dist)*bullet_speed;}
-                else {hero.bullet.x-=(x_dist / total_dist)*bullet_speed;hero.bullet.y-=(y_dist / total_dist)*bullet_speed;}
-            }
-
-
-            //  hero.bullet.x-=7.63;
-            // hero.bullet.y-=0.37;
-
-            /*console.log("hero.bullet X"+hero.bullet.x);
-            console.log("hero.bullet Y"+hero.bullet.y);
-            console.log("cursorX"+(cursorX));
-            console.log("cursorY"+(cursorY));
-
-
-
-            if(hero.bullet.checkCollisionWithStaticObjects())
-            {clearInterval(myVar);
-                console.log("meet collision");
-                hero.bullet=null;
-
-            }
-            /*else if(hero.bullet.checkCollisionWithPlayerObject()){
-                clearInterval(myVar);console.log("shoot successful");
-                henry.drawSelfColorShift(ctx,"black");
-                hero.bullet=null;
-
-            }
-
-        }
-
-        var myVar = setInterval(fire, 10);//can"t be 5
-
-    }*/
-
-
-
-
-
-
+             generateHealthPack(ctx,situation,room_list.current_room);
+     }
 
 
 
