@@ -132,7 +132,7 @@ class Bullet extends Rectangle{
                 if (testCollision(this.x, this.y, this.width, this.height, this.room.hero_list[i])){
                     this.room.hero_list[i].takeDamage(this.damage);
                     if (this.room.hero_list[i].health < 0){
-                        alert("GAME OVER");
+                        window.location.href="lose.html";
                     }
                     return true;
                 } else {
@@ -141,20 +141,6 @@ class Bullet extends Rectangle{
             }
         }
         
-        
-        /*else if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
-          if(this.entity.health>0)
-          { this.entity.takeDamage(this.damage);
-              //console.log("colliding with player, player-health: " + this.entity.health);
-              return true;
-              
-           }
-          else if (this.entity.health <= 0){
-              alert("game over, you died");
-          }
 
-        } else {
-            return false;
-        }*/
     }
 }

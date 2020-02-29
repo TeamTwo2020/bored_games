@@ -23,7 +23,9 @@ class Entity extends Rectangle {
                 if (this.hostile == true){
                     this.room.room_array.entity_counter -= 1;
                     if (this.room.room_array.entity_counter === 0){
-                        alert("YOU WIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN!");
+                        //alert("YOU WIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN!");
+                        window.location.href="firework.html";
+                       // setTimeout(function(){ alert("Hello"); }, 3000);
                     }
                     
                     if (this.room.entity_list.length === 0){
@@ -63,7 +65,7 @@ class Entity extends Rectangle {
         if (testCollision(this.x, this.y, this.width, this.height, this.entity)) {
             if(this.entity.health>0)
             { this.entity.takeDamage(10);return true;}
-            else alert("game over");
+            //else alert("game over");
 
         } else {
             return false;

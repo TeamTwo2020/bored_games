@@ -9,7 +9,7 @@ class RoomArray{
         this.current_room = this.array[2][2];
         //this.definePremadeMapLayout1(canvas);
         //this.associateNeighbours();
-        this.beginGeneratingRooms(canvas, 20, this.current_room);
+        this.beginGeneratingRooms(canvas, 2, this.current_room);
         //console.log("remaining rooms: " + rr);
         //console.log("roo00000000000000000m counter: " + this.room_counter);
         //this.printArray();
