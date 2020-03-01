@@ -91,7 +91,7 @@ class RoomArray{
             return room_quantity;
         }
         //console.log("genrating rooms..... room_quantity: " + room_quantity);
-        if (room_quantity === this.room_counter){
+        if (room_quantity == this.room_counter){
             var wall_quantity = 5;
         } else {
             var wall_quantity = 15;
