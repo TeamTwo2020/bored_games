@@ -9,8 +9,8 @@
     <title>Bored-Games</title>
     
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"> 
-     <link href="css/styles.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet"> 
+     <link href="../css/styles.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,11 +18,29 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="topdown.css"/>
+    <script src="BorderObject.js"></script>
+    <script src="WallObject.js"></script>
+    <script src="RoomObject.js"></script>
+    <script src="RoomArrayObject.js"></script>
+    <script src="RectangleObject.js"></script>
+    <script src="ParticleObject.js"></script>
+    <script src="EntityObject.js"></script>
+    <script src="GunObject.js"></script>
+    <script src="HeroObject.js"></script>
+    <script src="CollisionDetection.js"></script>
+    <script src="BulletObject.js"></script>
+    <script src="HenryObject.js"></script>
+    <script src="HealthPack.js"></script>
+    <script src="topdowngame.js"></script>
+    <script>
+        var ii=0;
+    </script>
     
   </head>
 
   
-  <body class="body" background="images/theGrid4.jpg">
+  <body class="body" background="../images/theGrid4.jpg">
    
     <main class="container">
     
@@ -37,13 +55,13 @@
     </nav>
     <nav>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="../index.html">Home</a></li>
            <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="topdown/topdown.html">Top-Down Game</a></li>
-            <li><a href="hangman/index.html">Hangman</a></li>
+            <li><a href="topdown/topdown1.html">Top-Down Game</a></li>
+            <li><a href="../hangman/index.html">Hangman</a></li>
             <li><a href="#">Coming Soon</a></li>
             
           </ul>
@@ -52,8 +70,8 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tutorials
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="tutorial.html">Top-Down Game</a></li>
-            <li><a href="tutorial.html">Hangman</a></li>
+            <li><a href="topdown/topdown1.html">Top-Down Game</a></li>
+            <li><a href="../hangman/index.html">Hangman</a></li>
             <li><a href="#">Coming Soon</a></li> 
           </ul>
         </li>
@@ -62,8 +80,8 @@
           <span class="caret"></span></a>
           
        
-         <li><a href="contactUs.html">Contact us</a></li> 
-         <li><a href="login.html">Login/Sign up</a></li>
+         <li><a href="../contactUs.html">Contact us</a></li> 
+         <li><a href="../login.html">Login/Sign up</a></li>
          <li><a href ="#">Sign up for our News Letter</a></li>
          <li><form action = "add.php" method = "Post">
           <input type = "text" name = "email" placeholder = "E-mail Address">
@@ -80,42 +98,14 @@
      
       </main><!--close row-->
      
-      <div class ="row">
+     <!-- <div class ="row">-->
 
-        <div class="col-md-4">
+        <!--<div class="col-md-4">-->
 
-            <h2 class="star"><a href="topdown/topdown.html">Top-Down Game</h2></a>
-             <a href="topdown/topdown.html"><img class="img-left" src="images/word1.png"  alt="Top-Down Game"/></a>
-             <h5 class="star">currently in production</h5>
-             <h5 class="star">please check back soon</h5>
+            
           
-        </div><!--close col-md-8-->
-        
-        <div class ="col-md-4">
-        <h2 class="star"><a href="hangman/index.html"> Hangman </h2></a>
-        <a href="hangman/index.html"><img class="img-left" src="images/hangman1.png"  alt="Hangman"/></a>
-         <h5 class ="star">The aim of hangman is to guess the Football Team, Film or city</h5>
-         
-         <h5 class ="star">To do this simply select a letter and if right the letter will appear
-            and fade, if wrong the gallows will begin to build until you have hunged the man.</h5>
-        <h5 class ="star">if you get stuck or are running out of lives select the hint button to display a hint that may help you.</h5>
-        <h5 class ="star">At the end of the game, win or lose if you wish to play again, press Play Again or press home to return to the main Bored-Game page</h5>
-        </div>
-
-       
-      <div class="row"> 
-        <div class ="col-md-4">
-        <h2 class="star">Coming Soon</h2>
-        <img class="img-left" src="images/coming1.png"  alt="Coming Soon"/>
-        <h2 class="star">Coming Soon</h2>
-        </div> 
-         </div>
-          
-                 
-         
-          </div>
-        
-
+           
+        <h1 class ="star">Canvas Test</h1>
           <nav class="navbar navbar-inverse col-md-12">
             <nav class="container-fluid">
               <div class="navbar-header">
@@ -131,6 +121,8 @@
             </div>
         
     </div><!--close container-->
+     
+            <canvas id="game_canvas" width="1600" height="900"></canvas>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -138,3 +130,4 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
+     

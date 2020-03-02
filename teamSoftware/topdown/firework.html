@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/demo.css">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	</head>
+
+<body>
+
+	<div class="demo">
+		<canvas id="fireworksField" width="1366" height="611" style="position: absolute; top: 0px; left: 0px; opacity: 0.9;"></canvas>
+	</div>
+
+<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="jquery.fireworks.js"></script>
+<script type="text/javascript">
+	$('.demo').fireworks({ 
+	  sound: true, // sound effect
+	  opacity: 0.9, 
+	  width: '100%', 
+	  height: '100%' 
+	});
+	setTimeout(function(){ swal("Congratulations","You Win","success",{
+		button: "Try again",
+	}).then((value) => {
+		window.location.href="topdown.html#game_canvas";
+	});}, 4000);
+
+
+</script>
+</body>
+</html>
