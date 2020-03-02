@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "emailDb";
+$servername = "cs1.ucc.ie";
+$username = "cgg1";
+$password = "weeS2dih";
+$dbname = "2020_cgg1";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

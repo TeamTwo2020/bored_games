@@ -30,7 +30,7 @@
    <nav class="navbar navbar-inverse col-md-12">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand star" >Star Wars</a>
+      <a class="navbar-brand star" >Bored-Games</a>
     </div>
     <div>
       <ul class="nav navbar-nav">
@@ -92,10 +92,10 @@
 //get value from html form on add.html
 $email = $_POST["email"];
 //Connect Info
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "emailDb";
+$servername = "cs1.ucc.ie";
+$username = "cgg1";
+$password = "weeS2dih";
+$dbname = "2021_cgg1";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
