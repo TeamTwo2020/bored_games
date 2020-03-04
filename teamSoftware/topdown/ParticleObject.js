@@ -1,5 +1,6 @@
+//Particles are superficial effects to make the game look prettier.
 class Particle extends Rectangle{
-
+    //They take in a momentum value, which denotes the speed of the particle, and a friction value which determines how fast it will slow down.
     constructor(x, y, min_size, max_size, color, friction, momentum, direction){
         var size = (Math.random() * max_size) + min_size;
         super(x, y, size, size, color);
@@ -23,7 +24,7 @@ class Particle extends Rectangle{
     }
 
 
-
+    //Determine where the particle will move. If it is not given, it will be random.
     determineMovementSpeeds(momentum, direction){
 
         if (direction === "straight-up"){
@@ -88,14 +89,16 @@ class Particle extends Rectangle{
             this.y_movement = null;
         }
     }
-
+    
+    //Based on the friction, determine how fast the object x and y speeds reduce
     determineFrictionValues(friction){
         var total_speed = Math.sqrt(this.x_speed ** 2) + Math.sqrt(this.y_speed ** 2);
         this.x_friction = friction * (10**-2);
         this.y_friction = friction * (10**-2);
         //console.log("proposed friction is " + (friction * (10**-2)));
     }
-
+    
+    //Move the particle based on its x and y speed
     moveSelf(){
 
         if (this.x_speed != null) {
@@ -123,18 +126,18 @@ class Particle extends Rectangle{
         if ((this.x_movement === "left" && this.x_speed > -0.01) || (this.x_movement === "right" && this.x_speed < 0.01) || this.x_speed === 0){
             this.x_movement = null;
             this.x_speed = 0;
-            //console.log("no longer moving x");
+            
         }
 
         if ((this.y_movement === "up" && this.y_speed > -0.01) || (this.y_movement === "down" && this.y_speed < 0.01) || this.y_speed === 0){
             this.y_movement = null;
             this.y_speed = 0;
-            //console.log("no longer moving y");
+            
         }
 
         if (this.x_speed === 0 && this.y_speed === 0){
             this.stopped = true;
-            //console.log("STOPPED at x: " + this.x_speed + " and y is: " + this.y_speed + "\nXPos: " + this.x + "   YPos: " + this.y);
+            
         }
 
 
