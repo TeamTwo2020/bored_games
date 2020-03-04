@@ -1,3 +1,13 @@
+//Legacy file. This game was scrapped.
+//--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function(event){
     init();
 });
