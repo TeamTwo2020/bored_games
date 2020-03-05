@@ -51,30 +51,24 @@ function init(){
             moving.moving_up = true;
             moving.moving_up_speed = 5;
             direct=0;
-            //console.log("up");
         }
 
         if(event.key == "d" || event.key == "D"){
             moving.moving_right = true;
             moving.moving_right_speed = 5;
             direct=3;
-            //console.log("right");
-
         }
 
         if(event.key == "a" || event.key == "A"){
             moving.moving_left = true;
             moving.moving_left_speed = 5;
             direct=2;
-            //console.log("left");
         }
 
         if(event.key == "s" || event.key == "S"){
             moving.moving_down = true;
             moving.moving_down_speed = 5;
             direct=1;
-            //console.log("down");
-
         }
     });
 
@@ -82,7 +76,6 @@ function init(){
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        //console.log("x: " + x + " y: " + y);
         hero.shoot(x, y);
 
     }
@@ -91,7 +84,7 @@ function init(){
     canvas.addEventListener('mousedown', function(e){
         getCursorPosition(canvas, e);
     })
-
+//Movement
     document.addEventListener('keyup', function(event){
         if(event.key == "w" || event.key == "W"){
             moving.moving_up = false;
@@ -134,16 +127,7 @@ function init(){
 
 }
 
-/*
-function showCoords(event) {
-    cursorX=event.pageX-10;
-    cursorY=event.pageY-141;
-    console.log("cursorX"+(cursorX));
-    console.log("cursorY"+(cursorY));
-    console.log("hero.middle.x"+hero.middle.x);
-    console.log("hero.middle.y"+(hero.middle.y));
 
-}*/
 
 function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_list, moving) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -162,10 +146,10 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
     hero.drawSelf(ctx);
     if (room_list.current_room.room_row_index == henry.room.room_row_index && room_list.current_room.room_col_index == henry.room.room_col_index) {
         if (ii <= 2000) ii += 10;
-        //else henry.shoot();// 2seconds for player prepare , after that opponent will shoot
+      // 2seconds for player prepare , after that opponent will shoot
     }
     room_list.current_room.drawSelf(ctx);
-    //console.log("drawing room: " + room_info.current_room);
+   
 
     moving.colliding_down = false;
     moving.colliding_up = false;
@@ -200,7 +184,7 @@ function draw(canvas, ctx, hero, henry, vertical_speed, horizontal_speed, room_l
 
             } else {
                 moving.moving_left = true;
-                //hero.x = hero.x - moving.moving_left_speed;
+              
             }
         }
         if (moving.moving_right_speed > 0) {
