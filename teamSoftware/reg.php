@@ -93,7 +93,7 @@
 		    
 		
 if ($uname) {
-	$insert = "INSERT INTO players VALUES ('$uname','$password','$email');";
+	$insert = "INSERT INTO players VALUES ('$username','$password','$email');";
 	$result = mysqli_query($conn, $insert)
 		or exit ("Cannot execute insert");
 	if ($result){
